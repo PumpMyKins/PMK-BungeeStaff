@@ -50,14 +50,14 @@ public class Main extends Plugin{
 		
 		logToConsole("§aMySQL connection success.");
 		//BASE DE DONNER
-		mySQL.update("CREATE TABLE IF NOT EXISTS MinecraftPlayer(userid INT, username VARCHAT(16),uuid VARCHAR(256))");
+		mySQL.update("CREATE TABLE IF NOT EXISTS MinecraftPlayer( `userID` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(16) NOT NULL , `uuid` VARCHAR(256) NOT NULL , PRIMARY KEY (`userID`))");
 		//BDD Relation 1:N (1 = USER; 1 = OTHER)
-		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeBan(userid INT, banEnd LONG, banReason VARCHAR(256), banBy VARCHAR(16))");
-		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeMutes(userid INT, muteEnd LONG, muteReason VARCHAR(256), muteBy VARCHAR(16))");
-		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeKicks(userid INT, muteEnd LONG, muteReason VARCHAR(256), muteBy VARCHAR(16))");
-		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeBan(userid INT, banEnd LONG, banReason VARCHAR(256), banBy VARCHAR(16))");
-		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeMutes(userid INT, muteEnd LONG, muteReason VARCHAR(256), muteBy VARCHAR(16))");
-		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeKicks(userid INT, muteEnd LONG, muteReason VARCHAR(256), muteBy VARCHAR(16))");
+		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeBan(userID INT, banEnd LONG, banReason VARCHAR(256), INT)");
+		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeMutes(userID INT, muteEnd LONG, muteReason VARCHAR(256), INT)");
+		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeKicks(userID INT, muteEnd LONG, muteReason VARCHAR(256), INT)");
+		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeBan(userID INT, banEnd LONG, banReason VARCHAR(256), banBy INT)");
+		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeMutes(userID INT, muteEnd LONG, muteReason VARCHAR(256), muteBy INT)");
+		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeKicks(userID INT, muteEnd LONG, muteReason VARCHAR(256), muteBy INT)");
 			
 	}
 	
