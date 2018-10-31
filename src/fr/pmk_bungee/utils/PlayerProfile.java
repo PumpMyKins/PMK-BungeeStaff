@@ -75,7 +75,6 @@ public class PlayerProfile {
 	
 	
 	}
-	
 	private int getUserID(String playerName) {
 		
 		try {

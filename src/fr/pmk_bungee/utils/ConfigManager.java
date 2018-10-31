@@ -62,6 +62,7 @@ public class ConfigManager {
 	    return str;
 	}
 	  
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<String> getStringList(String key, String... replace) {
 		
 	    List<String> list = getStringList(key);
@@ -77,6 +78,7 @@ public class ConfigManager {
 	    }
 	    return avail;
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<String> getStringList(String key){
 		
 	    List<String> list = this.configuration.getStringList(key);
@@ -92,6 +94,7 @@ public class ConfigManager {
 	   return new File(Main.sharedInstance().getDataFolder(), "config.yml");
 	}
 	
+	@SuppressWarnings("unused")
 	private void saveDefaultConfig()
 	  {
 	    if (!Main.sharedInstance().getDataFolder().exists()) {
