@@ -25,4 +25,4 @@ Permission :
   Warn :
     Warn a player : bungeestaff.command.warn
     Warn see : bungeestaff.command.warn.see
-
+	
