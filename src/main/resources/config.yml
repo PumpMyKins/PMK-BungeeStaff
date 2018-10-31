@@ -1,0 +1,72 @@
+#Placeholders available: 
+
+#{NAME} - Le nom du Joueurs
+#{UUID} - L'UUID du Joueurs
+#{REASON} - La raison pour kick / ban / mute
+#{REMAININGTIME} - Le temps restant d'un ban / mute, utilisant le format temps spécifié plus bas
+#{BY} - Le nom de la personne ayant kick / ban ou mutes
+#{DETAILS} - Si un message à un détails il faut utiliser celui si.
+
+lang:
+
+  prefix: '&6&l[&r&2Pump&eMy&aStaff&6&l]&r'
+  console_prefix: '[PumpMyStaff] '
+  time_format: '{DAYS} jours(s), {HOURS} heure(s), {MINUTES} min(s) and {SECONDS} sec(s)'
+  time_format_permanent: 'PERMANENT'
+
+  errors:
+    no_permissions: '&cVous n'avez pas la permission.'
+    player_not_found: '&cCe joueur n'existe pas.'
+    player_not_online: '&cLe joueurs {NAME} n'est pas connecté.'
+    internal_error: '&c INTERNAL SERVER ERROR: &e{DETAILS}'
+    player_already_banned: '&cLe joueur &e{NAME} &cest déjà banni.'
+    player_not_banned: '&cLe joueur &e{NAME} &cn'est pas banni.'
+    player_already_muted: '&cLe joueur &e{NAME} &cest déjà muté.'
+    player_not_muted: '&cLe joueur &e{NAME} &cn'est pas muté.'
+    unknown_timeunit: '&cErreur TimeUnit réferer vous à vos supérieurs.'
+
+  banmessage:
+  - '&cVous avez été banni du serveur.'
+  - '&cRaison: &e{REASON}'
+  - '&cBanni par: &e{BY}'
+  - '&cTemps restant: &e{REMAININGTIME}'
+
+  mutemessage:
+  - '&cVous êtes mute du serveur.'
+  - '&cRaison: &e{REASON}'
+  - '&cMuté par: &e{BY}'
+  - '&cTemps restant: &e{REMAININGTIME}'
+
+commands:
+  ban:
+    syntax: '&cUtilisation: &c/ban <Joueurs> <Temps> <TimeUnit> <Raison>'
+    banned: '&aVous avez banni &e{NAME}&a avec succès.'
+    broadcast:
+    - '&e{NAME} &ca été banni par &e{BY}&c.'
+    - '&cRaison: &e{REASON}'
+    - '&cTemps: &e{REMAININGTIME}'
+  unban:
+    syntax: '&cUsage: &c/unban <Joueurs>'
+    unbanned: '&aVous avez unban &e{NAME}&a avec succès.'
+    broadcast:
+    - '&e{NAME} &ca été débanni par &e{BY}&c.'
+  mute:
+    syntax: '&cUtilisation: &c/mute <Joueurs> <Time> <TimeUnit> <Raison>'
+    muted: '&aVous avez muté &e{NAME}&a avec succès.'
+    broadcast:
+    - '&e{NAME} &ca été muté par &e{BY}&c.'
+    - '&cRaison: &e{REASON}'
+    - '&cTemps: &e{REMAININGTIME}'
+  unmute:
+    syntax: '&cUtilisation: /unmute <Joueurs>'
+    unmuted: '&aVous avez démute &e{NAME}&a avec succès.'
+    broadcast:
+    - '&e{NAME} &ca été démute par &e{BY}&c.'
+  kick:
+    syntax: '&cUtilisation: &c/kick <Joueurs> <Reason>'
+    kicked: '&aVous avez kick &e{NAME}&a avec succès.'
+    broadcast:
+    - '&e{NAME} &cà été kick par &e{BY}&c.'
+    - '&cRaison: &e{REASON}'
+
+    
