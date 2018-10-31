@@ -7,6 +7,13 @@
 #{BY} - Le nom de la personne ayant kick / ban ou mutes
 #{DETAILS} - Si un message à un détails il faut utiliser celui si.
 
+mysql:
+  host: 'localhost'
+  port: 3306
+  username: 'bungeeUtils'
+  password: 'secret'
+  database: 'bungeeUtils'
+
 lang:
 
   prefix: '&6&l[&r&2Pump&eMy&aStaff&6&l]&r'
@@ -69,4 +76,3 @@ commands:
     - '&e{NAME} &cà été kick par &e{BY}&c.'
     - '&cRaison: &e{REASON}'
 
-    
