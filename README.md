@@ -1,27 +1,27 @@
 # PMK-BungeeStaff
 Plugin BungeeCord de ban / Mute / kick / Warn
 
-Permission : 
+Permission : <br /><br />
 
-  Banissement :
-    Banissement : bungeestaff.command.ban
-    Débanissement : bungeestaff.command.unban
+  Banissement : <br />
+    Banissement : bungeestaff.command.ban <br />
+    Débanissement : bungeestaff.command.unban <br /><br />
   
-  Chat Limiter :
-    Mute : bungeestaff.command.mute
-    DéMute : bungeestaff.command.unmute
+  Chat Limiter : <br />
+    Mute : bungeestaff.command.mute <br />
+    DéMute : bungeestaff.command.unmute <br /><br />
 
-  History :
-    Personnal History : bungeestaff.command.history.personnal
-    History Player : bungeestaff.command.history.player
+  History : <br />
+    Personnal History : bungeestaff.command.history.personnal <br />
+    History Player : bungeestaff.command.history.player <br /><br />
     
-  Kick :
-    Kick : bungeestaff.command.kick
+  Kick : <br />
+    Kick : bungeestaff.command.kick <br /><br />
   
-  Information :
-    Personnal Information : bungeestaff.command.information.personnal
-    Information Player : bungeestaff.command.information.player
+  Information : <br /> 
+    Personnal Information : bungeestaff.command.information.personnal <br />
+    Information Player : bungeestaff.command.information.player <br /><br />
     
-  Warn :
-    Warn a player : bungeestaff.command.warn
-    Warn see : bungeestaff.command.warn.see
+  Warn : <br />
+    Warn a player : bungeestaff.command.warn <br />
+    Warn see : bungeestaff.command.warn.see <br />
