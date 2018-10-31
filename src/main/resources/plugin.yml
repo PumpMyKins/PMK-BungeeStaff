@@ -1,0 +1,31 @@
+name: PMK-BungeeStaff
+main: fr.pmk_bungee.Main
+version: 1.0
+author: Sufike
+
+commands:
+  unban:
+    description: Commande d'unban
+    
+  unmute:
+    description:  Commande de unmute
+  
+  mute:  
+    description:  Commande de mute
+  
+  ban:
+    description: Commande de ban
+    
+  history:
+    description: commande d'historique de sanction
+    
+  info:
+    description: commande d'info sur un joueurs
+    
+  kick:
+    description: commande de kick
+  
+  warn:
+    description: commande de warn
+
+    
