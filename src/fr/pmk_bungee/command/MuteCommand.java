@@ -14,6 +14,6 @@ public class MuteCommand extends Command {
 	public void execute(CommandSender sender, String[] args) {
 		// TODO Auto-generated method stub
 
-	}
+	} 
 
 }
