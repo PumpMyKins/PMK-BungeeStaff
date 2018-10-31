@@ -4,13 +4,25 @@ Plugin BungeeCord de ban / Mute / kick / Warn
 Permission : <br /><br />
 
   Banissement : <br />
-    Banissement : bungeestaff.command.ban <br />
-    Débanissement : bungeestaff.command.unban <br /><br />
+    Banissement : bungeestaff.command.ban | /ban <Pseudo> <Temps<unité>> <Raison> <br />
+    Débanissement : bungeestaff.command.unban | /unban <Pseudo> <br /><br /> 
+  
+  Unités de temps : <br /><br />
+  Secondes : s / secs / second / seconds <br />
+  Minute : m / min / mins / minute / minutes <br />
+  Heure : h / hs , hour, hours <br />
+  Jours : d / ds / day / days <br /><br />
   
   Chat Limiter : <br />
     Mute : bungeestaff.command.mute <br />
     DéMute : bungeestaff.command.unmute <br /><br />
-
+  
+  Unités de temps : <br /><br />
+  Secondes : s / secs / second / seconds <br />
+  Minute : m / min / mins / minute / minutes <br />
+  Heure : h / hs , hour, hours <br />
+  Jours : d / ds / day / days <br /><br />
+  
   History : <br />
     Personnal History : bungeestaff.command.history.personnal <br />
     History Player : bungeestaff.command.history.player <br /><br />
@@ -24,4 +36,3 @@ Permission : <br /><br />
     
   Warn : <br />
     Warn a player : bungeestaff.command.warn <br />
-    Warn see : bungeestaff.command.warn.see <br />
