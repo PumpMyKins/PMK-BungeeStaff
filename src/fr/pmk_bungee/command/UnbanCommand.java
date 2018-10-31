@@ -35,7 +35,8 @@ public class UnbanCommand extends Command {
 			  }
 		  }
 		  else {
-			  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));	  }
+			  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));	 
+			  }
 	  }
 
 }
