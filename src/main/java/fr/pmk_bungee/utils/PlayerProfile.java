@@ -35,7 +35,7 @@ public class PlayerProfile {
 				+ ProxyServer.getInstance().getPlayer(playerName).getUniqueId() 
 				+ "', '" 
 				+ ProxyServer.getInstance().getPlayer(playerName).getAddress().getAddress() 
-				+ "'");
+				+ "')");
 			
 			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM ActualBungeeBan WHERE userID ='" + getUserID(playerName) + "'");
 			if(rs.next()) {
