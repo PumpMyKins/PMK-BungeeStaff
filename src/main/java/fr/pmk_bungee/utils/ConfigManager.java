@@ -50,7 +50,7 @@ public class ConfigManager {
 		for (String repl : replace) {
 			
 			String[] r = repl.split("~");
-			str = str.replace(r[0], str);
+			str = str.replace(r[0], r[1]);
 		}
 		return str;
 	}

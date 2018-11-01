@@ -1,5 +1,6 @@
 package fr.pmk_bungee.command;
 
+import fr.pmk_bungee.Main;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -12,6 +13,7 @@ public class KickCommand extends Command {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		// TODO Auto-generated method stub
@@ -30,8 +32,9 @@ public class KickCommand extends Command {
 				}
 				kickReason.addExtra(reason + " par " + sender);
 				ProxyServer.getInstance().getPlayer(playername).disconnect(kickReason);
-			}
-		}
+				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.kick.kicked", new String[] { "{NAME}~" + playername}));
+			} else { sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.kick.syntax"));}
+		} else { sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));}
 	}
 
 }

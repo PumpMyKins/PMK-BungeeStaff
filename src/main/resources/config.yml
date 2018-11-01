@@ -23,56 +23,56 @@ lang:
 
   errors:
     no_permissions: '&cVous n avez pas la permission.'
-    player_not_found: '&cCe joueur n existe pas.'
-    player_not_online: '&cLe joueurs {NAME} n est pas connecté.'
+    player_not_found: '&cCe joueur est introuvable.'
+    player_not_online: '&cThe player &e{NAME} &cis not online.'
     internal_error: '&c INTERNAL SERVER ERROR: &e{DETAILS}'
     player_already_banned: '&cLe joueur &e{NAME} &cest déjà banni.'
     player_not_banned: '&cLe joueur &e{NAME} &cn est pas banni.'
-    player_already_muted: '&cLe joueur &e{NAME} &cest déjà muté.'
-    player_not_muted: '&cLe joueur &e{NAME} &cn est pas muté.'
-    unknown_timeunit: '&cErreur TimeUnit réferer vous à vos supérieurs.'
+    player_already_muted: '&cLe joueur est deja mute.'
+    player_not_muted: '&cLe joueur &e{NAME} &cn est pas muta.'
+    unknown_timeunit: '&cErreur TimeUnit referer vous à vos superieurs.'
 
   banmessage:
-  - '&cVous avez été banni du serveur.'
+  - '&cVous avez ete banni du serveur.'
   - '&cRaison: &e{REASON}'
   - '&cBanni par: &e{BY}'
   - '&cTemps restant: &e{REMAININGTIME}'
 
   mutemessage:
-  - '&cVous êtes mute du serveur.'
+  - '&cVous etes mute du serveur.'
   - '&cRaison: &e{REASON}'
-  - '&cMuté par: &e{BY}'
+  - '&cMute par: &e{BY}'
   - '&cTemps restant: &e{REMAININGTIME}'
 
-commands:
-  ban:
-    syntax: '&cUtilisation: &c/ban <Joueurs> <Temps> <TimeUnit> <Raison>'
-    banned: '&aVous avez banni &e{NAME}&a avec succès.'
-    broadcast:
-    - '&e{NAME} &ca été banni par &e{BY}&c.'
-    - '&cRaison: &e{REASON}'
-    - '&cTemps: &e{REMAININGTIME}'
-  unban:
-    syntax: '&cUsage: &c/unban <Joueurs>'
-    unbanned: '&aVous avez unban &e{NAME}&a avec succès.'
-    broadcast:
-    - '&e{NAME} &ca été débanni par &e{BY}&c.'
-  mute:
-    syntax: '&cUtilisation: &c/mute <Joueurs> <Time> <TimeUnit> <Raison>'
-    muted: '&aVous avez muté &e{NAME}&a avec succès.'
-    broadcast:
-    - '&e{NAME} &ca été muté par &e{BY}&c.'
-    - '&cRaison: &e{REASON}'
-    - '&cTemps: &e{REMAININGTIME}'
-  unmute:
-    syntax: '&cUtilisation: /unmute <Joueurs>'
-    unmuted: '&aVous avez démute &e{NAME}&a avec succès.'
-    broadcast:
-    - '&e{NAME} &ca été démute par &e{BY}&c.'
-  kick:
-    syntax: '&cUtilisation: &c/kick <Joueurs> <Reason>'
-    kicked: '&aVous avez kick &e{NAME}&a avec succès.'
-    broadcast:
-    - '&e{NAME} &cà été kick par &e{BY}&c.'
-    - '&cRaison: &e{REASON}'
+  commands:
+    ban:
+      syntax: '&cUtilisation: &c/ban <Joueurs> <Temps> <TimeUnit> <Raison>'
+      banned: '&aVous avez banni &e{NAME}&a avec succes.'
+      broadcast:
+      - '&e{NAME} &ca ete banni par &e{BY}&c.'
+      - '&cRaison: &e{REASON}'
+      - '&cTemps: &e{REMAININGTIME}'
+    unban:
+      syntax: '&cUsage: &c/unban <Joueurs>'
+      unbanned: '&aVous avez unban &e{NAME}&a avec succes.'
+      broadcast:
+      - '&e{NAME} &ca ete débanni par &e{BY}&c.'
+    mute:
+      syntax: '&cUtilisation: &c/mute <Joueurs> <Time> <TimeUnit> <Raison>'
+      muted: '&aVous avez muté &e{NAME}&a avec succès.'
+      broadcast:
+      - '&e{NAME} &ca été muté par &e{BY}&c.'
+      - '&cRaison: &e{REASON}'
+      - '&cTemps: &e{REMAININGTIME}'
+    unmute:
+      syntax: '&cUtilisation: /unmute <Joueurs>'
+      unmuted: '&aVous avez démute &e{NAME}&a avec succès.'
+      broadcast:
+      - '&e{NAME} &ca été démute par &e{BY}&c.'
+    kick:
+      syntax: '&cUtilisation: &c/kick <Joueurs> <Reason>'
+      kicked: '&aVous avez kick &e{NAME}&a avec succès.'
+      broadcast:
+      - '&e{NAME} &cà été kick par &e{BY}&c.'
+      - '&cRaison: &e{REASON}'
 
