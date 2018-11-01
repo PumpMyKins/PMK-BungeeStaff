@@ -94,7 +94,10 @@ public class PlayerProfile {
 	public String getUsername(int userID) {
 		
 		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE userID = '" + userID + "'");
+			ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE userID = '" 
+					+ userID 
+					+ "'");
+			
 			if(id.next()) {
 				
 				String username = id.getString("username");
@@ -131,14 +134,30 @@ public class PlayerProfile {
 			
 			toProxiedPlayer().disconnect(getBanKickMessage());
 		}
-		Main.getMySQL().update("INSERT INTO ActualBungeeBan(userID, banEnd, banBy, banReason) VALUES ('" + this.getUserID(playerName) + "', '" + getBanEnd() + "','" + getBanBy() + "','" + getBanReason() + "')");
+		Main.getMySQL().update("INSERT INTO ActualBungeeBan(userID, banEnd, banBy, banReason) VALUES ('" 
+			+ this.getUserID(playerName) 
+			+ "', '" 
+			+ getBanEnd() 
+			+ "','" 
+			+ getBanBy() 
+			+ "','" 
+			+ getBanReason() 
+			+ "')");
 
 	}
 	
 	public void unban() {
 		
-		Main.getMySQL().update("DELETE FROM ActualBungeeBan WHERE userID = '" + this.getUserID(playerName) + "'");
-		Main.getMySQL().update("INSERT INTO PastBungeeBan(userID, banEnd, banBy, banReason) VALUES ('" + this.getUserID(playerName) + "', '" + getBanEnd() + "','" + getBanBy() + "','" + getBanReason() + "')");
+		Main.getMySQL().update("DELETE FROM ActualBungeeBan WHERE userID = '" 
+			+ this.getUserID(playerName) 
+			+ "'");
+		
+		Main.getMySQL().update("INSERT INTO PastBungeeBan(userID, banEnd, banBy, banReason) VALUES ('" 
+			+ this.getUserID(playerName) + "', '" 
+			+ getBanEnd() + "','" 
+			+ getBanBy() + "','" 
+			+ getBanReason() 
+			+ "')");
 
 	}
 	
@@ -159,13 +178,33 @@ public class PlayerProfile {
 		setMuteReason(reason);
 		setMutedBy(by);
 		toProxiedPlayer().sendMessage(getMuteMessage());
-		Main.getMySQL().update("INSERT INTO ActualBungeeMutes(userID, muteEnd, muteReason, muteBy) VALUES ('" + this.getUserID(playerName) + "','" + getMuteReason() + "', '" + getMutedBy() + "')"); 
+		
+		Main.getMySQL().update("INSERT INTO ActualBungeeMutes(userID, muteEnd, muteReason, muteBy) VALUES ('" 
+			+ this.getUserID(playerName) 
+			+ "','" 
+			+ getMuteEnd() 
+			+ "','" 
+			+ getMuteReason() 
+			+ "', '" 
+			+ getMutedBy() 
+			+ "')"); 
 	}
 	
 	public void unmute() {
 		
-		Main.getMySQL().update("DELETE FROM ActualBungeeMutes WHERE userID = '" + this.getUserID(playerName) + "'");
-		Main.getMySQL().update("INSERT INTO PastBungeeMutes(userID, muteEnd, muteBy, muteReason) VALUES ('" + this.getUserID(playerName) + "','" + getMutedBy() + "', '" + getMuteReason() + "')"); 
+		Main.getMySQL().update("DELETE FROM ActualBungeeMutes WHERE userID = '" 
+			+ this.getUserID(playerName) 
+			+ "'");
+		
+		Main.getMySQL().update("INSERT INTO PastBungeeMutes(userID, muteEnd, muteBy, muteReason) VALUES ('" 
+			+ this.getUserID(playerName) 
+			+ "','" 
+			+ getMuteEnd() 
+			+ "','" 
+			+ getMuteReason() 
+			+ "', '" 
+			+ getMutedBy() 
+			+ "')"); 
 
 	}
 
