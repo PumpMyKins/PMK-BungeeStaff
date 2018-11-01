@@ -36,7 +36,6 @@ public class LoginEvent implements Listener {
 				+ e.getConnection().getAddress().getAddress()
 				+ "','true')");
 		}
-		else {
 			PlayerProfile profile = new PlayerProfile(e.getConnection().getName());
 			if(profile.isBanned()) {
 				
@@ -60,6 +59,5 @@ public class LoginEvent implements Listener {
 					e.setCancelReason(profile.getBanKickMessage() + "");
 				}
 			}
-		}
 	}
 }
