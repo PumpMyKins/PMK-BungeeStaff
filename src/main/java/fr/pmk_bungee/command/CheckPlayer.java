@@ -37,28 +37,28 @@ public class CheckPlayer extends Command {
 							
 							List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.banned.true", new String[] { "{NAME}~" + playername, "{REASON}~" + profile.getBanReason(), "{BY}~" + profile.getUsername(profile.getBanBy()), "{REMAININGTIME}~" + profile.getRemainingbanTime()});
 							for (String msg : msgs) {
-								sender.sendMessage(new TextComponent(Main.PREFIX + msg));
+								sender.sendMessage(new TextComponent(msg));
 							}
 						}
 						else {
 							
 			                List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.banned.false", new String[] { "{NAME}~" + playername });
 			                for (String msg : msgs) {
-			                	sender.sendMessage(new TextComponent(Main.PREFIX + msg));
+			                	sender.sendMessage(new TextComponent(msg));
 			                }
 						}
 						if(profile.isMuted()) {
 							
 							List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.muted.true", new String[] { "{NAME}~" + playername, "{REASON}~" + profile.getMuteReason(), "{BY}~" + profile.getUsername(profile.getMutedBy()), "{REMAININGTIME}~" + profile.getRemainingmuteTime()});
 			                for (String msg : msgs) {
-			                  sender.sendMessage(new TextComponent(Main.PREFIX + msg));
+			                  sender.sendMessage(new TextComponent(msg));
 			                }
 			              }
 			              else
 			              {
 			                List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.muted.false", new String[] { "{NAME}~" + playername });
 			                for (String msg : msgs) {
-			                  sender.sendMessage(new TextComponent(Main.PREFIX + msg));
+			                  sender.sendMessage(new TextComponent(msg));
 			                }
 			            }
 					} else {
