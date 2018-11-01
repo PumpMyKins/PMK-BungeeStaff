@@ -32,10 +32,10 @@ public class CheckPlayer extends Command {
 						if(profile != null) {
 							
 							String playername = args[0];
-							sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.check", new String[] { "{NAME}~" + playername}));
+							sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.check.succes", new String[] { "{NAME}~" + playername}));
 						if(profile.isBanned()) {
 							
-							List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.banned.true", new String[] { "{NAME}~" + playername, "{REASON}~" + profile.getBanReason(), "{BY}~" + profile.getUsername(profile.getBanBy())});
+							List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.banned.true", new String[] { "{NAME}~" + playername, "{REASON}~" + profile.getBanReason(), "{BY}~" + profile.getUsername(profile.getBanBy()), "{REMAININGTIME}~" + profile.getRemainingbanTime()});
 							for (String msg : msgs) {
 								sender.sendMessage(new TextComponent(Main.PREFIX + msg));
 							}

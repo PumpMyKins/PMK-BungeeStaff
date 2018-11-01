@@ -90,6 +90,7 @@ lang:
       no_ban: '&aAucun ancien ban'
       no_mute: '&aAucun ancien mute'
     check:
+      succes: '&cInformation pour le joueurs &e{NAME}'
       syntax: '&cUtilisation: $c/check <joueur>'
       banned:
         true:
