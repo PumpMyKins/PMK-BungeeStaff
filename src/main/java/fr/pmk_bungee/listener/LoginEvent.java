@@ -16,6 +16,7 @@ public class LoginEvent implements Listener {
 		
 		String playerName = e.getConnection().getName();
 		boolean isPresent = false;
+		boolean trueSetter = true;
 		try {
 			ResultSet rs = Main.getMySQL().getResult("SELECT isPresent FROM MinecraftPlayer WHERE username = '" + e.getConnection().getName()+ "'"); 
 			if(rs.next()) {
@@ -35,7 +36,9 @@ public class LoginEvent implements Listener {
 				+ e.getConnection().getUniqueId() 
 				+ "', '" 
 				+ e.getConnection().getAddress().getAddress()
-				+ "','true')");
+				+ "','" 
+				+ trueSetter 
+				+ "')");
 		}
 			PlayerProfile profile = new PlayerProfile(e.getConnection().getName());
 			if(profile.isBanned()) {
