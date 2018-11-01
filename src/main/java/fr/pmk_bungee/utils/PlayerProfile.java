@@ -196,7 +196,7 @@ public class PlayerProfile {
 			+ this.getUserID(playerName) 
 			+ "'");
 		
-		Main.getMySQL().update("INSERT INTO PastBungeeMutes(userID, muteEnd, muteBy, muteReason) VALUES ('" 
+		Main.getMySQL().update("INSERT INTO PastBungeeMutes(userID, muteEnd, muteReason, muteBy) VALUES ('" 
 			+ this.getUserID(playerName) 
 			+ "','" 
 			+ getMuteEnd() 
