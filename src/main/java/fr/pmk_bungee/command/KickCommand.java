@@ -32,9 +32,8 @@ public class KickCommand extends Command {
 					reason = reason + args[i] + " ";
 				}
 				List<String> msgs = Main.getConfigManager().getStringList("lang.kickmessage", new String[] { 
-						"{NAME}~" + playername, 
+						"{NAME}~" + sender.getName(), 
 						"{REASON}~" + reason, 
-						"{BY}~" + sender.getName(), 
 				
 				});
 				
