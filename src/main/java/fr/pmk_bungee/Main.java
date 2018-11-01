@@ -59,7 +59,8 @@ public class Main extends Plugin{
 		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeBan(banID INT NOT NULL AUTO_INCREMENT, userID INT, banAt DATETIME, banReason VARCHAR(256), banBy INT, PRIMARY KEY (banID) )");
 		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeMutes(muteID INT NOT NULL AUTO_INCREMENT, userID INT, muteAt DATETIME, muteReason VARCHAR(256), muteBy INT, PRIMARY KEY (muteID))");
 		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeKicks(kickID INT NOT NULL AUTO_INCREMENT, userID INT, muteAt DATETIME, muteReason VARCHAR(256), muteBy INT, PRIMARY KEY (kickID))");
-			
+		mySQL.update("CREATE TABLE IF NOT EXISTS BungeeWarn(warnID INT NOT NULL AUTO_INCREMENT, userID INT, warnAt DATETIME, warnReason VARCHAR(256), warnBy INT, PRIMARY KEY (warnID))");
+
 	}
 	
 	getProxy();
