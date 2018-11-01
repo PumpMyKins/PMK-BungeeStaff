@@ -54,6 +54,11 @@ lang:
   - '&cRaison : &e{REASON}'
   - '&cMute par : &e{BY}'
 
+  kickmessage:
+  - '&cVous avez ete kick du serveur.'
+  - '&cRaison: &e{REASON}'
+  - '&cBanni par: &e{BY}'
+
   commands:
     ban:
       syntax: '&cUtilisation: &c/ban <Joueurs> <Temps> <TimeUnit> <Raison>'
