@@ -18,7 +18,7 @@ public class LoginEvent implements Listener {
 		String playerName = e.getConnection().getName();
 		boolean isPresent = false;
 		try {
-			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = " + e.getConnection().getName()+ ""); 
+			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '" + e.getConnection().getName()+ "'"); 
 			if(rs.next()) {
 				
 				isPresent = rs.getBoolean("isPresent");
