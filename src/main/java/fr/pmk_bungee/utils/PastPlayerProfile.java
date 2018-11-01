@@ -12,7 +12,7 @@ public class PastPlayerProfile {
 	private String playerName;
 	
 	private ArrayList<Integer> pastBan;
-	private ArrayList<String> pastMute;
+	private ArrayList<Integer> pastMute;
 	//private ArrayList<String> pastKick;
 	
 	private ArrayList<String> banReason;
@@ -65,7 +65,7 @@ public class PastPlayerProfile {
 			ResultSet rs3 = Main.getMySQL().getResult("SELECT * FROM PastBungeeMutes WHERE userID ='" + getUserID(playerName) + "'");
 			while(rs3.next()) {
 				
-				this.pastMute.add(String.valueOf(rs3.getInt("muteID")));
+				this.pastMute.add(rs3.getInt("muteID"));
 			}
 			if(this.pastMute.size() > 0) {
 				
@@ -165,11 +165,11 @@ public class PastPlayerProfile {
 		this.pastBan = pastBan;
 	}
 
-	public ArrayList<String> getPastMute() {
+	public ArrayList<Integer> getPastMute() {
 		return pastMute;
 	}
 
-	public void setPastMute(ArrayList<String> pastMute) {
+	public void setPastMute(ArrayList<Integer> pastMute) {
 		this.pastMute = pastMute;
 	}
 
