@@ -89,5 +89,24 @@ lang:
       succes: '&4Historique des sanction de &e{NAME}'
       no_ban: '&aAucun ancien ban'
       no_mute: '&aAucun ancien mute'
-      
+    check:
+      syntax: '&cUtilisation: $c/check <joueur>'
+      banned:
+        true:
+          - '&cLe joueur &e{NAME} &cest &4&lBANNIE&c.'
+          - '&cRaison: &e{REASON}'
+          - '&cBanni par: &e{BY}'
+          - '&cTemps restant: &e{REMAININGTIME}'
+        false:
+          - '&fLe joueur &e{NAME} &fest pas bannie.'
+      muted:
+        true:
+          - '&cLe joueur &e{NAME} &cest &4&lMUTE&c.'
+          - '&cRaison: &e{REASON}'
+          - '&cMute par: &e{BY}'
+          - '&cTemps restant: &e{REMAININGTIME}'
+        false:
+          - '&fLe joueur &e{NAME} &fest pas mute.'
+        
+
 
