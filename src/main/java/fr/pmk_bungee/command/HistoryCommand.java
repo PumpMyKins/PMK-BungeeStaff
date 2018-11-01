@@ -17,9 +17,12 @@ public class HistoryCommand extends Command {
 	public void execute(CommandSender sender, String[] args) {
 		if(args.length > 0) {
 			
-			if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().equals(args[0]) || sender.hasPermission("bungeestaff.command.history.player")) {
+			String playername = args[0];
+			
+			if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().equals(playername) || sender.hasPermission("bungeestaff.command.history.player")) {
 				
-					PastPlayerProfile profile = new PastPlayerProfile(args[0]);
+				
+					PastPlayerProfile profile = new PastPlayerProfile(playername);
 					if(profile != null) {
 						
 					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.history.succes", new String[] { "{NAME}~" + args[0] }));
