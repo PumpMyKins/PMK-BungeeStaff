@@ -28,14 +28,14 @@ public class ChatEvent implements Listener {
 				
 				e.setCancelled(true);
 				e.setMessage("");
-				p.sendMessage(Main.PREFIX + profile.getMuteMessage());
+				p.sendMessages(Main.PREFIX + profile.getMuteMessage());
 				return;
 			}
 			if(end > current) {
 				
 				e.setCancelled(true);
 				e.setMessage("");
-				p.sendMessage(Main.PREFIX + profile.getMuteMessage());
+				p.sendMessages(Main.PREFIX + profile.getMuteMessage());
 				return;
 			}
 			else {

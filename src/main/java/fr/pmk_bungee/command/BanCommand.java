@@ -45,7 +45,7 @@ public class BanCommand extends Command {
 									
 									seconds *= unit.getSeconds();
 									profile.setBanned(reason, getUserID(sender.getName()), seconds);
-									sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.banned", new String[] { "{NAME}~" + playerName 
+									sender.sendMessages(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.banned", new String[] { "{NAME}~" + playerName 
 											
 									
 								}));							  }
