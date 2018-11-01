@@ -19,7 +19,7 @@ public class HistoryCommand extends Command {
 			
 			String playername = args[0];
 			
-			if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().equals(playername) || sender.hasPermission("bungeestaff.command.history.player")) {
+			//if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().equals(playername) || sender.hasPermission("bungeestaff.command.history.player")) {
 				
 				
 					PastPlayerProfile profile = new PastPlayerProfile(playername);
@@ -47,7 +47,7 @@ public class HistoryCommand extends Command {
 						for(int i = 0;i < profile.getPastMute().size(); i++) {
 							
 							sender.sendMessages(profile.getPastMuteMessage(i));
-						}
+						//}
 					}
 				}
 			}
