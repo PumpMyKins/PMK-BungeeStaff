@@ -15,37 +15,39 @@ public class HistoryCommand extends Command {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		
-		if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().toLowerCase() == args[0].toLowerCase() || sender.hasPermission("bungeestaff.command.history.player")) {
+		if(args[0] != null) {
 			
-				PastPlayerProfile profile = new PastPlayerProfile(args[0]);
-				if(profile != null) {
-					
-				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.history.succes", new String[] { "{NAME}~" + args[0] }));
+			if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().equals(args[0]) || sender.hasPermission("bungeestaff.command.history.player")) {
 				
-				if(profile.getPastBan().size() == 0) {
-					
-					sender.sendMessage(Main.getConfigManager().getString("lang.command.history.no_ban"));
-					
-				} else {
-					
-					for(int i = 0;i < profile.getPastBan().size(); i++) {
-					
-						sender.sendMessages(profile.getPastBanMessage(i));
-					}
-					
-				}
-				if(profile.getPastMute().size() == 0) {
-					
-					sender.sendMessage(Main.getConfigManager().getString("lang.command.history.no_mute"));
-				} else {
-					
-					for(int i = 0;i < profile.getPastMute().size(); i++) {
+					PastPlayerProfile profile = new PastPlayerProfile(args[0]);
+					if(profile != null) {
 						
-						sender.sendMessages(profile.getPastMuteMessage(i));
+					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.history.succes", new String[] { "{NAME}~" + args[0] }));
+					
+					if(profile.getPastBan().size() == 0) {
+						
+						sender.sendMessage(Main.getConfigManager().getString("lang.command.history.no_ban"));
+						
+					} else {
+						
+						for(int i = 0;i < profile.getPastBan().size(); i++) {
+						
+							sender.sendMessages(profile.getPastBanMessage(i));
+						}
+						
+					}
+					if(profile.getPastMute().size() == 0) {
+						
+						sender.sendMessage(Main.getConfigManager().getString("lang.command.history.no_mute"));
+					} else {
+						
+						for(int i = 0;i < profile.getPastMute().size(); i++) {
+							
+							sender.sendMessages(profile.getPastMuteMessage(i));
+						}
 					}
 				}
 			}
-		}
+		} else { System.out.println(args.length);}
 	}
 }
