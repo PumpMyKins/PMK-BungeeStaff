@@ -43,8 +43,8 @@ public class PastPlayerProfile {
 						ResultSet rs2 = Main.getMySQL().getResult("SELECT * FROM PastBungeeBan WHERE banID = '" + this.pastBan.get(i) + "'");
 						if(rs.next()) {
 							
-							this.banReason.add(rs2.getString("banReason"));
-							this.banBy.add(getUsername(rs2.getInt("banBy")));
+							this.banReason.add(i, rs2.getString("banReason"));
+							this.banBy.add(i, getUsername(rs2.getInt("banBy")));
 						
 						}
 						
@@ -69,7 +69,7 @@ public class PastPlayerProfile {
 			}
 			if(this.pastMute.size() > 0) {
 				
-				for(int i = 0; i <= pastMute.size(); i++) {
+				for(int i = 0; i <= this.pastMute.size(); i++) {
 					
 					try {
 						ResultSet rs4 = Main.getMySQL().getResult("SELECT * FROM PastBungeeBan WHERE banID = '" + this.pastMute.get(i) + "'");
@@ -119,7 +119,7 @@ public class PastPlayerProfile {
 	private int getUserID(String playerName) {
 		
 		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT userID FROM MinecraftPlayer WHERE username = '" + playerName + "'");
+			ResultSet id = Main.getMySQL().getResult("SELECT userID FROM MinecraftPlayer WHERE username = '" + this.playerName + "'");
 			if(id.next()) {
 				
 				int userID = id.getInt("userID");
