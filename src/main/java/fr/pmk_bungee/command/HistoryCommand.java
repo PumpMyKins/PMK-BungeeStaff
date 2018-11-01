@@ -19,7 +19,7 @@ public class HistoryCommand extends Command {
 			
 			if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().equals(args[0]) || sender.hasPermission("bungeestaff.command.history.player")) {
 				
-					PastPlayerProfile profile = new PastPlayerProfile(args[0]);
+					/*PastPlayerProfile profile = new PastPlayerProfile(args[0]);
 					if(profile != null) {
 						
 					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.history.succes", new String[] { "{NAME}~" + args[0] }));
@@ -46,7 +46,7 @@ public class HistoryCommand extends Command {
 							sender.sendMessages(profile.getPastMuteMessage(i));
 						}
 					}
-				}
+				}*/
 			}
 		} else { System.out.println("MISSING ARGUMENT");}
 	}
