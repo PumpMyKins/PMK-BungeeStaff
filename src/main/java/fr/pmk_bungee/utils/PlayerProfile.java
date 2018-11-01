@@ -29,13 +29,6 @@ public class PlayerProfile {
 	
 	public void init() {
 		try {
-			Main.getMySQL().update("INSERT IGNORE INTO MinecraftPlayer(username, uuid, ip) VALUES ('" 
-				+ this.playerName 
-				+ "', '" 
-				+ ProxyServer.getInstance().getPlayer(playerName).getUniqueId() 
-				+ "', '" 
-				+ ProxyServer.getInstance().getPlayer(playerName).getAddress().getAddress() 
-				+ "')");
 			
 			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM ActualBungeeBan WHERE userID ='" + getUserID(playerName) + "'");
 			if(rs.next()) {
