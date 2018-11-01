@@ -18,67 +18,39 @@ public class HistoryCommand extends Command {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
+		List<String> banHistory = null;
 		if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().toLowerCase() == args[0].toLowerCase() || sender.hasPermission("bungeestaff.command.history.player")) {
 			
-			sender.sendMessage(getHistoryList(getUserID(args[0])) +" ");
+			int userID = 0;
+			try {
+				ResultSet id = Main.getMySQL().getResult("SELECT userID FROM MinecraftPlayer WHERE username = '" 
+						+ args[0] 
+						+ "'");
+				
+				if(id.next()) {
+					
+					userID = id.getInt("userID");
+				
+				}
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			} 
+			try {
+				
+				ResultSet rsHistory = Main.getMySQL().getResult("SELECT * FROM PastBungeeBan WHERE userID ='" 
+						+ userID
+						+ "'");
+				while(rsHistory.next()) {
+					
+					banHistory.add(rsHistory.getInt("banID") +" ");
+				}
+				System.out.println("banHistory.size =" + banHistory.size());
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			sender.sendMessage(banHistory.size()+ "");
 		}
-	}
-private int getUserID(String playerName) {
-		
-		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '" 
-					+ playerName 
-					+ "'");
-			
-			if(id.next()) {
-				
-				int userID = id.getInt("userID");
-				return userID;
-			
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} 
-		return -1;
-	}
-	private String getUsername(int userID) {
-		
-		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE userID = '" 
-					+ userID 
-					+ "'");
-			
-			if(id.next()) {
-				
-				String username = id.getString("username");
-				return username;
-			}
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} return "";
-	}
-	@SuppressWarnings("null")
-	private int getHistoryList(int userID) {
-		
-		List<String> banHistory = null;
-		try {
-			
-			ResultSet rsHistory = Main.getMySQL().getResult("SELECT * FROM PastBungeeBan WHERE userID ='" 
-					+ userID
-					+ "'");
-			while(rsHistory.next()) {
-				
-				banHistory.add(rsHistory.getInt("banID") +" ");
-			}
-			System.out.println("banHistory.size =" + banHistory.size());
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		int returning = banHistory.size();
-		return returning;
 	}
 }
