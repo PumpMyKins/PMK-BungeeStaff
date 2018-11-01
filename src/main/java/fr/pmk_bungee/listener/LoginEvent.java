@@ -25,6 +25,8 @@ public class LoginEvent implements Listener {
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+		} catch (NullPointerException e2) {
+			isPresent = false;
 		}
 		if(!isPresent) {
 			Main.getMySQL().update("INSERT IGNORE INTO MinecraftPlayer(username, uuid, ip, isPresent) VALUES ('" 
