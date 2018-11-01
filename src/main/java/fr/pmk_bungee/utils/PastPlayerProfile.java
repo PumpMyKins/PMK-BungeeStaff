@@ -51,6 +51,8 @@ public class PastPlayerProfile {
 					} catch (SQLException e) {
 						
 						e.printStackTrace();
+					} catch (NullPointerException e) {
+						e.printStackTrace();
 					}
 					
 				}
