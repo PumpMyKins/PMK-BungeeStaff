@@ -91,6 +91,21 @@ public class PlayerProfile {
 		} 
 		return -1;
 	}
+	public String getUsername(int userID) {
+		
+		try {
+			ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE userID = '" + userID + "'");
+			if(id.next()) {
+				
+				String username = id.getString("username");
+				return username;
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} return "";
+	}
 
 	public void refreshPlayerData() {
 		
@@ -159,10 +174,10 @@ public class PlayerProfile {
 	
 	  public String getMuteMessage()
 	  {
-	    List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {"{REASON}~" + 
-	      getMuteReason(), "{BY}~" + 
-	      getMutedBy(), "{REMAININGTIME}~" + 
-	      getRemainingmuteTime() });
+	    List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {
+	      "{REASON}~" + getMuteReason(), 
+	      "{BY}~" + getUsername(getMutedBy()), 
+	      "{REMAININGTIME}~" + getRemainingmuteTime() });
 	    String str = "";
 	    for (String line : lines) {
 	      str = str + line + "\n";
@@ -172,10 +187,10 @@ public class PlayerProfile {
 	
 	  public String getBanKickMessage()
 	  {
-	    List<String> lines = Main.getConfigManager().getStringList("lang.banmessage", new String[] {"{REASON}~" + 
-	      getBanReason(), "{BY}~" + 
-	      getBanBy(), "{REMAININGTIME}~" + 
-	      getRemainingbanTime() });
+	    List<String> lines = Main.getConfigManager().getStringList("lang.banmessage", new String[] {
+	      "{REASON}~" + getBanReason(), 
+	      "{BY}~" + getUsername(getBanBy()), 
+	      "{REMAININGTIME}~" + getRemainingbanTime() });
 	    String str = "";
 	    for (String line : lines) {
 	      str = str + line + "\n";
@@ -203,8 +218,8 @@ public class PlayerProfile {
 		return banBy;
 	}
 
-	public void setBanBy(int banBy) {
-		this.banBy = banBy;
+	public void setBanBy(int by) {
+		this.banBy = by;
 	}
 
 	public boolean isBanned() {
@@ -235,8 +250,8 @@ public class PlayerProfile {
 		return mutedBy;
 	}
 
-	public void setMutedBy(int mutedBy) {
-		this.mutedBy = mutedBy;
+	public void setMutedBy(int by) {
+		this.mutedBy = by;
 	}
 
 	public boolean isMuted() {
