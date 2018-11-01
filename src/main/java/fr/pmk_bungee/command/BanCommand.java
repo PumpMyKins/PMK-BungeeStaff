@@ -42,7 +42,7 @@ public class BanCommand extends Command {
 									
 									seconds *= unit.getSeconds();
 									profile.setBanned(reason, getUserID(sender.getName()), seconds);
-									sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.banned", new String[] { "{NAME}~" + playerName 
+									sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban_banned", new String[] { "{NAME}~" + playerName 
 											
 									
 								}));							  }
@@ -56,7 +56,7 @@ public class BanCommand extends Command {
 				  }
 			  }
 			  else {
-				  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.syntax"));
+				  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban_syntax"));
 				  }
 		  } else {
 			  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));
