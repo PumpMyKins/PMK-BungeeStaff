@@ -121,15 +121,17 @@ public class PastPlayerProfile {
 	private int getUserID(String playerName) {
 		
 		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT userID FROM MinecraftPlayer WHERE username = '" + this.playerName + "'");
+			ResultSet id = Main.getMySQL().getResult("SELECT userID FROM MinecraftPlayer WHERE username = '" + playerName + "'");
 			if(id.next()) {
 				
 				int userID = id.getInt("userID");
-				System.out.println(userID);
 				return userID;
 			
 			}
 		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} catch (NullPointerException e) {
 			
 			e.printStackTrace();
 		} 
