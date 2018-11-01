@@ -48,6 +48,6 @@ public class HistoryCommand extends Command {
 					}
 				}
 			}
-		} else { System.out.println(args.length);}
+		} else { System.out.println("ARGUMENT LENGTH" +args.length);}
 	}
 }
