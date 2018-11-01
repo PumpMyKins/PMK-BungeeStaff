@@ -10,6 +10,7 @@ import net.md_5.bungee.api.plugin.Command;
 
 public class HistoryCommand extends Command {
 
+	List<String> banHistory = null;
 	public HistoryCommand(String name) {
 		super(name);
 		// TODO Auto-generated constructor stub
@@ -63,7 +64,6 @@ private int getUserID(String playerName) {
 	@SuppressWarnings("null")
 	private int getHistoryList(int userID) {
 		
-		List<String> banHistory = null;
 		try {
 			
 			ResultSet rsHistory = Main.getMySQL().getResult("SELECT * FROM PastBungeeBan WHERE userID ='" 
