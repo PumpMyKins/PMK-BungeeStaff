@@ -41,7 +41,7 @@ public class PastPlayerProfile {
 					
 					try {
 						ResultSet rs2 = Main.getMySQL().getResult("SELECT * FROM PastBungeeBan WHERE banID = '" + this.pastBan.get(i) + "'");
-						if(rs.next()) {
+						if(rs2.next()) {
 							
 							this.banReason.add(i, rs2.getString("banReason"));
 							this.banBy.add(i, getUsername(rs2.getInt("banBy")));
