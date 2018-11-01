@@ -29,7 +29,7 @@ public class PlayerProfile {
 	
 	public void init() {
 		try {
-			Main.getMySQL().update("INSERT IGNORE INTO MinecraftPlayer(username, uuid, ip) VALUES ('" + this.playerName + "', '" + ProxyServer.getInstance().getPlayer(playerName).getUniqueId() + "', '" + ProxyServer.getInstance().getPlayer(playerName).getAddress().getHostName() + "') WHERE NOT EXISTS (SELECT username FROM MinecraftPlayer WHERE username = '" + ProxyServer.getInstance().getPlayer(playerName).getName() + "'");
+			Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip) VALUES ('" + this.playerName + "', '" + ProxyServer.getInstance().getPlayer(playerName).getUniqueId() + "', '" + ProxyServer.getInstance().getPlayer(playerName).getAddress().getHostName() + "') WHERE NOT EXISTS (SELECT username FROM MinecraftPlayer WHERE username = '" + ProxyServer.getInstance().getPlayer(playerName).getName() + "'");
 			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM ActualBungeeBan WHERE userID ='" + getUserID(playerName) + "'");
 			if(rs.next()) {
 				
