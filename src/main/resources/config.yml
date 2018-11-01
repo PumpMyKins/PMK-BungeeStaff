@@ -58,7 +58,14 @@ lang:
   - '&cVous avez ete kick du serveur par &e{NAME}.'
   - '&cRaison: &e{REASON}'
 
+  warnmessage:
+  - '&cVous avez ete warn par &e{NAME}.'
+  - '&cRaison : &e{REASON}'
+
   commands:
+    warn:
+      succes: '&cVous avez warn &e{NAME}.'
+      syntax: '&cUtilisation /warn <Joueur> <Raison>'
     ban:
       syntax: '&cUtilisation: &c/ban <Joueurs> <Temps> <TimeUnit> <Raison>'
       banned: '&aVous avez banni &e{NAME}&a avec succes.'
