@@ -2,6 +2,7 @@ package fr.pmk_bungee.command;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerProfile;
@@ -42,7 +43,9 @@ public class MuteCommand extends Command {
 								  if(unit != null) {
 									  
 									  seconds *= unit.getSeconds();
-									  profile.setMute(reason, getUserID(sender.getName()), seconds);
+									  LocalDateTime now = LocalDateTime.now();
+									  java.sql.Date inNow = java.sql.Date.valueOf(now.toLocalDate());
+									  profile.setMute(reason, getUserID(sender.getName()), seconds, inNow);
 									  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.mute.muted", new String[] { "{NAME}~" + playerName }));		
 									  }
 							  } catch (NumberFormatException e) {sender.sendMessage("An interal error occured");}
