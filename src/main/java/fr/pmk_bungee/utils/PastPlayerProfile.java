@@ -62,7 +62,7 @@ public class PastPlayerProfile {
 		}
 		
 		try {
-			ResultSet rs3 = Main.getMySQL().getResult("SELECT * FROM PastBungeeMute WHERE userID ='" + getUserID(playerName) + "'");
+			ResultSet rs3 = Main.getMySQL().getResult("SELECT * FROM PastBungeeMutes WHERE userID ='" + getUserID(playerName) + "'");
 			while(rs3.next()) {
 				
 				this.pastMute.add(String.valueOf(rs3.getInt("muteID")));
