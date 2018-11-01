@@ -6,7 +6,6 @@ import java.util.List;
 
 import fr.pmk_bungee.Main;
 import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class PlayerProfile {
@@ -399,7 +398,7 @@ public class PlayerProfile {
 			
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
+			e.printStackTrace(); 
 		} return "";
 	}
 
