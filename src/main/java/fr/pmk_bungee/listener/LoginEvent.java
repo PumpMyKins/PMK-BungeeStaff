@@ -27,13 +27,13 @@ public class LoginEvent implements Listener {
 			e1.printStackTrace();
 		}
 		if(!isPresent) {
-			Main.getMySQL().update("INSERT IGNORE INTO MinecraftPlayer(username, uuid, ip) VALUES ('" 
+			Main.getMySQL().update("INSERT IGNORE INTO MinecraftPlayer(username, uuid, ip, isPresent) VALUES ('" 
 				+ playerName 
 				+ "', '" 
 				+ ProxyServer.getInstance().getPlayer(playerName).getUniqueId() 
 				+ "', '" 
 				+ ProxyServer.getInstance().getPlayer(playerName).getAddress().getAddress() 
-				+ "')");
+				+ "','true')");
 		}
 		else {
 			PlayerProfile profile = new PlayerProfile(e.getConnection().getName());
