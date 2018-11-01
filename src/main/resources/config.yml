@@ -44,6 +44,16 @@ lang:
   - '&cMute par: &e{BY}'
   - '&cTemps restant: &e{REMAININGTIME}'
 
+  pastbanmessage:
+  - '&cAnciens bannissement'
+  - '&cRaison : &e{REASON}'
+  - '&cBanni par : &e{BY}'
+
+  pastmutemessage:
+  - '&cAnciens Mute'
+  - '&cRaison : &e{REASON}'
+  - '&cMute par : &e{BY}'
+
   commands:
     ban:
       syntax: '&cUtilisation: &c/ban <Joueurs> <Temps> <TimeUnit> <Raison>'
@@ -75,4 +85,9 @@ lang:
       broadcast:
       - '&e{NAME} &ca ete kick par &e{BY}&c.'
       - '&cRaison: &e{REASON}'
+    history:
+      succes: '&4Historique des sanction de &e{NAME}'
+      no_ban: '&aAucun ancien ban'
+      no_mute: '&aAucun ancien mute'
+      
 
