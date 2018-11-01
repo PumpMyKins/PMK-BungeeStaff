@@ -227,7 +227,7 @@ public class PlayerProfile {
 	      "{REMAININGTIME}~" + getRemainingmuteTime() });
 	    String str = "";
 	    for (String line : lines) {
-	      str = str + line + "\n";
+	      str = str + line + " ";
 	    }
 	    return str;
 	  }
@@ -240,7 +240,7 @@ public class PlayerProfile {
 	      "{REMAININGTIME}~" + getRemainingbanTime() });
 	    String str = "";
 	    for (String line : lines) {
-	      str = str + line + "\n";
+	      str = str + line + " ";
 	    }
 	    return str;
 	  }
