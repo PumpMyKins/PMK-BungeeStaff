@@ -1,6 +1,5 @@
 package fr.pmk_bungee.listener;
 
-import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerProfile;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Listener;
@@ -28,14 +27,14 @@ public class ChatEvent implements Listener {
 				
 				e.setCancelled(true);
 				e.setMessage("");
-				p.sendMessages(Main.PREFIX + profile.getMuteMessage());
+				p.sendMessages(profile.getMuteMessage());
 				return;
 			}
 			if(end > current) {
 				
 				e.setCancelled(true);
 				e.setMessage("");
-				p.sendMessages(Main.PREFIX + profile.getMuteMessage());
+				p.sendMessages(profile.getMuteMessage());
 				return;
 			}
 			else {
