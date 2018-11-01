@@ -30,7 +30,7 @@ public class PastPlayerProfile {
 	public void init() {
 		try {
 			
-			ResultSet rs = Main.getMySQL().getResult("SELECT banID FROM PastBungeeBan WHERE userID ='" + getUserID(playerName) + "'");
+			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM PastBungeeBan WHERE userID ='" + getUserID(playerName) + "'");
 			while(rs.next()) {
 				
 				this.pastBan.add(rs.getInt("banID"));
@@ -117,6 +117,7 @@ public class PastPlayerProfile {
 			if(id.next()) {
 				
 				int userID = id.getInt("userID");
+				System.out.println(userID);
 				return userID;
 			
 			}
