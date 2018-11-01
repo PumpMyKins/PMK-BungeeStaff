@@ -15,13 +15,13 @@ public class HistoryCommand extends Command {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		if(args.length > 0) {
-			
+		
+	if(args[0] != null) {
 			String playername = args[0];
-			
-			//if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().equals(playername) || sender.hasPermission("bungeestaff.command.history.player")) {
-				
-				
+		if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().equals(playername) || sender.hasPermission("bungeestaff.command.history.player")) {
+
+			if(args.length > 0) {
+											
 					PastPlayerProfile profile = new PastPlayerProfile(playername);
 					if(profile != null) {
 						
@@ -47,10 +47,11 @@ public class HistoryCommand extends Command {
 						for(int i = 0;i < profile.getPastMute().size(); i++) {
 							
 							sender.sendMessages(profile.getPastMuteMessage(i));
-						//}
+						}
 					}
-				}
-			}
-		} else { System.out.println("MISSING ARGUMENT");}
+				} else { System.out.println("PROFILE ERROR");}
+			} else { System.out.println("NO ARGUMENT");}
+		} else { System.out.println("NO PERMISSION");}
 	}
+}
 }
