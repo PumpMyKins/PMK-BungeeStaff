@@ -26,7 +26,7 @@ public class ChatEvent implements Listener {
 			
 			if(end == -1L) {
 				
-				e.setCancelled(true);
+				e.setCancelled(true); 
 				e.setMessage("");
 				p.sendMessages(Main.PREFIX + profile.getMuteMessage());
 				return;
