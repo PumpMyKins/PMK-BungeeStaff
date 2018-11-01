@@ -32,8 +32,8 @@ public class KickCommand extends Command {
 				}
 				kickReason.addExtra(reason + " par " + sender);
 				ProxyServer.getInstance().getPlayer(playername).disconnect(kickReason);
-				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.kick.kicked", new String[] { "{NAME}~" + playername}));
-			} else { sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.kick.syntax"));}
+				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.kicked", new String[] { "{NAME}~" + playername}));
+			} else { sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.syntax"));}
 		} else { sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));}
 	}
 
