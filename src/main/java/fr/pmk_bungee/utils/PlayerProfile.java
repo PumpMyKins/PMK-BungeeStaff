@@ -157,7 +157,7 @@ public class PlayerProfile {
 		setMuteReason(reason);
 		setMutedBy(by);
 		toProxiedPlayer().sendMessage(getMuteMessage());
-		Main.getMySQL().update("INSERT INTO ActualBungeeMutes(PlayerName, muteEnd, muteBy, muteReason) VALUES ('" + this.getUserID(playerName) + "','" + getMutedBy() + "', '" + getMuteReason() + "')"); 
+		Main.getMySQL().update("INSERT INTO ActualBungeeMutes(userID, muteEnd, muteBy, muteReason) VALUES ('" + this.getUserID(playerName) + "','" + getMutedBy() + "', '" + getMuteReason() + "')"); 
 	}
 	
 	public void unmute() {
