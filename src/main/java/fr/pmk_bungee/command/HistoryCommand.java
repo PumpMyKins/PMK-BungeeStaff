@@ -15,7 +15,7 @@ public class HistoryCommand extends Command {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		if(args[0] != null) {
+		if(args.length > 0) {
 			
 			if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().equals(args[0]) || sender.hasPermission("bungeestaff.command.history.player")) {
 				
@@ -48,6 +48,6 @@ public class HistoryCommand extends Command {
 					}
 				}
 			}
-		} else { System.out.println("ARGUMENT LENGTH" +args.length);}
+		} else { System.out.println("MISSING ARGUMENT");}
 	}
 }
