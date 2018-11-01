@@ -247,7 +247,7 @@ public class PlayerProfile {
 	      "{REMAININGTIME}~" + getRemainingbanTime() });
 	    String str = "";
 	    for (String line : lines) {
-	      str = str + line + " ";
+	      str = str + line + "\n";
 	    }
 	    return str;
 	  }

@@ -45,8 +45,7 @@ public class BanCommand extends Command {
 									
 									seconds *= unit.getSeconds();
 									profile.setBanned(reason, getUserID(sender.getName()), seconds);
-									sender.sendMessages(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.banned", new String[] { "{NAME}~" + playerName 
-											
+									sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.banned", new String[] { "{NAME}~" + playerName 
 									
 								}));							  }
 							} catch (NumberFormatException e) {sender.sendMessage("An interal error occured");}
