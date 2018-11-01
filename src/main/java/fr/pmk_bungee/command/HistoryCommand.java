@@ -1,10 +1,7 @@
 package fr.pmk_bungee.command;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
 import fr.pmk_bungee.Main;
+import fr.pmk_bungee.utils.PastPlayerProfile;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
 
@@ -14,43 +11,41 @@ public class HistoryCommand extends Command {
 		super(name);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		List<String> banHistory = null;
+		
 		if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().toLowerCase() == args[0].toLowerCase() || sender.hasPermission("bungeestaff.command.history.player")) {
 			
-			int userID = 0;
-			try {
-				ResultSet id = Main.getMySQL().getResult("SELECT userID FROM MinecraftPlayer WHERE username = '" 
-						+ args[0] 
-						+ "'");
-				
-				if(id.next()) {
+				PastPlayerProfile profile = new PastPlayerProfile(args[0]);
+				if(profile != null) {
 					
-					userID = id.getInt("userID");
+				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.history.succes", new String[] { "{NAME}~" + args[0] }));
 				
-				}
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			} 
-			try {
-				
-				ResultSet rsHistory = Main.getMySQL().getResult("SELECT * FROM PastBungeeBan WHERE userID ='" 
-						+ userID
-						+ "'");
-				while(rsHistory.next()) {
+				if(profile.getPastBan().size() == 0) {
 					
-					banHistory.add(rsHistory.getInt("banID") +" ");
+					sender.sendMessage(Main.getConfigManager().getString("lang.command.history.no_ban"));
+					
+				} else {
+					
+					for(int i = 0;i < profile.getPastBan().size(); i++) {
+					
+						sender.sendMessages(profile.getPastBanMessage(i));
+					}
+					
 				}
-				System.out.println("banHistory.size =" + banHistory.size());
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
+				if(profile.getPastMute().size() == 0) {
+					
+					sender.sendMessage(Main.getConfigManager().getString("lang.command.history.no_mute"));
+				} else {
+					
+					for(int i = 0;i < profile.getPastMute().size(); i++) {
+						
+						sender.sendMessages(profile.getPastMuteMessage(i));
+					}
+				}
 			}
-			sender.sendMessage(banHistory.size()+ "");
 		}
 	}
 }
