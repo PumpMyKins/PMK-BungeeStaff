@@ -27,7 +27,7 @@ public class HistoryCommand extends Command {
 						
 					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.history.succes", new String[] { "{NAME}~" + args[0] }));
 					
-					if(profile.getPastBan().size() == 0) {
+					if(profile.getPastBan().isEmpty()) {
 						
 						sender.sendMessage(Main.getConfigManager().getString("lang.command.history.no_ban"));
 						
