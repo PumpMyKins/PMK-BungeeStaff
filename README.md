@@ -31,3 +31,6 @@ Plugin BungeeCord de ban / Mute / kick / Warn
     
   ***Warn : <br />***
  - [ ]    Warn a player : bungeestaff.command.warn <br />
+ 
+   ***Check Player : <br />***
+ - [x]    Check a player situation : bungeestaff.command.check | /check <player> <br />

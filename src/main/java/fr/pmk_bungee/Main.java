@@ -4,6 +4,7 @@ package fr.pmk_bungee;
 import fr.pmk_bungee.MySQL.MySQLCredentials;
 //IMPORT COMMAND
 import fr.pmk_bungee.command.BanCommand;
+import fr.pmk_bungee.command.CheckPlayer;
 import fr.pmk_bungee.command.HistoryCommand;
 import fr.pmk_bungee.command.InformationCommand;
 import fr.pmk_bungee.command.KickCommand;
@@ -72,7 +73,9 @@ public class Main extends Plugin{
 	pm.registerCommand(this, new MuteCommand("mute"));
 	//BAN
 	pm.registerCommand(this, new BanCommand("ban"));
-	//GET HISTORY OF A PLAYER
+	//CHECK IF BAN / MUTE
+	pm.registerCommand(this, new CheckPlayer("check"));
+	//GET HISTORY OF THE PLAYER
 	pm.registerCommand(this, new HistoryCommand("history"));
 	// GET ALL INFORMATION OF A PLAYER
 	pm.registerCommand(this, new InformationCommand("info"));

@@ -6,24 +6,36 @@ author: Sufike
 commands:
   unban:
     description: Commande d'unban
+    permission: bungeestaff.command.unban
     
   unmute:
     description:  Commande de unmute
+    permission: bungeestaff.command.unmute 
   
   mute:  
     description:  Commande de mute
+    permission: bungeestaff.command.mute 
   
   ban:
     description: Commande de ban
+    permission: bungeestaff.command.ban
     
   history:
     description: commande d'historique de sanction
+    permission: bungeestaff.command.history
     
   info:
     description: commande d'info sur un joueurs
+    permission: bungeestaff.command.information
     
   kick:
     description: commande de kick
+    permission: bungeestaff.command.kick
   
   warn:
     description: commande de warn
+    permission: bungeestaff.command.warn 
+
+  check:
+    description: commande de check du joueurs
+    permission: bungeestaff.command.check
