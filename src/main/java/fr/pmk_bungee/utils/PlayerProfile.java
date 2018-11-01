@@ -182,7 +182,7 @@ public class PlayerProfile {
 			Object[] players = ProxyServer.getInstance().getPlayers().toArray();
 			
 			if(toProxiedPlayer() == players[i]) {
-				toProxiedPlayer().sendMessage(getMuteMessage());
+				toProxiedPlayer().sendMessages(getMuteMessage());
 			}
 		}
 		
@@ -219,9 +219,10 @@ public class PlayerProfile {
 	
 	//GETTER AND SETTER
 	
-	  public String getMuteMessage()
+	  @SuppressWarnings("null")
+	public String[] getMuteMessage()
 	  {
-	    List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {
+	    /*List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {
 	      "{REASON}~" + getMuteReason(), 
 	      "{BY}~" + getUsername(getMutedBy()), 
 	      "{REMAININGTIME}~" + getRemainingmuteTime() });
@@ -229,8 +230,14 @@ public class PlayerProfile {
 	    for (String line : lines) {
 	      str = str + line + " ";
 	    }
-	    return str;
-	  }
+	    return str;*/
+		  List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {
+			      "{REASON}~" + getMuteReason(), 
+			      "{BY}~" + getUsername(getMutedBy()), 
+			      "{REMAININGTIME}~" + getRemainingmuteTime() });
+		  String[] str = new String [] {lines.get(0), lines.get(1), lines.get(2), lines.get(3)};
+		  return str;
+		  }
 	
 	  public String getBanKickMessage()
 	  {
