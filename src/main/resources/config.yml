@@ -85,7 +85,7 @@ lang:
       - '&e{NAME} &ca ete demute par &e{BY}&c.'
     kick:
       syntax: '&cUtilisation: &c/kick <Joueurs> <Reason>'
-      kicked: '&aVous avez kick &e{NAME}&a avec succès.'
+      kicked: '&aVous avez kick &e{NAME}&a avec succes.'
       broadcast:
       - '&e{NAME} &ca ete kick par &e{BY}&c.'
       - '&cRaison: &e{REASON}'
