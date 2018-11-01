@@ -28,6 +28,9 @@ public class BanCommand extends Command {
 				for(int i = 3; i <= args.length - 1; i++) {
 					
 					reason = reason + args[i] + " ";
+					
+				}
+				
 					Main.getConfigManager().save();
 					PlayerProfile profile = new PlayerProfile(playerName);
 					if(profile != null) {
@@ -53,10 +56,9 @@ public class BanCommand extends Command {
 					  } else {
 						  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));
 					  }
-				  }
 			  }
 			  else {
-				  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.syntax"));
+				  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban_syntax"));
 				  }
 		  } else {
 			  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));
