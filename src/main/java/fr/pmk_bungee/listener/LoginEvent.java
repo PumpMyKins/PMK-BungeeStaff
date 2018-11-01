@@ -17,7 +17,7 @@ public class LoginEvent implements Listener {
 		String playerName = e.getConnection().getName();
 		boolean isPresent = false;
 		try {
-			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '" + e.getConnection().getName()+ "'"); 
+			ResultSet rs = Main.getMySQL().getResult("SELECT isPresent FROM MinecraftPlayer WHERE username = '" + e.getConnection().getName()+ "'"); 
 			if(rs.next()) {
 				
 				isPresent = rs.getBoolean("isPresent");
@@ -26,6 +26,7 @@ public class LoginEvent implements Listener {
 			e1.printStackTrace();
 		} catch (NullPointerException e2) {
 			isPresent = false;
+			e2.printStackTrace();
 		}
 		if(!isPresent) {
 			Main.getMySQL().update("INSERT IGNORE INTO MinecraftPlayer(username, uuid, ip, isPresent) VALUES ('" 
