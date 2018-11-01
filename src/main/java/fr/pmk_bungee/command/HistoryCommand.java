@@ -18,9 +18,10 @@ public class HistoryCommand extends Command {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		// TODO Auto-generated method stub
-		
-		sender.sendMessage(getHistoryList(getUserID(args[0])) +" ");
+		if(sender.hasPermission("bungeestaff.command.history.personnal") && sender.getName().toLowerCase() == args[0].toLowerCase() || sender.hasPermission("bungeestaff.command.history.player")) {
+			
+			sender.sendMessage(getHistoryList(getUserID(args[0])) +" ");
+		}
 	}
 private int getUserID(String playerName) {
 		

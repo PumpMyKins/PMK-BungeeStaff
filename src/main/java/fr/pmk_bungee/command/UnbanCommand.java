@@ -15,7 +15,7 @@ public class UnbanCommand extends Command {
 	@SuppressWarnings({ "deprecation", "unused" })
 	@Override
 	  public void execute(final CommandSender sender, final String[] args) {
-		  if(sender.hasPermission("bungeeban.command.unban")) {
+		  if(sender.hasPermission("bungeestaff.command.unban")) {
 			  if(args.length == 1) {
 				  String playerName = args[0];
 				  PlayerProfile profile = new PlayerProfile(playerName);
