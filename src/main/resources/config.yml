@@ -7,6 +7,13 @@
 #{BY} - Le nom de la personne ayant kick / ban ou mutes
 #{DETAILS} - Si un message à un détails il faut utiliser celui si.
 
+mysql:
+  host: 'localhost'
+  port: 3306
+  username: 'bungeeUtils'
+  password: 'secret'
+  database: 'bungeeUtils'
+
 lang:
 
   prefix: '&6&l[&r&2Pump&eMy&aStaff&6&l]&r'
@@ -15,14 +22,14 @@ lang:
   time_format_permanent: 'PERMANENT'
 
   errors:
-    no_permissions: '&cVous n'avez pas la permission.'
-    player_not_found: '&cCe joueur n'existe pas.'
-    player_not_online: '&cLe joueurs {NAME} n'est pas connecté.'
+    no_permissions: '&cVous n avez pas la permission.'
+    player_not_found: '&cCe joueur n existe pas.'
+    player_not_online: '&cLe joueurs {NAME} n est pas connecté.'
     internal_error: '&c INTERNAL SERVER ERROR: &e{DETAILS}'
     player_already_banned: '&cLe joueur &e{NAME} &cest déjà banni.'
-    player_not_banned: '&cLe joueur &e{NAME} &cn'est pas banni.'
+    player_not_banned: '&cLe joueur &e{NAME} &cn est pas banni.'
     player_already_muted: '&cLe joueur &e{NAME} &cest déjà muté.'
-    player_not_muted: '&cLe joueur &e{NAME} &cn'est pas muté.'
+    player_not_muted: '&cLe joueur &e{NAME} &cn est pas muté.'
     unknown_timeunit: '&cErreur TimeUnit réferer vous à vos supérieurs.'
 
   banmessage:
@@ -69,4 +76,3 @@ commands:
     - '&e{NAME} &cà été kick par &e{BY}&c.'
     - '&cRaison: &e{REASON}'
 
-    
