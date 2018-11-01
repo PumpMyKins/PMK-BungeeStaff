@@ -29,7 +29,7 @@ public class PlayerProfile {
 	
 	public void init() {
 		try {
-			Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip) VALUES ('" 
+			Main.getMySQL().update("INSERT IGNORE INTO MinecraftPlayer(username, uuid, ip) VALUES ('" 
 				+ this.playerName 
 				+ "', '" 
 				+ ProxyServer.getInstance().getPlayer(playerName).getUniqueId() 
