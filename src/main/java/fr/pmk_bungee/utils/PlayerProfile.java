@@ -48,6 +48,8 @@ public class PlayerProfile {
 			
 		} catch (SQLException e ) {
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
 		}
 		
 		try {
