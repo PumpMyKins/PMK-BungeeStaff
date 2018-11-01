@@ -222,15 +222,6 @@ public class PlayerProfile {
 	  @SuppressWarnings("null")
 	public String[] getMuteMessage()
 	  {
-	    /*List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {
-	      "{REASON}~" + getMuteReason(), 
-	      "{BY}~" + getUsername(getMutedBy()), 
-	      "{REMAININGTIME}~" + getRemainingmuteTime() });
-	    String str = "";
-	    for (String line : lines) {
-	      str = str + line + " ";
-	    }
-	    return str;*/
 		  List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {
 			      "{REASON}~" + getMuteReason(), 
 			      "{BY}~" + getUsername(getMutedBy()), 
