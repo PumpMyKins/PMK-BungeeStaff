@@ -1,7 +1,5 @@
 package fr.pmk_bungee.listener;
 
-import java.sql.ResultSet;
-
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerProfile;
 import net.md_5.bungee.api.plugin.Listener;
@@ -14,7 +12,7 @@ public class LoginEvent implements Listener {
 	public void onLogin(net.md_5.bungee.api.event.LoginEvent e) {
 		
 		try {
-		//Main.getMySQL().update("INSERT INTO MinecraftPlayer ");
+			
 			PlayerProfile profile = new PlayerProfile(e.getConnection().getName());
 			if(profile.isBanned()) {
 				
