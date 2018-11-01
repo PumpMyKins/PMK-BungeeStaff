@@ -50,7 +50,7 @@ public class Main extends Plugin{
 		
 		logToConsole("§aMySQL connection success.");
 		//BASE DE DONNER
-		mySQL.update("CREATE TABLE IF NOT EXISTS MinecraftPlayer( `userID` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(16) NOT NULL , `uuid` VARCHAR(256) NOT NULL ,`ip` VARCHAR(256) NOT NULL, PRIMARY KEY (`userID`))");
+		mySQL.update("CREATE TABLE IF NOT EXISTS MinecraftPlayer( `userID` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(16) NOT NULL , `uuid` VARCHAR(256) NOT NULL ,`ip` VARCHAR(256) NOT NULL, PRIMARY KEY (`userID`), UNIQUE (username))");
 		//BDD Relation 1:N (1 = USER; 1 = OTHER)
 		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeBan(userID INT, banEnd LONG, banReason VARCHAR(256),banBy INT)");
 		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeMutes(userID INT, muteEnd LONG, muteReason VARCHAR(256),muteBy INT)");
