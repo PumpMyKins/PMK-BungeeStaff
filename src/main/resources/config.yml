@@ -18,7 +18,7 @@ lang:
 
   prefix: '&6&l[&r&2Pump&eMy&aStaff&6&l]&r'
   console_prefix: '[PumpMyStaff] '
-  time_format: '{DAYS} jours(s), {HOURS} heure(s), {MINUTES} min(s) and {SECONDS} sec(s)'
+  time_format: '{DAYS} jours(s), {HOURS} heure(s), {MINUTES} min(s) et {SECONDS} sec(s)'
   time_format_permanent: 'PERMANENT'
 
   errors:
@@ -29,7 +29,7 @@ lang:
     player_already_banned: '&cLe joueur &e{NAME} &cest déjà banni.'
     player_not_banned: '&cLe joueur &e{NAME} &cn est pas banni.'
     player_already_muted: '&cLe joueur est deja mute.'
-    player_not_muted: '&cLe joueur &e{NAME} &cn est pas muta.'
+    player_not_muted: '&cLe joueur &e{NAME} &cn est pas mute.'
     unknown_timeunit: '&cErreur TimeUnit referer vous à vos superieurs.'
 
   banmessage:
