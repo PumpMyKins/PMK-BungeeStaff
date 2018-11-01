@@ -55,9 +55,9 @@ public class Main extends Plugin{
 		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeBan(userID INT, banEnd LONG, banReason VARCHAR(256),banBy INT)");
 		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeMutes(userID INT, muteEnd LONG, muteReason VARCHAR(256),muteBy INT)");
 		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeKicks(userID INT, muteEnd LONG, muteReason VARCHAR(256),kickBy INT)");
-		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeBan('banID' INT NOT NULL AUTO_INCREMENT, userID INT, banEnd LONG, banReason VARCHAR(256), banBy INT, PRIMARY KEY ('banID') )");
-		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeMutes('muteID' INT NOT NULL AUTO_INCREMENT, userID INT, muteEnd LONG, muteReason VARCHAR(256), muteBy INT, PRIMARY KEY ('muteID'))");
-		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeKicks('kickID' INT NOT NULL AUTO_INCREMENT, userID INT, muteEnd LONG, muteReason VARCHAR(256), muteBy INT, PRIMARY KEY ('kickID'))");
+		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeBan(banID INT NOT NULL AUTO_INCREMENT, userID INT, banEnd LONG, banReason VARCHAR(256), banBy INT, PRIMARY KEY (banID) )");
+		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeMutes(muteID INT NOT NULL AUTO_INCREMENT, userID INT, muteEnd LONG, muteReason VARCHAR(256), muteBy INT, PRIMARY KEY (muteID))");
+		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeKicks(kickID INT NOT NULL AUTO_INCREMENT, userID INT, muteEnd LONG, muteReason VARCHAR(256), muteBy INT, PRIMARY KEY (kickID))");
 			
 	}
 	
