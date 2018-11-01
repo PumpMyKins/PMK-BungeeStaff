@@ -55,11 +55,10 @@ public class BanCommand extends Command {
 							  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_already_banned", new String[] { "{NAME}~" + playerName }));						  }
 					  } else {
 						  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));
-					  }
-			  }
-			  else {
-				  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban_syntax"));
-				  }
+					    }
+			  } else {
+				  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.syntax"));
+			    }
 		  } else {
 			  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));
 		  };
