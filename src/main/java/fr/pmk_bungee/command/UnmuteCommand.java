@@ -22,7 +22,7 @@ public class UnmuteCommand extends Command {
 				  if(profile != null) {
 					  if(profile.isMuted()) {
 						  profile.unmute();
-						  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.mute.muted", new String[] { "{NAME}~" + playerName }));							  
+						  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.unmuted", new String[] { "{NAME}~" + playerName }));							  
 					  }
 					  else {
 						  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_muted", new String[] { "{NAME}~" + playerName }));				  }
@@ -35,7 +35,8 @@ public class UnmuteCommand extends Command {
 			  }
 		  }
 		  else {
-			  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));	  }
+			  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));	  
+		  }
 	  }
 
 }
