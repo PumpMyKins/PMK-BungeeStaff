@@ -35,7 +35,7 @@ public class PastPlayerProfile {
 				
 				this.pastBan.add(rs.getInt("banID"));
 			}
-			if(this.pastBan.size() > 0) {
+			if(!this.pastBan.isEmpty()) {
 				
 				for(int i = 0; i <= this.pastBan.size(); i++) {
 					
@@ -69,7 +69,7 @@ public class PastPlayerProfile {
 				
 				this.pastMute.add(rs3.getInt("muteID"));
 			}
-			if(this.pastMute.size() > 0) {
+			if(!this.pastMute.isEmpty()) {
 				
 				for(int i = 0; i <= this.pastMute.size(); i++) {
 					
