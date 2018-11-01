@@ -163,7 +163,7 @@ public class PlayerProfile {
 	public void unmute() {
 		
 		Main.getMySQL().update("DELETE FROM ActualBungeeMutes WHERE userID = '" + this.getUserID(playerName) + "'");
-		Main.getMySQL().update("INSERT INTO PastBungeeMutes(PlayerName, muteEnd, muteBy, muteReason) VALUES ('" + this.getUserID(playerName) + "','" + getMutedBy() + "', '" + getMuteReason() + "')"); 
+		Main.getMySQL().update("INSERT INTO PastBungeeMutes(userID, muteEnd, muteBy, muteReason) VALUES ('" + this.getUserID(playerName) + "','" + getMutedBy() + "', '" + getMuteReason() + "')"); 
 
 	}
 
