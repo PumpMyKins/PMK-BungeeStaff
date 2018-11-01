@@ -30,7 +30,7 @@ public class LoginEvent implements Listener {
 			e2.printStackTrace();
 		}
 		if(!isPresent) {
-			Main.getMySQL().update("INSERT IGNORE INTO MinecraftPlayer(username, uuid, ip, isPresent) VALUES ('" 
+			Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip, isPresent) VALUES ('" 
 				+ playerName 
 				+ "', '" 
 				+ e.getConnection().getUniqueId() 
