@@ -15,21 +15,21 @@ public class LoginEvent implements Listener {
 	public void onLogin(net.md_5.bungee.api.event.LoginEvent e) {
 		
 		String playerName = e.getConnection().getName();
-		boolean isPresent = false;
-		boolean trueSetter = true;
+		int isPresent = 0;
+		int trueSetter = 1;
 		try {
 			ResultSet rs = Main.getMySQL().getResult("SELECT isPresent FROM MinecraftPlayer WHERE username = '" + e.getConnection().getName()+ "'"); 
 			if(rs.next()) {
 				
-				isPresent = rs.getBoolean("isPresent");
+				isPresent = rs.getInt("isPresent");
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} catch (NullPointerException e2) {
-			isPresent = false;
+			isPresent = 0;
 			e2.printStackTrace();
 		}
-		if(!isPresent) {
+		if(isPresent == 0) {
 			Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip, isPresent) VALUES ('" 
 				+ playerName 
 				+ "', '" 
