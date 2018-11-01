@@ -29,6 +29,7 @@ public class PastPlayerProfile {
 	
 	public void init() {
 		try {
+			
 			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM PastBungeeBan WHERE userID ='" + getUserID(playerName) + "'");
 			while(rs.next()) {
 				
