@@ -33,7 +33,7 @@ public class PastPlayerProfile {
 			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM PastBungeeBan WHERE userID ='" + getUserID(playerName) + "'");
 			while(rs.next()) {
 				
-				this.pastBan.add(rs.getInt("banid"));
+				this.pastBan.add(rs.getInt("banID"));
 			}
 			if(this.pastBan.size() > 0) {
 				
@@ -63,7 +63,7 @@ public class PastPlayerProfile {
 			ResultSet rs3 = Main.getMySQL().getResult("SELECT * FROM PastBungeeMute WHERE userID ='" + getUserID(playerName) + "'");
 			while(rs3.next()) {
 				
-				this.pastMute.add(String.valueOf(rs3.getInt("banid")));
+				this.pastMute.add(String.valueOf(rs3.getInt("muteID")));
 			}
 			if(this.pastMute.size() > 0) {
 				
