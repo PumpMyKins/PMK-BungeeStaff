@@ -21,14 +21,14 @@ public class KickCommand extends Command {
 				
 				String playername = args[0];
 				String reason = "";
-				TextComponent kickReason = new TextComponent(reason);
-				kickReason.addExtra(" par " + sender);
+				TextComponent kickReason = new TextComponent();
 				
 				for(int i = 1; i <= args.length - 1; i++) {
 					
 					reason = reason + args[i] + " ";
 					
 				}
+				kickReason.addExtra(reason + " par " + sender);
 				ProxyServer.getInstance().getPlayer(playername).disconnect(kickReason);
 			}
 		}
