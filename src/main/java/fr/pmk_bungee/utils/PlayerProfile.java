@@ -177,8 +177,16 @@ public class PlayerProfile {
 		setMuteEnd(end);
 		setMuteReason(reason);
 		setMutedBy(by);
-		toProxiedPlayer().sendMessage(getMuteMessage());
+		for(int i = 0;i < ProxyServer.getInstance().getPlayers().size(); i++) {
+			
+			Object[] players = ProxyServer.getInstance().getPlayers().toArray();
+			
+			if(toProxiedPlayer() == players[i]) {
+				toProxiedPlayer().sendMessage(getMuteMessage());
+			}
+		}
 		
+				
 		Main.getMySQL().update("INSERT INTO ActualBungeeMutes(userID, muteEnd, muteReason, muteBy) VALUES ('" 
 			+ this.getUserID(playerName) 
 			+ "','" 
@@ -196,7 +204,7 @@ public class PlayerProfile {
 			+ this.getUserID(playerName) 
 			+ "'");
 		
-		Main.getMySQL().update("INSERT INTO PastBungeeMutes(userID, muteEnd, muteBy, muteReason) VALUES ('" 
+		Main.getMySQL().update("INSERT INTO PastBungeeMutes(userID, muteEnd, muteReason, muteBy) VALUES ('" 
 			+ this.getUserID(playerName) 
 			+ "','" 
 			+ getMuteEnd() 
