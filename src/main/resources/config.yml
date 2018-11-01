@@ -56,23 +56,23 @@ lang:
       syntax: '&cUsage: &c/unban <Joueurs>'
       unbanned: '&aVous avez unban &e{NAME}&a avec succes.'
       broadcast:
-      - '&e{NAME} &ca ete débanni par &e{BY}&c.'
+      - '&e{NAME} &ca ete debanni par &e{BY}&c.'
     mute:
       syntax: '&cUtilisation: &c/mute <Joueurs> <Time> <TimeUnit> <Raison>'
-      muted: '&aVous avez muté &e{NAME}&a avec succès.'
+      muted: '&aVous avez mute &e{NAME}&a avec succes.'
       broadcast:
-      - '&e{NAME} &ca été muté par &e{BY}&c.'
+      - '&e{NAME} &ca ete mute par &e{BY}&c.'
       - '&cRaison: &e{REASON}'
       - '&cTemps: &e{REMAININGTIME}'
     unmute:
       syntax: '&cUtilisation: /unmute <Joueurs>'
-      unmuted: '&aVous avez démute &e{NAME}&a avec succès.'
+      unmuted: '&aVous avez demute &e{NAME}&a avec succes.'
       broadcast:
-      - '&e{NAME} &ca été démute par &e{BY}&c.'
+      - '&e{NAME} &ca ete demute par &e{BY}&c.'
     kick:
       syntax: '&cUtilisation: &c/kick <Joueurs> <Reason>'
       kicked: '&aVous avez kick &e{NAME}&a avec succès.'
       broadcast:
-      - '&e{NAME} &cà été kick par &e{BY}&c.'
+      - '&e{NAME} &ca ete kick par &e{BY}&c.'
       - '&cRaison: &e{REASON}'
 
