@@ -26,7 +26,7 @@ lang:
     player_not_found: '&cCe joueur est introuvable.'
     player_not_online: '&cThe player &e{NAME} &cis not online.'
     internal_error: '&c INTERNAL SERVER ERROR: &e{DETAILS}'
-    player_already_banned: '&cLe joueur &e{NAME} &cest déjà banni.'
+    player_already_banned: '&cLe joueur &e{NAME} &cest deja banni.'
     player_not_banned: '&cLe joueur &e{NAME} &cn est pas banni.'
     player_already_muted: '&cLe joueur est deja mute.'
     player_not_muted: '&cLe joueur &e{NAME} &cn est pas mute.'
