@@ -28,6 +28,9 @@ public class BanCommand extends Command {
 				for(int i = 3; i <= args.length - 1; i++) {
 					
 					reason = reason + args[i] + " ";
+					
+				}
+				
 					Main.getConfigManager().save();
 					PlayerProfile profile = new PlayerProfile(playerName);
 					if(profile != null) {
@@ -42,7 +45,7 @@ public class BanCommand extends Command {
 									
 									seconds *= unit.getSeconds();
 									profile.setBanned(reason, getUserID(sender.getName()), seconds);
-									sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban_banned", new String[] { "{NAME}~" + playerName 
+									sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.banned", new String[] { "{NAME}~" + playerName 
 											
 									
 								}));							  }
@@ -53,7 +56,6 @@ public class BanCommand extends Command {
 					  } else {
 						  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));
 					  }
-				  }
 			  }
 			  else {
 				  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban_syntax"));

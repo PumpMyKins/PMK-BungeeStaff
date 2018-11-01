@@ -27,12 +27,12 @@ lang:
     player_not_online: '&cLe joueurs {NAME} n est pas connecté.'
     internal_error: '&c INTERNAL SERVER ERROR: &e{DETAILS}'
     player_already_banned: '&cLe joueur est déjà banni.'
-    player_not_banned: "&cLe joueur n\'est pas banni."
-    player_already_muted: "&cLe joueur &e{NAME} &cest d\éj\à mut\é."
+    player_not_banned: "&cLe joueur n est pas banni."
+    player_already_muted: "&cLe joueur est deja mute."
     player_not_muted: '&cLe joueur &e{NAME} &cn est pas muté.'
     unknown_timeunit: '&cErreur TimeUnit réferer vous à vos supérieurs.'
     ban_syntax: '&cErreur syntax.'
-    ban_banned: "&c Joueurs banni avec succ\ès"
+    ban_banned: "&c Joueurs banni avec succ\ès."
 
 
   banmessage:
