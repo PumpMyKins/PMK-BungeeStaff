@@ -94,7 +94,7 @@ public class PlayerProfile {
 	public String getUsername(int userID) {
 		
 		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE userID = '" 
+			ResultSet id = Main.getMySQL().getResult("SELECT username FROM MinecraftPlayer WHERE userID = '" 
 					+ userID 
 					+ "'");
 			
