@@ -55,9 +55,8 @@ lang:
   - '&cMute par : &e{BY}'
 
   kickmessage:
-  - '&cVous avez ete kick du serveur.'
+  - '&cVous avez ete kick du serveur par &e{NAME}.'
   - '&cRaison: &e{REASON}'
-  - '&cBanni par: &e{BY}'
 
   commands:
     ban:
