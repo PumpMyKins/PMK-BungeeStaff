@@ -29,7 +29,7 @@ public class PlayerProfile {
 	
 	public void init() {
 		try {
-			
+			Main.getMySQL().update("INSERT IF NOT EXISTS INTO MinecraftPlayer(username, uuid, ip) VALUES ('" + this.playerName + "', '" + ProxyServer.getInstance().getPlayer(playerName).getUniqueId() + "', '" + ProxyServer.getInstance().getPlayer(playerName).getAddress().getHostName() + "')");
 			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM ActualBungeeBan WHERE userID ='" + getUserID(playerName) + "'");
 			if(rs.next()) {
 				
@@ -88,21 +88,23 @@ public class PlayerProfile {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		} catch (NullPointerException error) {
-			
-			Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip) VALUES ('" + this.playerName + "', '" + ProxyServer.getInstance().getPlayer(playerName).getUniqueId() + "', '" + ProxyServer.getInstance().getPlayer(playerName).getAddress().getHostName() + "')");
-			try {
-				ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '" + this.playerName + "'");
-				if(id.next()) {
-					
-					int userID = id.getInt("userID");
-					return userID;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		} 
 		return -1;
+	}
+	public String getUsername(int userID) {
+		
+		try {
+			ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE userID = '" + userID + "'");
+			if(id.next()) {
+				
+				String username = id.getString("username");
+				return username;
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} return "";
 	}
 
 	public void refreshPlayerData() {
@@ -157,13 +159,13 @@ public class PlayerProfile {
 		setMuteReason(reason);
 		setMutedBy(by);
 		toProxiedPlayer().sendMessage(getMuteMessage());
-		Main.getMySQL().update("INSERT INTO ActualBungeeMutes(PlayerName, muteEnd, muteBy, muteReason) VALUES ('" + this.getUserID(playerName) + "','" + getMutedBy() + "', '" + getMuteReason() + "')"); 
+		Main.getMySQL().update("INSERT INTO ActualBungeeMutes(userID, muteEnd, muteBy, muteReason) VALUES ('" + this.getUserID(playerName) + "','" + getMutedBy() + "', '" + getMuteReason() + "')"); 
 	}
 	
 	public void unmute() {
 		
 		Main.getMySQL().update("DELETE FROM ActualBungeeMutes WHERE userID = '" + this.getUserID(playerName) + "'");
-		Main.getMySQL().update("INSERT INTO PastBungeeMutes(PlayerName, muteEnd, muteBy, muteReason) VALUES ('" + this.getUserID(playerName) + "','" + getMutedBy() + "', '" + getMuteReason() + "')"); 
+		Main.getMySQL().update("INSERT INTO PastBungeeMutes(userID, muteEnd, muteBy, muteReason) VALUES ('" + this.getUserID(playerName) + "','" + getMutedBy() + "', '" + getMuteReason() + "')"); 
 
 	}
 
@@ -172,10 +174,10 @@ public class PlayerProfile {
 	
 	  public String getMuteMessage()
 	  {
-	    List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {"{REASON}~" + 
-	      getMuteReason(), "{BY}~" + 
-	      getMutedBy(), "{REMAININGTIME}~" + 
-	      getRemainingmuteTime() });
+	    List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {
+	      "{REASON}~" + getMuteReason(), 
+	      "{BY}~" + getUsername(getMutedBy()), 
+	      "{REMAININGTIME}~" + getRemainingmuteTime() });
 	    String str = "";
 	    for (String line : lines) {
 	      str = str + line + "\n";
@@ -185,10 +187,10 @@ public class PlayerProfile {
 	
 	  public String getBanKickMessage()
 	  {
-	    List<String> lines = Main.getConfigManager().getStringList("lang.banmessage", new String[] {"{REASON}~" + 
-	      getBanReason(), "{BY}~" + 
-	      getBanBy(), "{REMAININGTIME}~" + 
-	      getRemainingbanTime() });
+	    List<String> lines = Main.getConfigManager().getStringList("lang.banmessage", new String[] {
+	      "{REASON}~" + getBanReason(), 
+	      "{BY}~" + getUsername(getBanBy()), 
+	      "{REMAININGTIME}~" + getRemainingbanTime() });
 	    String str = "";
 	    for (String line : lines) {
 	      str = str + line + "\n";
@@ -216,8 +218,8 @@ public class PlayerProfile {
 		return banBy;
 	}
 
-	public void setBanBy(int banBy) {
-		this.banBy = banBy;
+	public void setBanBy(int by) {
+		this.banBy = by;
 	}
 
 	public boolean isBanned() {
@@ -248,8 +250,8 @@ public class PlayerProfile {
 		return mutedBy;
 	}
 
-	public void setMutedBy(int mutedBy) {
-		this.mutedBy = mutedBy;
+	public void setMutedBy(int by) {
+		this.mutedBy = by;
 	}
 
 	public boolean isMuted() {
