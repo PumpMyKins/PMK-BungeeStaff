@@ -27,6 +27,8 @@ public class MuteCommand extends Command {
 				  for(int i = 3; i <= args.length - 1; i++) {
 					  
 					  reason = reason + args[i] + " ";
+					
+				  }
 					  Main.getConfigManager().save();
 					  PlayerProfile profile = new PlayerProfile(playerName);
 					  if(profile != null) {
@@ -52,7 +54,6 @@ public class MuteCommand extends Command {
 						  
 						  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));
 					  }
-				  }
 			  }
 			  else {
 				  
