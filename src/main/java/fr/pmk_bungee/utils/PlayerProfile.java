@@ -29,7 +29,7 @@ public class PlayerProfile {
 	
 	public void init() {
 		try {
-			
+			Main.getMySQL().update("INSERT IF NOT EXIST INTO MinecraftPlayer(username, uuid, ip) VALUES ('" + this.playerName + "', '" + ProxyServer.getInstance().getPlayer(playerName).getUniqueId() + "', '" + ProxyServer.getInstance().getPlayer(playerName).getAddress().getHostName() + "')");
 			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM ActualBungeeBan WHERE userID ='" + getUserID(playerName) + "'");
 			if(rs.next()) {
 				
@@ -88,20 +88,7 @@ public class PlayerProfile {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-		} catch (NullPointerException error) {
-			
-			Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip) VALUES ('" + this.playerName + "', '" + ProxyServer.getInstance().getPlayer(playerName).getUniqueId() + "', '" + ProxyServer.getInstance().getPlayer(playerName).getAddress().getHostName() + "')");
-			try {
-				ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '" + this.playerName + "'");
-				if(id.next()) {
-					
-					int userID = id.getInt("userID");
-					return userID;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		} 
 		return -1;
 	}
 
