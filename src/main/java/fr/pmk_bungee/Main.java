@@ -85,13 +85,7 @@ public class Main extends Plugin{
 	
 	pm.registerListener(this, new LoginEvent());
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	//GETTER AND SETTER 
 	
 	@SuppressWarnings("deprecation")
