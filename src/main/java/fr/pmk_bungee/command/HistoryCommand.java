@@ -25,7 +25,7 @@ public class HistoryCommand extends Command {
 					PastPlayerProfile profile = new PastPlayerProfile(playername);
 					if(profile != null) {
 						
-					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.history.succes", new String[] { "{NAME}~" + args[0] }));
+					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.command.history.succes", new String[] { "{NAME}~" + playername }));
 					
 					if(profile.getPastBan().isEmpty()) {
 						
