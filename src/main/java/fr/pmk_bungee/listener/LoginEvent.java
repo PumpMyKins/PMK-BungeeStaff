@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerProfile;
-import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
@@ -32,9 +31,9 @@ public class LoginEvent implements Listener {
 			Main.getMySQL().update("INSERT IGNORE INTO MinecraftPlayer(username, uuid, ip, isPresent) VALUES ('" 
 				+ playerName 
 				+ "', '" 
-				+ ProxyServer.getInstance().getPlayer(playerName).getUniqueId() 
+				+ e.getConnection().getUniqueId() 
 				+ "', '" 
-				+ ProxyServer.getInstance().getPlayer(playerName).getAddress().getAddress() 
+				+ e.getConnection().getAddress().getAddress()
 				+ "','true')");
 		}
 		else {
