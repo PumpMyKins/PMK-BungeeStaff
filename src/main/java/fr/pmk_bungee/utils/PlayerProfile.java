@@ -75,45 +75,8 @@ public class PlayerProfile {
 	
 	
 	}
-	private int getUserID(String playerName) {
-		
-		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT userID FROM MinecraftPlayer WHERE username = '" + playerName + "'");
-			if(id.next()) {
-				
-				int userID = id.getInt("userID");
-				return userID;
-			
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} 
-		return -1;
-	}
-	public String getUsername(int userID) {
-		
-		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT username FROM MinecraftPlayer WHERE userID = '" 
-					+ userID 
-					+ "'");
-			
-			if(id.next()) {
-				
-				String username = id.getString("username");
-				return username;
-			}
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} return "";
-	}
-
-	public void refreshPlayerData() {
-		
-		init();
-	}
+	
+	// ALL THE BAN
 	
 	@SuppressWarnings("deprecation")
 	public void setBanned(String reason, int by, long seconds) {
@@ -161,6 +124,92 @@ public class PlayerProfile {
 
 	}
 	
+	public String getBanKickMessage()
+	  {
+	    List<String> lines = Main.getConfigManager().getStringList("lang.banmessage", new String[] {
+	      "{REASON}~" + getBanReason(), 
+	      "{BY}~" + getUsername(getBanBy()), 
+	      "{REMAININGTIME}~" + getRemainingbanTime() });
+	    String str = "";
+	    for (String line : lines) {
+	      str = str + line + "\n";
+	    }
+	    return str;
+	  }
+
+	public String getBanReason() {
+		return banReason;
+	}
+
+	public void setBanReason(String banReason) {
+		this.banReason = banReason;
+	}
+
+	public int getBanBy() {
+		return banBy;
+	}
+
+	public void setBanBy(int by) {
+		this.banBy = by;
+	}
+
+	public boolean isBanned() {
+		return isBanned;
+	}
+
+	public void setBanned(boolean isBanned) {
+		this.isBanned = isBanned;
+	}
+
+	public long getBanEnd() {
+		return banEnd;
+	}
+
+	public void setBanEnd(long banEnd) {
+		this.banEnd = banEnd;
+	}
+	
+	public String getRemainingbanTime()
+	  {
+	    if (isBanned())
+	    {
+	      long end = getBanEnd();
+	      if (end > 0L)
+	      {
+	        long millis = end - System.currentTimeMillis();
+	        int days = 0;
+	        int hours = 0;
+	        int minutes = 0;
+	        int seconds = 0;
+	        while (millis >= 1000L)
+	        {
+	          seconds++;
+	          millis -= 1000L;
+	        }
+	        while (seconds >= 60)
+	        {
+	          minutes++;
+	          seconds -= 60;
+	        }
+	        while (minutes >= 60)
+	        {
+	          hours++;
+	          minutes -= 60;
+	        }
+	        while (hours >= 24)
+	        {
+	          days++;
+	          hours -= 24;
+	        }
+	        return Main.getConfigManager().timeFormat(days, hours, minutes, seconds);
+	      }
+	      return Main.getConfigManager().getString("lang.time_format_permanent");
+	    }
+	    return null;
+	  }
+	
+	// ALL THE MUTE
+
 	@SuppressWarnings("deprecation")
 	public void setMute(String reason, int by, long seconds){
 		
@@ -215,11 +264,7 @@ public class PlayerProfile {
 			+ "')"); 
 
 	}
-
 	
-	//GETTER AND SETTER
-	
-	  @SuppressWarnings("null")
 	public String[] getMuteMessage()
 	  {
 		  List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {
@@ -230,59 +275,6 @@ public class PlayerProfile {
 		  return str;
 		  }
 	
-	  public String getBanKickMessage()
-	  {
-	    List<String> lines = Main.getConfigManager().getStringList("lang.banmessage", new String[] {
-	      "{REASON}~" + getBanReason(), 
-	      "{BY}~" + getUsername(getBanBy()), 
-	      "{REMAININGTIME}~" + getRemainingbanTime() });
-	    String str = "";
-	    for (String line : lines) {
-	      str = str + line + "\n";
-	    }
-	    return str;
-	  }
-
-	public String getPlayerName() {
-		return playerName;
-	}
-
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
-
-	public String getBanReason() {
-		return banReason;
-	}
-
-	public void setBanReason(String banReason) {
-		this.banReason = banReason;
-	}
-
-	public int getBanBy() {
-		return banBy;
-	}
-
-	public void setBanBy(int by) {
-		this.banBy = by;
-	}
-
-	public boolean isBanned() {
-		return isBanned;
-	}
-
-	public void setBanned(boolean isBanned) {
-		this.isBanned = isBanned;
-	}
-
-	public long getBanEnd() {
-		return banEnd;
-	}
-
-	public void setBanEnd(long banEnd) {
-		this.banEnd = banEnd;
-	}
-
 	public String getMuteReason() {
 		return muteReason;
 	}
@@ -315,50 +307,6 @@ public class PlayerProfile {
 
 		this.muteEnd = muteEnd;
 	}
-	
-	public ProxiedPlayer toProxiedPlayer() {
-		
-		return ProxyServer.getInstance().getPlayer(playerName);
-	}
-	
-	public String getRemainingbanTime()
-	  {
-	    if (isBanned())
-	    {
-	      long end = getBanEnd();
-	      if (end > 0L)
-	      {
-	        long millis = end - System.currentTimeMillis();
-	        int days = 0;
-	        int hours = 0;
-	        int minutes = 0;
-	        int seconds = 0;
-	        while (millis >= 1000L)
-	        {
-	          seconds++;
-	          millis -= 1000L;
-	        }
-	        while (seconds >= 60)
-	        {
-	          minutes++;
-	          seconds -= 60;
-	        }
-	        while (minutes >= 60)
-	        {
-	          hours++;
-	          minutes -= 60;
-	        }
-	        while (hours >= 24)
-	        {
-	          days++;
-	          hours -= 24;
-	        }
-	        return Main.getConfigManager().timeFormat(days, hours, minutes, seconds);
-	      }
-	      return Main.getConfigManager().getString("lang.time_format_permanent");
-	    }
-	    return null;
-	  }
 	
 	public String getRemainingmuteTime()
 	  {
@@ -398,4 +346,61 @@ public class PlayerProfile {
 	    }
 	    return null;
 	 }
+
+	//OTHER
+	
+	public ProxiedPlayer toProxiedPlayer() {
+		
+		return ProxyServer.getInstance().getPlayer(playerName);
+	}
+
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+	private int getUserID(String playerName) {
+		
+		try {
+			ResultSet id = Main.getMySQL().getResult("SELECT userID FROM MinecraftPlayer WHERE username = '" + playerName + "'");
+			if(id.next()) {
+				
+				int userID = id.getInt("userID");
+				return userID;
+			
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} 
+		return -1;
+	}
+	
+	public String getUsername(int userID) {
+		
+		try {
+			ResultSet id = Main.getMySQL().getResult("SELECT username FROM MinecraftPlayer WHERE userID = '" 
+					+ userID 
+					+ "'");
+			
+			if(id.next()) {
+				
+				String username = id.getString("username");
+				return username;
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} return "";
+	}
+
+	public void refreshPlayerData() {
+		
+		init();
+	}
+	
 }
