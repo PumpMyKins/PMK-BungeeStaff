@@ -81,7 +81,7 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								senderMessage("warn.false", true, playername);
+								senderMessage("warn.false", true, playername, sender);
 								
 							}
 				            break;
@@ -103,7 +103,7 @@ public class HistoryCommand extends Command {
 							}
 							else {
 								
-								senderMessage("ban.false", true, playername);
+								senderMessage("ban.false", true, playername, sender);
 
 							}
 							break;
@@ -124,7 +124,7 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								senderMessage("mute.false", true, playername);
+								senderMessage("mute.false", true, playername, sender);
 
 							}
 							break;
@@ -145,7 +145,7 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								senderMessage("kick.false", true, playername);
+								senderMessage("kick.false", true, playername, sender);
 
 							}
 							break;
@@ -166,7 +166,7 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								senderMessage("warn.false", true, playername);
+								senderMessage("warn.false", true, playername, sender);
 
 							}
 							if(pastBanList.size() > 0) {
@@ -185,7 +185,7 @@ public class HistoryCommand extends Command {
 							}
 							else {								
 								
-								senderMessage("ban.false", true, playername);
+								senderMessage("ban.false", true, playername, sender);
 							}
 							if(pastMuteList.size() > 0) {
 								for(int i = 0; i < pastMuteList.size(); i++) {	
@@ -202,7 +202,7 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								senderMessage("mute.false", true, playername);
+								senderMessage("mute.false", true, playername, sender);
 
 							}
 							if(pastKickList.size() > 0) {
@@ -220,7 +220,7 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								senderMessage("kick.false", true, playername);
+								senderMessage("kick.false", true, playername, sender);
 
 							}
 				            break;
@@ -267,7 +267,7 @@ public class HistoryCommand extends Command {
 			e.printStackTrace(); 
 		} return "";
 	}
-	public void senderMessage(String situation, Boolean prefix, String playername) {
+	public void senderMessage(String situation, Boolean prefix, String playername, CommandSender sender) {
 		
 		situation = "lang.commands.history" + situation;
 		List<String> msgs = Main.getConfigManager().getStringList(situation, new String[] {
@@ -276,7 +276,7 @@ public class HistoryCommand extends Command {
 		});
 		for(String msg : msgs) {
 			
-			
+			sender.sendMessage(new TextComponent(msg));
 		}
 		
 	}
