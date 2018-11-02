@@ -81,11 +81,8 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								sender.sendMessage(new TextComponent(
-										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.warn.faux", new String[] {
-												"{NAME}~" + playername
-										})));
+								senderMessage("warn.false", true, playername);
+								
 							}
 				            break;
 						
@@ -105,11 +102,9 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								sender.sendMessage(new TextComponent(
-										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.ban.faux",new String[] {
-												"{NAME}~" + playername
-										})));
+								
+								senderMessage("ban.false", true, playername);
+
 							}
 							break;
 
@@ -129,11 +124,8 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								sender.sendMessage(new TextComponent(
-										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.faux",new String[] {
-												"{NAME}~" + playername
-										})));
+								senderMessage("mute.false", true, playername);
+
 							}
 							break;
 
@@ -153,11 +145,8 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								sender.sendMessage(new TextComponent(
-										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.faux", new String[] {
-												"{NAME}~" + playername
-										})));
+								senderMessage("kick.false", true, playername);
+
 							}
 							break;
 
@@ -177,11 +166,8 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								sender.sendMessage(new TextComponent(
-										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.warn.faux", new String[] {
-												"{NAME}~" + playername
-										})));
+								senderMessage("warn.false", true, playername);
+
 							}
 							if(pastBanList.size() > 0) {
 								for(int i = 0; i < pastBanList.size(); i++) {
@@ -197,13 +183,9 @@ public class HistoryCommand extends Command {
 									}
 								}
 							}
-							else {
-								System.out.println("Je suis faux et je suis un ban");
-								sender.sendMessage(new TextComponent(
-										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.unban.broadcast", new String[] {
-												"{NAME}~" + playername
-										})));
+							else {								
+								
+								senderMessage("ban.false", true, playername);
 							}
 							if(pastMuteList.size() > 0) {
 								for(int i = 0; i < pastMuteList.size(); i++) {	
@@ -220,11 +202,8 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								sender.sendMessage(new TextComponent(
-										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.faux", new String[] {
-												"{NAME}~" + playername
-										})));
+								senderMessage("mute.false", true, playername);
+
 							}
 							if(pastKickList.size() > 0) {
 								for(int i = 0; i < pastKickList.size(); i++) {
@@ -241,11 +220,8 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
-								sender.sendMessage(new TextComponent(
-										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.faux", new String[] {
-												"{NAME}~" + playername
-										})));
+								senderMessage("kick.false", true, playername);
+
 							}
 				            break;
 
@@ -290,6 +266,19 @@ public class HistoryCommand extends Command {
 
 			e.printStackTrace(); 
 		} return "";
+	}
+	public void senderMessage(String situation, Boolean prefix, String playername) {
+		
+		situation = "lang.commands.history" + situation;
+		List<String> msgs = Main.getConfigManager().getStringList(situation, new String[] {
+			"{NAME}~" + playername
+		
+		});
+		for(String msg : msgs) {
+			
+			
+		}
+		
 	}
 
 }
