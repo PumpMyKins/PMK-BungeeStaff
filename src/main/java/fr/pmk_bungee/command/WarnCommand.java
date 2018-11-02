@@ -61,7 +61,7 @@ public class WarnCommand extends Command {
 		
 		try {
 			
-			Main.getMySQL().update("INSERT INTO BungerWarn(userID, warnAt, warnBy, warnReason) VALUES ('" 
+			Main.getMySQL().update("INSERT INTO BungeeWarn(userID, warnAt, warnBy, warnReason) VALUES ('" 
 					+ getUserID(playername) 
 					+ "', '" 
 					+ warnAt
