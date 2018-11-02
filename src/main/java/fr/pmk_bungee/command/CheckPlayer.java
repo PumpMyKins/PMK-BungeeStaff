@@ -1,9 +1,11 @@
 package fr.pmk_bungee.command;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerProfile;
+import fr.pmk_bungee.utils.Warn;
 import fr.pmk_bungee.utils.WarnShower;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -26,105 +28,109 @@ public class CheckPlayer extends Command {
 			public void run() {
 				
 				if(sender.hasPermission("bungeestaff.command.check")) {
-					
+					List<Warn> warnList = null;
 					if(args.length == 1) {
-						
+
 						PlayerProfile profile = new PlayerProfile(args[0]);
-						WarnShower warnShower = new WarnShower(args[0]);
 						String playername = args[0];
+						try {
+							warnList = WarnShower.listWarn(playername);
+						} catch (ClassNotFoundException | NullPointerException | SQLException e) {
+							e.printStackTrace();
+						}
 
 						if(profile != null) {
-							
+
 							sender.sendMessage(new TextComponent(
-								Main.PREFIX + 
-								Main.getConfigManager().getString("lang.commands.check.succes", new String[] { 
-									"{NAME}~" + playername
-									
-								})
-							));
-							
-						if(profile.isBanned()) {
-							
-							List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.banned.true", new String[] { 
-									"{NAME}~" + playername, 
-									"{REASON}~" + profile.getBanReason(), 
-									"{BY}~" + profile.getUsername(profile.getBanBy()), 
-									"{REMAININGTIME}~" + profile.getRemainingbanTime(),
-									"{BANAT}~" + profile.getInNowBan()
-							
-							});
-							
-							for (String msg : msgs) {
-								sender.sendMessage(new TextComponent(msg));
+									Main.PREFIX + 
+									Main.getConfigManager().getString("lang.commands.check.succes", new String[] { 
+											"{NAME}~" + playername
+
+									})
+									));
+
+							if(profile.isBanned()) {
+
+								List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.banned.true", new String[] { 
+										"{NAME}~" + playername, 
+										"{REASON}~" + profile.getBanReason(), 
+										"{BY}~" + profile.getUsername(profile.getBanBy()), 
+										"{REMAININGTIME}~" + profile.getRemainingbanTime(),
+										"{BANAT}~" + profile.getInNowBan()
+
+								});
+
+								for (String msg : msgs) {
+									sender.sendMessage(new TextComponent(msg));
+								}
 							}
-						}
-						else {
-							
-			                List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.banned.false", new String[] { 
-			                		"{NAME}~" + playername 
-			                		
-			                });
-			                
-			                for (String msg : msgs) {
-			                	sender.sendMessage(new TextComponent(msg));
-			                }
-						}
-						if(profile.isMuted()) {
-							
-							List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.muted.true", new String[] { 
-									"{NAME}~" + playername, 
-									"{REASON}~" + profile.getMuteReason(), 
-									"{BY}~" + profile.getUsername(profile.getMutedBy()), 
-									"{REMAININGTIME}~" + profile.getRemainingmuteTime(),
-									"{MUTEAT}~" + profile.getInNowMute()
-							
-							});
-							
-			                for (String msg : msgs) {
-			                  sender.sendMessage(new TextComponent(msg));
-			                }
-			                
-			              }
-			              else
-			              {
-			                List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.muted.false", new String[] { 
-			                		"{NAME}~" + playername 
-			                		
-			                });
-			                
-			                for (String msg : msgs) {
-			                  sender.sendMessage(new TextComponent(msg));
-			                }
-			                
-			            }
-					} else {
-						sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.errors.player_not_found")));
-					} if(warnShower != null) {
-						
-						if(warnShower.getWarnNumber() == 0) {
-						
+							else {
+
+								List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.banned.false", new String[] { 
+										"{NAME}~" + playername 
+
+								});
+
+								for (String msg : msgs) {
+									sender.sendMessage(new TextComponent(msg));
+								}
+							}
+							if(profile.isMuted()) {
+
+								List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.muted.true", new String[] { 
+										"{NAME}~" + playername, 
+										"{REASON}~" + profile.getMuteReason(), 
+										"{BY}~" + profile.getUsername(profile.getMutedBy()), 
+										"{REMAININGTIME}~" + profile.getRemainingmuteTime(),
+										"{MUTEAT}~" + profile.getInNowMute()
+
+								});
+
+								for (String msg : msgs) {
+									sender.sendMessage(new TextComponent(msg));
+								}
+
+							}
+							else
+							{
+								List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.muted.false", new String[] { 
+										"{NAME}~" + playername 
+
+								});
+
+								for (String msg : msgs) {
+									sender.sendMessage(new TextComponent(msg));
+								}
+
+							}
+						} else {
+							sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.errors.player_not_found")));
+						} 
+
+						if(warnList.size() == 0) {
+
 							sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.commands.check.warn.false", new String[] {
 									"{NAME}~" + playername
 							})));
-							
+
 						} else {
-							
-							for(int i = 0; i < warnShower.getWarnNumber(); i++) {
-								
+
+							for(int i = 0; i < warnList.size(); i++) {
+
+								Warn actual = warnList.get(i);
 								List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.warn.true", new String[] {
-										"{NAME}~" + warnShower.getUsername(warnShower.getWarnBy().get(i)),
-										"{REASON}~" + warnShower.getWarnReason().get(i),
-										"{DATE}~" + warnShower.getWarnAt().get(i)
-										
+										"{NAME}~" + actual.getWarnBy(),
+										"{REASON}~" + actual.getWarnReason(),
+										"{DATE}~" + actual.getWarnAt()
+
 								});
-							for (String msg : msgs) {
-								sender.sendMessage(new TextComponent(msg));
-							}
+								for (String msg : msgs) {
+									sender.sendMessage(new TextComponent(msg));
+								}
 							}
 						}
-					}
-				} else { sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.check.syntax")));}
-			} else { sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));}
+					} else { sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.check.syntax")));}
+				} else { sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));}
 			}
 		});
 	}
