@@ -6,6 +6,9 @@
 #{REMAININGTIME} - Le temps restant d'un ban / mute, utilisant le format temps spécifié plus bas
 #{BY} - Le nom de la personne ayant kick / ban ou mutes
 #{DETAILS} - Si un message à un détails il faut utiliser celui si.
+#{BANAT} - Pour la date d'un ban.
+#{MUTEAT} - Pour la date d'un mute.
+#{DATE} - Pour la date de quelque chose.
 
 mysql:
   host: 'localhost'
@@ -119,6 +122,14 @@ lang:
           - '&cTemps restant: &e{REMAININGTIME}'
         false:
           - '&fLe joueur &e{NAME} &fest pas mute.'
+      warn:
+        true:
+          - '&c-------&eListe des warn&c-------'
+          - '&cAverti par &e{NAME}'
+          - '&cAverti pour &e{REASON}'
+          - '&cAverti le &e{DATE}'
+        false:
+          - '&fLe joueur $e{NAME} est pas Warn'
         
 
 
