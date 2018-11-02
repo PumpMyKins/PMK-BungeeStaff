@@ -201,7 +201,7 @@ public class HistoryCommand extends Command {
 								System.out.println("Je suis faux et je suis un ban");
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.ban.faux", new String[] {
+										Main.getConfigManager().getString("lang.commands.unban.broadcast", new String[] {
 												"{NAME}~" + playername
 										})));
 							}
