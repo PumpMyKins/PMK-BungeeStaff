@@ -3,12 +3,12 @@ package fr.pmk_bungee.utils;
 import java.sql.Date;
 
 public class Warn {
-	
+
 	private String playername;
 	private Date warnAt;
 	private int warnBy;
 	private String warnReason;
-	
+
 	public String getPlayername() {
 		return playername;
 	}
@@ -33,6 +33,6 @@ public class Warn {
 	public void setWarnReason(String warnReason) {
 		this.warnReason = warnReason;
 	}
-	
-	
+
+
 }

@@ -24,10 +24,10 @@ public class CheckPlayer extends Command {
 	public void execute(CommandSender sender, String[] args) {
 		// TODO Auto-generated method stub
 		ProxyServer.getInstance().getScheduler().runAsync(Main.sharedInstance(), new Runnable() {
-			
+
 			@SuppressWarnings({ "unused" })
 			public void run() {
-				
+
 				if(sender.hasPermission("bungeestaff.command.check")) {
 					List<Warn> warnList = null;
 					if(args.length == 1) {

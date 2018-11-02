@@ -15,28 +15,28 @@ public class UnmuteCommand extends Command {
 	@SuppressWarnings({ "deprecation", "unused" })
 	@Override
 	public void execute(final CommandSender sender, final String[] args) {
-		  if(sender.hasPermission("bungeeban.command.unmute")) {
-			  if(args.length == 1) {
-				  String playerName = args[0];
-				  PlayerProfile profile = new PlayerProfile(playerName);
-				  if(profile != null) {
-					  if(profile.isMuted()) {
-						  profile.unmute();
-						  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.unmuted", new String[] { "{NAME}~" + playerName }));							  
-					  }
-					  else {
-						  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_muted", new String[] { "{NAME}~" + playerName }));				  }
-				  }
-				  else {
-					  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));			  }
-			  }
-			  else {
-				  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.syntax"));
-			  }
-		  }
-		  else {
-			  sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));	  
-		  }
-	  }
+		if(sender.hasPermission("bungeeban.command.unmute")) {
+			if(args.length == 1) {
+				String playerName = args[0];
+				PlayerProfile profile = new PlayerProfile(playerName);
+				if(profile != null) {
+					if(profile.isMuted()) {
+						profile.unmute();
+						sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.unmuted", new String[] { "{NAME}~" + playerName }));							  
+					}
+					else {
+						sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_muted", new String[] { "{NAME}~" + playerName }));				  }
+				}
+				else {
+					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));			  }
+			}
+			else {
+				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.syntax"));
+			}
+		}
+		else {
+			sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));	  
+		}
+	}
 
 }
