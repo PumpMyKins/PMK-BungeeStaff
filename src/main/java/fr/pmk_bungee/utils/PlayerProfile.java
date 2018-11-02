@@ -1,5 +1,6 @@
 package fr.pmk_bungee.utils;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,11 +17,13 @@ public class PlayerProfile {
 	private int banBy;
 	private boolean isBanned;
 	private long banEnd;
+	private Date inNowBan;
 	
 	private String muteReason;
 	private int mutedBy;
 	private boolean isMuted;
 	private long muteEnd;
+	private Date inNowMute;
 	
 	public PlayerProfile(String player) {
 		this.playerName = player;
@@ -37,6 +40,7 @@ public class PlayerProfile {
 				this.banEnd = rs.getLong("banEnd");
 				this.banReason = rs.getString("banReason");
 				this.banBy = rs.getInt("banBy");
+				this.inNowBan = rs.getDate("banAt");
 			}
 			else {
 				
@@ -44,6 +48,7 @@ public class PlayerProfile {
 				this.banBy = 0;
 				this.banEnd = 0;
 				this.banReason = "";
+				this.inNowBan = null;
 			}
 			
 		} catch (SQLException e ) {
@@ -61,6 +66,7 @@ public class PlayerProfile {
 				this.muteEnd = rs.getLong("muteEnd");
 				this.muteReason = rs.getString("muteReason");
 				this.mutedBy = rs.getInt("muteBy");
+				this.inNowMute = rs.getDate("muteAt");
 			}
 			else {
 				
@@ -68,6 +74,7 @@ public class PlayerProfile {
 				this.muteEnd = 0;
 				this.muteReason = "";
 				this.mutedBy = 0;
+				this.inNowMute = null;
 			}
 			
 		} catch (SQLException e) {
@@ -83,7 +90,7 @@ public class PlayerProfile {
 	// ALL THE BAN
 	
 	@SuppressWarnings("deprecation")
-	public void setBanned(String reason, int by, long seconds) {
+	public void setBanned(String reason, int by, long seconds, Date inNow) {
 		
 		long end;
 		if(seconds == -1L){
@@ -97,18 +104,21 @@ public class PlayerProfile {
 		setBanEnd(end);
 		setBanReason(reason);
 		setBanBy(by);
+		setInNowBan(inNow);
 		if(toProxiedPlayer() != null) {
 			
 			toProxiedPlayer().disconnect(getBanKickMessage());
 		}
-		Main.getMySQL().update("INSERT INTO ActualBungeeBan(userID, banEnd, banBy, banReason) VALUES ('" 
+		Main.getMySQL().update("INSERT INTO ActualBungeeBan(userID, banEnd, banBy, banReason, banAt) VALUES ('" 
 			+ this.getUserID(playerName) 
 			+ "', '" 
 			+ getBanEnd() 
 			+ "','" 
 			+ getBanBy() 
 			+ "','" 
-			+ getBanReason() 
+			+ getBanReason()
+			+ "','" 
+			+ getInNowBan()
 			+ "')");
 
 	}
@@ -119,10 +129,13 @@ public class PlayerProfile {
 			+ this.getUserID(playerName) 
 			+ "'");
 		
-		Main.getMySQL().update("INSERT INTO PastBungeeBan(userID, banEnd, banBy, banReason) VALUES ('" 
-			+ this.getUserID(playerName) + "', '" 
-			+ getBanEnd() + "','" 
-			+ getBanBy() + "','" 
+		Main.getMySQL().update("INSERT INTO PastBungeeBan(userID, banAt, banBy, banReason) VALUES ('" 
+			+ this.getUserID(playerName) 
+			+ "', '" 
+			+ getInNowBan() 
+			+ "','" 
+			+ getBanBy() 
+			+ "','" 
 			+ getBanReason() 
 			+ "')");
 
@@ -215,7 +228,7 @@ public class PlayerProfile {
 	// ALL THE MUTE
 
 	@SuppressWarnings("deprecation")
-	public void setMute(String reason, int by, long seconds){
+	public void setMute(String reason, int by, long seconds, Date inNow){
 		
 		long end;
 		if (seconds == -1L) {
@@ -230,6 +243,7 @@ public class PlayerProfile {
 		setMuteEnd(end);
 		setMuteReason(reason);
 		setMutedBy(by);
+		setInNowMute(inNow);
 		for(int i = 0;i < ProxyServer.getInstance().getPlayers().size(); i++) {
 			
 			Object[] players = ProxyServer.getInstance().getPlayers().toArray();
@@ -240,7 +254,7 @@ public class PlayerProfile {
 		}
 		
 				
-		Main.getMySQL().update("INSERT INTO ActualBungeeMutes(userID, muteEnd, muteReason, muteBy) VALUES ('" 
+		Main.getMySQL().update("INSERT INTO ActualBungeeMutes(userID, muteEnd, muteReason, muteBy, muteAt) VALUES ('" 
 			+ this.getUserID(playerName) 
 			+ "','" 
 			+ getMuteEnd() 
@@ -248,6 +262,8 @@ public class PlayerProfile {
 			+ getMuteReason() 
 			+ "', '" 
 			+ getMutedBy() 
+			+ "', '"
+			+ getInNowMute()
 			+ "')"); 
 	}
 	
@@ -257,10 +273,10 @@ public class PlayerProfile {
 			+ this.getUserID(playerName) 
 			+ "'");
 		
-		Main.getMySQL().update("INSERT INTO PastBungeeMutes(userID, muteEnd, muteReason, muteBy) VALUES ('" 
+		Main.getMySQL().update("INSERT INTO PastBungeeMutes(userID, muteAt, muteReason, muteBy) VALUES ('" 
 			+ this.getUserID(playerName) 
 			+ "','" 
-			+ getMuteEnd() 
+			+ getInNowMute()
 			+ "','" 
 			+ getMuteReason() 
 			+ "', '" 
@@ -406,5 +422,22 @@ public class PlayerProfile {
 		
 		init();
 	}
+
+	public Date getInNowBan() {
+		return inNowBan;
+	}
+
+	public void setInNowBan(Date inNowBan) {
+		this.inNowBan = inNowBan;
+	}
+
+	public Date getInNowMute() {
+		return inNowMute;
+	}
+
+	public void setInNowMute(Date inNowMute) {
+		this.inNowMute = inNowMute;
+	}
+	
 	
 }

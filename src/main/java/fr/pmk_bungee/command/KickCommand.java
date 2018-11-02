@@ -1,5 +1,7 @@
 package fr.pmk_bungee.command;
 
+import java.util.List;
+
 import fr.pmk_bungee.Main;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -13,7 +15,6 @@ public class KickCommand extends Command {
 		// TODO Auto-generated constructor stub
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		// TODO Auto-generated method stub
@@ -24,17 +25,30 @@ public class KickCommand extends Command {
 				String playername = args[0];
 				String reason = "";
 				TextComponent kickReason = new TextComponent();
+				String str = "";
 				
 				for(int i = 1; i <= args.length - 1; i++) {
 					
 					reason = reason + args[i] + " ";
-					
 				}
-				kickReason.addExtra(reason + " par " + sender);
+				List<String> msgs = Main.getConfigManager().getStringList("lang.kickmessage", new String[] { 
+						"{NAME}~" + sender.getName(), 
+						"{REASON}~" + reason, 
+				
+				});
+				
+			    for (String line : msgs) {
+				      str = str + line + "\n";
+				}
+			    
+				kickReason.addExtra(str);
 				ProxyServer.getInstance().getPlayer(playername).disconnect(kickReason);
-				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.kicked", new String[] { "{NAME}~" + playername}));
-			} else { sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.syntax"));}
-		} else { sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));}
+				
+				sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.kicked", new String[] { "{NAME}~" + playername})));
+			
+			} else { sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.syntax")));}
+		
+		} else { sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));}
 	}
 
 }

@@ -53,13 +53,14 @@ public class Main extends Plugin{
 		//BASE DE DONNER
 		mySQL.update("CREATE TABLE IF NOT EXISTS MinecraftPlayer( `userID` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(16) NOT NULL , `uuid` VARCHAR(256) NOT NULL ,`ip` VARCHAR(256) NOT NULL,`isPresent` BOOLEAN,PRIMARY KEY (`userID`))");
 		//BDD Relation 1:N (1 = USER; 1 = OTHER)
-		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeBan(userID INT, banEnd LONG, banReason VARCHAR(256),banBy INT)");
-		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeMutes(userID INT, muteEnd LONG, muteReason VARCHAR(256),muteBy INT)");
-		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeKicks(userID INT, muteEnd LONG, muteReason VARCHAR(256),kickBy INT)");
-		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeBan(banID INT NOT NULL AUTO_INCREMENT, userID INT, banEnd LONG, banReason VARCHAR(256), banBy INT, PRIMARY KEY (banID) )");
-		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeMutes(muteID INT NOT NULL AUTO_INCREMENT, userID INT, muteEnd LONG, muteReason VARCHAR(256), muteBy INT, PRIMARY KEY (muteID))");
-		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeKicks(kickID INT NOT NULL AUTO_INCREMENT, userID INT, muteEnd LONG, muteReason VARCHAR(256), muteBy INT, PRIMARY KEY (kickID))");
-			
+		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeBan(userID INT, banEnd LONG, banReason VARCHAR(256),banBy INT, banAt DATETIME)");
+		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeMutes(userID INT, muteEnd LONG, muteReason VARCHAR(256),muteBy INT, muteAt DATETIME)");
+		mySQL.update("CREATE TABLE IF NOT EXISTS ActualBungeeKicks(userID INT, muteEnd LONG, muteReason VARCHAR(256),kickBy INT, kickAt DATETIME)");
+		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeBan(banID INT NOT NULL AUTO_INCREMENT, userID INT, banAt DATETIME, banReason VARCHAR(256), banBy INT, PRIMARY KEY (banID) )");
+		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeMutes(muteID INT NOT NULL AUTO_INCREMENT, userID INT, muteAt DATETIME, muteReason VARCHAR(256), muteBy INT, PRIMARY KEY (muteID))");
+		mySQL.update("CREATE TABLE IF NOT EXISTS PastBungeeKicks(kickID INT NOT NULL AUTO_INCREMENT, userID INT, muteAt DATETIME, muteReason VARCHAR(256), muteBy INT, PRIMARY KEY (kickID))");
+		mySQL.update("CREATE TABLE IF NOT EXISTS BungeeWarn(warnID INT NOT NULL AUTO_INCREMENT, userID INT, warnAt DATETIME, warnReason VARCHAR(256), warnBy INT, PRIMARY KEY (warnID))");
+
 	}
 	
 	getProxy();

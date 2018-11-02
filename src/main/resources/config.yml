@@ -6,6 +6,9 @@
 #{REMAININGTIME} - Le temps restant d'un ban / mute, utilisant le format temps spécifié plus bas
 #{BY} - Le nom de la personne ayant kick / ban ou mutes
 #{DETAILS} - Si un message à un détails il faut utiliser celui si.
+#{BANAT} - Pour la date d'un ban.
+#{MUTEAT} - Pour la date d'un mute.
+#{DATE} - Pour la date de quelque chose.
 
 mysql:
   host: 'localhost'
@@ -54,7 +57,18 @@ lang:
   - '&cRaison : &e{REASON}'
   - '&cMute par : &e{BY}'
 
+  kickmessage:
+  - '&cVous avez ete kick du serveur par &e{NAME}.'
+  - '&cRaison: &e{REASON}'
+
+  warnmessage:
+  - '&cVous avez ete warn par &e{NAME}.'
+  - '&cRaison : &e{REASON}'
+
   commands:
+    warn:
+      succes: '&cVous avez warn &e{NAME}.'
+      syntax: '&cUtilisation /warn <Joueur> <Raison>'
     ban:
       syntax: '&cUtilisation: &c/ban <Joueurs> <Temps> <TimeUnit> <Raison>'
       banned: '&aVous avez banni &e{NAME}&a avec succes.'
@@ -81,7 +95,7 @@ lang:
       - '&e{NAME} &ca ete demute par &e{BY}&c.'
     kick:
       syntax: '&cUtilisation: &c/kick <Joueurs> <Reason>'
-      kicked: '&aVous avez kick &e{NAME}&a avec succès.'
+      kicked: '&aVous avez kick &e{NAME}&a avec succes.'
       broadcast:
       - '&e{NAME} &ca ete kick par &e{BY}&c.'
       - '&cRaison: &e{REASON}'
@@ -108,6 +122,14 @@ lang:
           - '&cTemps restant: &e{REMAININGTIME}'
         false:
           - '&fLe joueur &e{NAME} &fest pas mute.'
+      warn:
+        true:
+          - '&c-------&eListe des warn&c-------'
+          - '&cAverti par &e{NAME}'
+          - '&cAverti pour &e{REASON}'
+          - '&cAverti le &e{DATE}'
+        false:
+          - '&fLe joueur $e{NAME} est pas Warn'
         
 
 
