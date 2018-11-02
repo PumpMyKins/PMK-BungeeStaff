@@ -98,9 +98,9 @@ public class CheckPlayer extends Command {
 			                
 			            }
 					} else {
-						sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found")));
+						sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.errors.player_not_found")));
 					} if(warnShower.getWarnNumber() == 0) {
-						sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.check.warn.false", new String[] {
+						sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.commands.check.warn.false", new String[] {
 								"{NAME}~" + playername
 						})));
 						

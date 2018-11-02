@@ -104,7 +104,7 @@ lang:
       no_ban: '&aAucun ancien ban'
       no_mute: '&aAucun ancien mute'
     check:
-      succes: '&cInformation pour le joueurs &e{NAME}'
+      succes: '&cInformation pour le joueur &e{NAME}'
       syntax: '&cUtilisation: $c/check <joueur>'
       banned:
         true:
