@@ -219,7 +219,6 @@ public class HistoryCommand extends Command {
 
 					} else {
 						sender.sendMessage(new TextComponent(
-								Main.PREFIX + 
 								Main.getConfigManager().getString("lang.commands.history.syntax")));
 					}
 
