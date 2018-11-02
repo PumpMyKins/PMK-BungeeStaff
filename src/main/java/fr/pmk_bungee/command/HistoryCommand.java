@@ -65,7 +65,7 @@ public class HistoryCommand extends Command {
 							if(warnList.size() > 0)
 								for(int i = 0; i < warnList.size(); i++) {
 									Warn actual = warnList.get(i);
-									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.warn.true", new String[] {
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.warn.true", new String[] {
 											"{NAME}~" + getUsername(actual.getWarnBy()),
 											"{REASON}~" + actual.getWarnReason(),
 											"{DATE}~" + actual.getWarnAt()
@@ -78,7 +78,7 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.warn.false", new String[] {
+										Main.getConfigManager().getString("lang.commands.history.warn.faux", new String[] {
 												"{NAME}~" + playername
 										})));
 				             break;
@@ -100,7 +100,7 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.ban.false",new String[] {
+										Main.getConfigManager().getString("lang.commands.history.ban.faux",new String[] {
 												"{NAME}~" + playername
 										})));
 				             break;
@@ -122,7 +122,7 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.false",new String[] {
+										Main.getConfigManager().getString("lang.commands.history.mute.faux",new String[] {
 												"{NAME}~" + playername
 										})));
 				            break;
@@ -144,7 +144,7 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.false", new String[] {
+										Main.getConfigManager().getString("lang.commands.history.mute.faux", new String[] {
 												"{NAME}~" + playername
 										})));
 				             break;
@@ -166,7 +166,7 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.warn.false", new String[] {
+										Main.getConfigManager().getString("lang.commands.history.warn.faux", new String[] {
 												"{NAME}~" + playername
 										})));
 							if(pastBanList.size() > 0)
@@ -183,9 +183,10 @@ public class HistoryCommand extends Command {
 									}
 								}
 							else
+								System.out.println("Je suis faux et je suis un ban");
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.ban.false", new String[] {
+										Main.getConfigManager().getString("lang.commands.history.ban.faux", new String[] {
 												"{NAME}~" + playername
 										})));
 							if(pastMuteList.size() > 0)
@@ -204,7 +205,7 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.false", new String[] {
+										Main.getConfigManager().getString("lang.commands.history.mute.faux", new String[] {
 												"{NAME}~" + playername
 										})));
 							if(pastKickList.size() > 0)
@@ -223,7 +224,7 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.false", new String[] {
+										Main.getConfigManager().getString("lang.commands.history.mute.faux", new String[] {
 												"{NAME}~" + playername
 										})));
 
