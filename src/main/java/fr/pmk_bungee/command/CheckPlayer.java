@@ -99,24 +99,28 @@ public class CheckPlayer extends Command {
 			            }
 					} else {
 						sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.errors.player_not_found")));
-					} if(warnShower.getWarnNumber() == 0) {
-						sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.commands.check.warn.false", new String[] {
-								"{NAME}~" + playername
-						})));
+					} if(warnShower != null) {
 						
-					} else {
+						if(warnShower.getWarnNumber() == 0) {
 						
-						for(int i = 0; i < warnShower.getWarnNumber(); i++) {
+							sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.commands.check.warn.false", new String[] {
+									"{NAME}~" + playername
+							})));
 							
-							List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.warn.true", new String[] {
-									"{NAME}~" + warnShower.getUsername(warnShower.getWarnBy().get(i)),
-									"{REASON}~" + warnShower.getWarnReason().get(i),
-									"{DATE}~" + warnShower.getWarnAt().get(i)
-									
-							});
-						for (String msg : msgs) {
-							sender.sendMessage(new TextComponent(msg));
-						}
+						} else {
+							
+							for(int i = 0; i < warnShower.getWarnNumber(); i++) {
+								
+								List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.warn.true", new String[] {
+										"{NAME}~" + warnShower.getUsername(warnShower.getWarnBy().get(i)),
+										"{REASON}~" + warnShower.getWarnReason().get(i),
+										"{DATE}~" + warnShower.getWarnAt().get(i)
+										
+								});
+							for (String msg : msgs) {
+								sender.sendMessage(new TextComponent(msg));
+							}
+							}
 						}
 					}
 				} else { sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.check.syntax")));}
