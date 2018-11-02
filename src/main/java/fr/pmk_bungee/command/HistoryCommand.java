@@ -78,14 +78,16 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.warn.false")));
+										Main.getConfigManager().getString("lang.commands.history.warn.false", new String[] {
+												"{NAME}~" + playername
+										})));
 				             break;
 
 						case "ban":
 							if(pastBanList.size() > 0)
 								for(int i = 0; i < pastBanList.size(); i++) {
 									PastBan actual = pastBanList.get(i);
-									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.ban.true", new String[] {
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.ban.true", new String[] {
 											"{NAME}~" + getUsername(actual.getBanBy()),
 											"{REASON}~" + actual.getBanReason(),
 											"{DATE}~" + actual.getBanAt()
@@ -98,14 +100,16 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.ban.false")));
+										Main.getConfigManager().getString("lang.commands.history.ban.false",new String[] {
+												"{NAME}~" + playername
+										})));
 				             break;
 
 						case "mute":
 							if(pastMuteList.size() > 0)
 								for(int i = 0; i < pastMuteList.size(); i++) {	
 									PastMute actual = pastMuteList.get(i);
-									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.mute.true", new String[] {
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.mute.true", new String[] {
 											"{NAME}~" + getUsername(actual.getMuteBy()),
 											"{REASON}~" + actual.getMuteReason(),
 											"{DATE}~" + actual.getMuteAt()
@@ -118,14 +122,16 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.false")));
+										Main.getConfigManager().getString("lang.commands.history.mute.false",new String[] {
+												"{NAME}~" + playername
+										})));
 				            break;
 
 						case "kick":
 							if(pastKickList.size() > 0)
 								for(int i = 0; i < pastKickList.size(); i++) {
 									PastKick actual = pastKickList.get(i);
-									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.kick.true", new String[] {
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.kick.true", new String[] {
 											"{NAME}~" + getUsername(actual.getKickBy()),
 											"{REASON}~" + actual.getKickReason(),
 											"{DATE}~" + actual.getKickAt()
@@ -138,14 +144,16 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.false")));
+										Main.getConfigManager().getString("lang.commands.history.mute.false", new String[] {
+												"{NAME}~" + playername
+										})));
 				             break;
 
 						case"all":
 							if(warnList.size() > 0)
 								for(int i = 0; i < warnList.size(); i++) {
 									Warn actual = warnList.get(i);
-									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.warn.true", new String[] {
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.warn.true", new String[] {
 											"{NAME}~" + getUsername(actual.getWarnBy()),
 											"{REASON}~" + actual.getWarnReason(),
 											"{DATE}~" + actual.getWarnAt()
@@ -158,11 +166,13 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.warn.false")));
+										Main.getConfigManager().getString("lang.commands.history.warn.false", new String[] {
+												"{NAME}~" + playername
+										})));
 							if(pastBanList.size() > 0)
 								for(int i = 0; i < pastBanList.size(); i++) {
 									PastBan actual = pastBanList.get(i);
-									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.ban.true", new String[] {
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.ban.true", new String[] {
 											"{NAME}~" + getUsername(actual.getBanBy()),
 											"{REASON}~" + actual.getBanReason(),
 											"{DATE}~" + actual.getBanAt()
@@ -175,11 +185,13 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.ban.false")));
+										Main.getConfigManager().getString("lang.commands.history.ban.false", new String[] {
+												"{NAME}~" + playername
+										})));
 							if(pastMuteList.size() > 0)
 								for(int i = 0; i < pastMuteList.size(); i++) {	
 									PastMute actual = pastMuteList.get(i);
-									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.mute.true", new String[] {
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.mute.true", new String[] {
 											"{NAME}~" + getUsername(actual.getMuteBy()),
 											"{REASON}~" + actual.getMuteReason(),
 											"{DATE}~" + actual.getMuteAt()
@@ -192,11 +204,13 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.false")));
+										Main.getConfigManager().getString("lang.commands.history.mute.false", new String[] {
+												"{NAME}~" + playername
+										})));
 							if(pastKickList.size() > 0)
 								for(int i = 0; i < pastKickList.size(); i++) {
 									PastKick actual = pastKickList.get(i);
-									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.kick.true", new String[] {
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.kick.true", new String[] {
 											"{NAME}~" + getUsername(actual.getKickBy()),
 											"{REASON}~" + actual.getKickReason(),
 											"{DATE}~" + actual.getKickAt()
@@ -209,7 +223,9 @@ public class HistoryCommand extends Command {
 							else
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
-										Main.getConfigManager().getString("lang.commands.history.mute.false")));
+										Main.getConfigManager().getString("lang.commands.history.mute.false", new String[] {
+												"{NAME}~" + playername
+										})));
 
 				             break;
 

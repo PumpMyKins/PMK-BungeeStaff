@@ -99,7 +99,7 @@ lang:
           - '&cBanni par: &e{BY}'
           - '&cTemps restant: &e{REMAININGTIME}'
         false:
-          - '&fLe joueur &e{NAME} &fest pas bannie.'
+          - '&aLe joueur &e{NAME} &aest pas bannie.'
       muted:
         true:
           - '&cLe joueur &e{NAME} &cest &4&lMUTE&c.'
@@ -107,7 +107,7 @@ lang:
           - '&cMute par: &e{BY}'
           - '&cTemps restant: &e{REMAININGTIME}'
         false:
-          - '&fLe joueur &e{NAME} &fest pas mute.'
+          - '&aLe joueur &e{NAME} &aest pas mute.'
       warn:
         true:
           - '&c-------&eListe des warn&c-------'
@@ -115,9 +115,9 @@ lang:
           - '&cAverti pour &e{REASON}'
           - '&cAverti le &e{DATE}'
         false:
-          - '&fLe joueur &e{NAME} est pas Warn'
+          - '&aLe joueur &e{NAME} &aest pas Warn'
     history:
-      syntax: '&cUtilisation : &c /history <player> <kick/ban/mute/warn/all>'
+      syntax: '&cUtilisation : &c /history <player> &c<kick/ban/mute/warn/all>'
       warn:
         true:
           - '&c-------&eListe des warn&c-------'
@@ -125,7 +125,7 @@ lang:
           - '&cAverti pour &e{REASON}'
           - '&cAverti le &e{DATE}'
         false:
-          - '&fLe joueur &e a jamais ete Warn'
+          - '&aLe joueur &e{NAME} &aa jamais ete Warn'
       ban:
         true:
           - '&c-------&eListe des anciens ban&c-------'
@@ -133,7 +133,7 @@ lang:
           - '&cBanni pour &e{REASON}'
           - '&cBanni le &e{DATE}'
         false:
-          - '&fLe joueur &e a jamais ete Ban'
+          - '&aLe joueur &e{NAME} &aa jamais ete Ban'
       mute:
         true:
           - '&c-------&eListe des anciens Mute&c-------'
@@ -141,7 +141,7 @@ lang:
           - '&cMute pour &e{REASON}'
           - '&cMute le &e{DATE}'
         false:
-          - '&fLe joueur &e a jamais ete Mute'
+          - '&aLe joueur &e{NAME}&a a jamais ete Mute'
       kick:
         true:
           - '&c-------&eListe des kick&c-------'
@@ -149,7 +149,7 @@ lang:
           - '&cKick pour &e{REASON}'
           - '&cKick le &e{DATE}'
         false:
-          - '&fLe joueur &e a jamais ete kick'
+          - '&aLe joueur &e{NAME} &aa jamais ete kick'
 
 
 
