@@ -81,6 +81,7 @@ public class HistoryCommand extends Command {
 								}
 							}
 							else {
+								
 								senderMessage("warn.false", true, playername, sender);
 								
 							}
@@ -269,7 +270,7 @@ public class HistoryCommand extends Command {
 	}
 	public void senderMessage(String situation, Boolean prefix, String playername, CommandSender sender) {
 		
-		situation = "lang.commands.history" + situation;
+		situation = "lang.commands.history." + situation;
 		List<String> msgs = Main.getConfigManager().getStringList(situation, new String[] {
 			"{NAME}~" + playername
 		
