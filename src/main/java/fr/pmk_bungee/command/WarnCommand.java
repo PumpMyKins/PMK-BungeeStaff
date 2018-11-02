@@ -47,15 +47,15 @@ public class WarnCommand extends Command {
 						
 						ProxyServer.getInstance().getPlayer(playername).sendMessage(new TextComponent(msg));
 					}
-					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.warn.succes", new String[] {
+					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.succes", new String[] {
 							"{NAME}~" + playername,
 							
 					})));
 				} else {
 					System.out.println("[PUMPMYSTAFF] ERREUR WARN_COMMAND_SQL_INSERT_REFUSE");
 				}
-			} else {sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.warn.syntax")));}
-		} else {sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));}
+			} else {sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.commands.warn.syntax")));}
+		} else {sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.errors.no_permissions")));}
 	}
 	public boolean addWarn(String playername, String warnReason, String warnBy, Date warnAt) {
 		
@@ -77,6 +77,7 @@ public class WarnCommand extends Command {
 		return true;
 		
 	}
+	
 	private int getUserID(String playerName) {
 		
 		try {
