@@ -2,13 +2,13 @@ package fr.pmk_bungee.listener;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerProfile;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
 public class ChatEvent implements Listener {
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onChar(net.md_5.bungee.api.event.ChatEvent e) {
 
@@ -28,14 +28,20 @@ public class ChatEvent implements Listener {
 
 				e.setCancelled(true); 
 				e.setMessage("");
-				p.sendMessages(Main.PREFIX + profile.getMuteMessage());
+				for(String str : profile.getMuteMessage()) {
+	
+					p.sendMessage(new TextComponent(Main.PREFIX + str));
+				}
 				return;
 			}
 			if(end > current) {
 
 				e.setCancelled(true);
 				e.setMessage("");
-				p.sendMessages(Main.PREFIX + profile.getMuteMessage());
+				for(String str : profile.getMuteMessage()) {
+					
+					p.sendMessage(new TextComponent(Main.PREFIX + str));
+				}				
 				return;
 			}
 			else {
