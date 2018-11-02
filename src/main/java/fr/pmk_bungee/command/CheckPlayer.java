@@ -1,5 +1,6 @@
 package fr.pmk_bungee.command;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -119,7 +120,7 @@ public class CheckPlayer extends Command {
 
 								Warn actual = warnList.get(i);
 								List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.warn.true", new String[] {
-										"{NAME}~" + actual.getWarnBy(),
+										"{NAME}~" + getUsername(actual.getWarnBy()),
 										"{REASON}~" + actual.getWarnReason(),
 										"{DATE}~" + actual.getWarnAt()
 
@@ -133,6 +134,25 @@ public class CheckPlayer extends Command {
 				} else { sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));}
 			}
 		});
+	}
+
+	public static  String getUsername(int userID) {
+
+		try {
+			ResultSet id = Main.getMySQL().getResult("SELECT username FROM MinecraftPlayer WHERE userID = '" 
+					+ userID 
+					+ "'");
+
+			if(id.next()) {
+
+				String username = id.getString("username");
+				return username;
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace(); 
+		} return "";
 	}
 
 }
