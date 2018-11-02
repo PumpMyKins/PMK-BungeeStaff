@@ -47,16 +47,6 @@ lang:
   - '&cMute par: &e{BY}'
   - '&cTemps restant: &e{REMAININGTIME}'
 
-  pastbanmessage:
-  - '&cAnciens bannissement'
-  - '&cRaison : &e{REASON}'
-  - '&cBanni par : &e{BY}'
-
-  pastmutemessage:
-  - '&cAnciens Mute'
-  - '&cRaison : &e{REASON}'
-  - '&cMute par : &e{BY}'
-
   kickmessage:
   - '&cVous avez ete kick du serveur par &e{NAME}.'
   - '&cRaison: &e{REASON}'
@@ -99,10 +89,6 @@ lang:
       broadcast:
       - '&e{NAME} &ca ete kick par &e{BY}&c.'
       - '&cRaison: &e{REASON}'
-    history:
-      succes: '&4Historique des sanction de &e{NAME}'
-      no_ban: '&aAucun ancien ban'
-      no_mute: '&aAucun ancien mute'
     check:
       succes: '&cInformation pour le joueur &e{NAME}'
       syntax: '&cUtilisation: &c/check <joueur>'
@@ -129,7 +115,42 @@ lang:
           - '&cAverti pour &e{REASON}'
           - '&cAverti le &e{DATE}'
         false:
-          - '&fLe joueur $e{NAME} est pas Warn'
-        
+          - '&fLe joueur &e{NAME} est pas Warn'
+    history:
+      syntax: '&cUtilisation : &c /history <player> <kick/ban/mute/warn/all>'
+      warn:
+        true:
+          - '&c-------&eListe des warn&c-------'
+          - '&cAverti par &e{NAME}'
+          - '&cAverti pour &e{REASON}'
+          - '&cAverti le &e{DATE}'
+        false:
+          - '&fLe joueur &e a jamais ete Warn'
+      ban:
+        true:
+          - '&c-------&eListe des anciens ban&c-------'
+          - '&cBanni par &e{NAME}'
+          - '&cBanni pour &e{REASON}'
+          - '&cBanni le &e{DATE}'
+        false:
+          - '&fLe joueur &e a jamais ete Ban'
+      mute:
+        true:
+          - '&c-------&eListe des anciens Mute&c-------'
+          - '&cMute par &e{NAME}'
+          - '&cMute pour &e{REASON}'
+          - '&cMute le &e{DATE}'
+        false:
+          - '&fLe joueur &e a jamais ete Mute'
+      kick:
+        true:
+          - '&c-------&eListe des kick&c-------'
+          - '&cKick par &e{NAME}'
+          - '&cKick pour &e{REASON}'
+          - '&cKick le &e{DATE}'
+        false:
+          - '&fLe joueur &e a jamais ete kick'
+
+
 
 
