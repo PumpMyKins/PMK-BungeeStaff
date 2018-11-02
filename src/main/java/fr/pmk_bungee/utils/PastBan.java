@@ -8,7 +8,7 @@ public class PastBan {
 	private Date banAt;
 	private int banBy;
 	private String banReason;
-	
+
 	public String getPlayername() {
 		return playername;
 	}
@@ -33,6 +33,6 @@ public class PastBan {
 	public void setBanReason(String banReason) {
 		this.banReason = banReason;
 	}
-	
-	
+
+
 }

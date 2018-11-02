@@ -11,21 +11,21 @@ public class PastKickShower {
 
 	public static List<PastKick> listPastKick(String playername) throws ClassNotFoundException, SQLException, NullPointerException {
 		List<PastKick> pastKickList = new ArrayList<PastKick>();
-		
+
 		ResultSet rs = Main.getMySQL().getResult("SELECT * FROM PastBungeeKicks WHERE userID = '" + getUserID(playername) + "'");
 		while(rs.next()) {
-			
+
 			PastKick pastKick = new PastKick();
 			pastKick.setKickAt(rs.getDate("kickAt"));
 			pastKick.setKickBy(rs.getInt("kickBy"));
 			pastKick.setPlayername(getUsername(rs.getInt("userID")));
 			pastKick.setKickReason(rs.getString("kickReason"));
 			pastKickList.add(pastKick);
-			
+
 		}
 		return pastKickList;
 	}
-	
+
 	private static  int getUserID(String playername) {
 
 		try {
@@ -61,5 +61,5 @@ public class PastKickShower {
 			e.printStackTrace(); 
 		} return "";
 	}
-	
+
 }
