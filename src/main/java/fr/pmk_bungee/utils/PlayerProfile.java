@@ -58,7 +58,7 @@ public class PlayerProfile {
 		}
 
 		try {
-
+      
 			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM ActualBungeeMutes WHERE userID = '" + getUserID(playerName) + "'");
 			if(rs.next()) {
 
