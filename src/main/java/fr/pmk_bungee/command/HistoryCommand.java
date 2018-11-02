@@ -59,7 +59,10 @@ public class HistoryCommand extends Command {
 						} catch (ClassNotFoundException | NullPointerException | SQLException e) {
 							e.printStackTrace();
 						}
-
+						System.out.println(warnList);
+						System.out.println(pastBanList);
+						System.out.println(pastMuteList);
+						System.out.println(pastKickList);
 						switch(args[1].toLowerCase()) {
 						case "warn":
 							if(warnList.size() > 0)
