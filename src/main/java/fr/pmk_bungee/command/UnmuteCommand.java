@@ -3,6 +3,7 @@ package fr.pmk_bungee.command;
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerProfile;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class UnmuteCommand extends Command {
@@ -15,7 +16,8 @@ public class UnmuteCommand extends Command {
 	@SuppressWarnings({ "deprecation", "unused" })
 	@Override
 	public void execute(final CommandSender sender, final String[] args) {
-		if(sender.hasPermission("bungeeban.command.unmute")) {
+		ProxiedPlayer player = (ProxiedPlayer) sender;
+		if(player.hasPermission("bungeeban.command.unmute")) {
 			if(args.length == 1) {
 				String playerName = args[0];
 				PlayerProfile profile = new PlayerProfile(playerName);

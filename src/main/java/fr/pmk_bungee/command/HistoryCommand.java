@@ -16,6 +16,7 @@ import fr.pmk_bungee.utils.WarnShower;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class HistoryCommand extends Command {
@@ -28,11 +29,11 @@ public class HistoryCommand extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		// TODO Auto-generated method stub
-
+		ProxiedPlayer player = (ProxiedPlayer) sender;
 		ProxyServer.getInstance().getScheduler().runAsync(Main.sharedInstance(), new Runnable() {
 
 			public void run() {
-				if(sender.hasPermission("bungeestaff.command.history")) {
+				if(player.hasPermission("bungeestaff.command.history")) {
 					if(args.length > 1) {
 						List<Warn> warnList = null;
 						List<PastBan> pastBanList = null;

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerProfile;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class MuteCommand extends Command {
@@ -20,7 +21,9 @@ public class MuteCommand extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		// TODO Auto-generated method stub
-		if(sender.hasPermission("bungeeban.command.mute")) {
+		ProxiedPlayer player = (ProxiedPlayer) sender;
+
+		if(player.hasPermission("bungeeban.command.mute")) {
 
 			if(args.length >= 4) {
 				String playerName = args[0];

@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerProfile;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class BanCommand extends Command {
@@ -21,8 +22,9 @@ public class BanCommand extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		// TODO Auto-generated method stub
+		ProxiedPlayer player = (ProxiedPlayer) sender;
 
-		if(sender.hasPermission("bungeestaff.command.ban")) {
+		if(player.hasPermission("bungeestaff.command.ban")) {
 			if(args.length >= 4) {
 
 				String playerName = args[0];
