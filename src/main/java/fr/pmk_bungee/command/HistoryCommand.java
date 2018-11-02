@@ -65,7 +65,8 @@ public class HistoryCommand extends Command {
 						System.out.println(pastKickList);
 						switch(args[1].toLowerCase()) {
 						case "warn":
-							if(warnList.size() > 0)
+						
+							if(warnList.size() > 0) {
 								for(int i = 0; i < warnList.size(); i++) {
 									Warn actual = warnList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.warn.true", new String[] {
@@ -78,16 +79,18 @@ public class HistoryCommand extends Command {
 										sender.sendMessage(new TextComponent(msg));
 									}
 								}
-							else
+							}
+							else {
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
 										Main.getConfigManager().getString("lang.commands.history.warn.faux", new String[] {
 												"{NAME}~" + playername
 										})));
-				             break;
-
+							}
+				            break;
+						
 						case "ban":
-							if(pastBanList.size() > 0)
+							if(pastBanList.size() > 0) {
 								for(int i = 0; i < pastBanList.size(); i++) {
 									PastBan actual = pastBanList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.ban.true", new String[] {
@@ -100,16 +103,18 @@ public class HistoryCommand extends Command {
 										sender.sendMessage(new TextComponent(msg));
 									}
 								}
-							else
+							}
+							else {
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
 										Main.getConfigManager().getString("lang.commands.history.ban.faux",new String[] {
 												"{NAME}~" + playername
 										})));
-				             break;
+							}
+							break;
 
 						case "mute":
-							if(pastMuteList.size() > 0)
+							if(pastMuteList.size() > 0) {
 								for(int i = 0; i < pastMuteList.size(); i++) {	
 									PastMute actual = pastMuteList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.mute.true", new String[] {
@@ -122,16 +127,18 @@ public class HistoryCommand extends Command {
 										sender.sendMessage(new TextComponent(msg));
 									}
 								}
-							else
+							}
+							else {
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
 										Main.getConfigManager().getString("lang.commands.history.mute.faux",new String[] {
 												"{NAME}~" + playername
 										})));
-				            break;
+							}
+							break;
 
 						case "kick":
-							if(pastKickList.size() > 0)
+							if(pastKickList.size() > 0) {
 								for(int i = 0; i < pastKickList.size(); i++) {
 									PastKick actual = pastKickList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.kick.true", new String[] {
@@ -144,16 +151,18 @@ public class HistoryCommand extends Command {
 										sender.sendMessage(new TextComponent(msg));
 									}
 								}
-							else
+							}
+							else {
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
 										Main.getConfigManager().getString("lang.commands.history.mute.faux", new String[] {
 												"{NAME}~" + playername
 										})));
-				             break;
+							}
+							break;
 
 						case"all":
-							if(warnList.size() > 0)
+							if(warnList.size() > 0) {
 								for(int i = 0; i < warnList.size(); i++) {
 									Warn actual = warnList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.warn.true", new String[] {
@@ -166,13 +175,15 @@ public class HistoryCommand extends Command {
 										sender.sendMessage(new TextComponent(msg));
 									}
 								}
-							else
+							}
+							else {
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
 										Main.getConfigManager().getString("lang.commands.history.warn.faux", new String[] {
 												"{NAME}~" + playername
 										})));
-							if(pastBanList.size() > 0)
+							}
+							if(pastBanList.size() > 0) {
 								for(int i = 0; i < pastBanList.size(); i++) {
 									PastBan actual = pastBanList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.ban.true", new String[] {
@@ -185,14 +196,16 @@ public class HistoryCommand extends Command {
 										sender.sendMessage(new TextComponent(msg));
 									}
 								}
-							else
+							}
+							else {
 								System.out.println("Je suis faux et je suis un ban");
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
 										Main.getConfigManager().getString("lang.commands.history.ban.faux", new String[] {
 												"{NAME}~" + playername
 										})));
-							if(pastMuteList.size() > 0)
+							}
+							if(pastMuteList.size() > 0) {
 								for(int i = 0; i < pastMuteList.size(); i++) {	
 									PastMute actual = pastMuteList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.mute.true", new String[] {
@@ -205,13 +218,15 @@ public class HistoryCommand extends Command {
 										sender.sendMessage(new TextComponent(msg));
 									}
 								}
-							else
+							}
+							else {
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
 										Main.getConfigManager().getString("lang.commands.history.mute.faux", new String[] {
 												"{NAME}~" + playername
 										})));
-							if(pastKickList.size() > 0)
+							}
+							if(pastKickList.size() > 0) {
 								for(int i = 0; i < pastKickList.size(); i++) {
 									PastKick actual = pastKickList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.kick.true", new String[] {
@@ -224,14 +239,15 @@ public class HistoryCommand extends Command {
 										sender.sendMessage(new TextComponent(msg));
 									}
 								}
-							else
+							}
+							else {
 								sender.sendMessage(new TextComponent(
 										Main.PREFIX + 
 										Main.getConfigManager().getString("lang.commands.history.mute.faux", new String[] {
 												"{NAME}~" + playername
 										})));
-
-				             break;
+							}
+				            break;
 
 						default:
 							sender.sendMessage(new TextComponent(
