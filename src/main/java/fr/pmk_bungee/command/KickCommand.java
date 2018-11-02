@@ -1,5 +1,9 @@
 package fr.pmk_bungee.command;
 
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.pmk_bungee.Main;
@@ -26,6 +30,8 @@ public class KickCommand extends Command {
 				String reason = "";
 				TextComponent kickReason = new TextComponent();
 				String str = "";
+				LocalDateTime now = LocalDateTime.now();
+				java.sql.Date kickAt = java.sql.Date.valueOf(now.toLocalDate());	
 
 				for(int i = 1; i <= args.length - 1; i++) {
 
@@ -42,6 +48,8 @@ public class KickCommand extends Command {
 				}
 
 				kickReason.addExtra(str);
+				kickRegister(playername, reason, sender.getName(), kickAt); 
+						
 				ProxyServer.getInstance().getPlayer(playername).disconnect(kickReason);
 
 				sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.kicked", new String[] { "{NAME}~" + playername})));
@@ -49,6 +57,61 @@ public class KickCommand extends Command {
 			} else { sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.syntax")));}
 
 		} else { sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));}
+	}
+	public boolean kickRegister(String userID, String reason, String kickBy, Date kickAt) {
+		
+		try {
+			
+			Main.getMySQL().update("INSERT INTO PastBungeeKicks(userID, kickAt, kickBy, kickReason) VALUES ('" 
+					+ getUserID(userID) 
+					+ "', '" 
+					+ kickAt
+					+ "','" 
+					+ getUserID(kickBy) 
+					+ "','" 
+					+ reason
+					+ "')");
+
+		} catch(NullPointerException e) {
+			return false;
+		}
+		return true;
+	}
+	
+	private static  int getUserID(String playername) {
+
+		try {
+			ResultSet id = Main.getMySQL().getResult("SELECT userID FROM MinecraftPlayer WHERE username = '" + playername + "'");
+			if(id.next()) {
+
+				int userID = id.getInt("userID");
+				return userID;
+
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} 
+		return -1;
+	}
+
+	public static  String getUsername(int userID) {
+
+		try {
+			ResultSet id = Main.getMySQL().getResult("SELECT username FROM MinecraftPlayer WHERE userID = '" 
+					+ userID 
+					+ "'");
+
+			if(id.next()) {
+
+				String username = id.getString("username");
+				return username;
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace(); 
+		} return "";
 	}
 
 }
