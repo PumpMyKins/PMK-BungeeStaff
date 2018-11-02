@@ -66,7 +66,7 @@ public class HistoryCommand extends Command {
 						switch(args[1].toLowerCase()) {
 						case "warn":
 						
-							if(warnList.size() > 0) {
+							if(!warnList.isEmpty()) {
 								for(int i = 0; i < warnList.size(); i++) {
 									Warn actual = warnList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.warn.true", new String[] {
@@ -87,7 +87,7 @@ public class HistoryCommand extends Command {
 				            break;
 						
 						case "ban":
-							if(pastBanList.size() > 0) {
+							if(!pastBanList.isEmpty()) {
 								for(int i = 0; i < pastBanList.size(); i++) {
 									PastBan actual = pastBanList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.ban.true", new String[] {
@@ -109,7 +109,7 @@ public class HistoryCommand extends Command {
 							break;
 
 						case "mute":
-							if(pastMuteList.size() > 0) {
+							if(!pastMuteList.isEmpty()) {
 								for(int i = 0; i < pastMuteList.size(); i++) {	
 									PastMute actual = pastMuteList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.mute.true", new String[] {
@@ -130,7 +130,7 @@ public class HistoryCommand extends Command {
 							break;
 
 						case "kick":
-							if(pastKickList.size() > 0) {
+							if(!pastKickList.isEmpty()) {
 								for(int i = 0; i < pastKickList.size(); i++) {
 									PastKick actual = pastKickList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.kick.true", new String[] {
@@ -151,7 +151,7 @@ public class HistoryCommand extends Command {
 							break;
 
 						case"all":
-							if(warnList.size() > 0) {
+							if(!warnList.isEmpty()) {
 								for(int i = 0; i < warnList.size(); i++) {
 									Warn actual = warnList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.warn.true", new String[] {
@@ -169,7 +169,7 @@ public class HistoryCommand extends Command {
 								senderMessage("warn.false", true, playername, sender);
 
 							}
-							if(pastBanList.size() > 0) {
+							if(!pastBanList.isEmpty()) {
 								for(int i = 0; i < pastBanList.size(); i++) {
 									PastBan actual = pastBanList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.ban.true", new String[] {
@@ -187,7 +187,7 @@ public class HistoryCommand extends Command {
 								
 								senderMessage("ban.false", true, playername, sender);
 							}
-							if(pastMuteList.size() > 0) {
+							if(!pastMuteList.isEmpty()) {
 								for(int i = 0; i < pastMuteList.size(); i++) {	
 									PastMute actual = pastMuteList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.mute.true", new String[] {
@@ -205,7 +205,7 @@ public class HistoryCommand extends Command {
 								senderMessage("mute.false", true, playername, sender);
 
 							}
-							if(pastKickList.size() > 0) {
+							if(!pastKickList.isEmpty()) {
 								for(int i = 0; i < pastKickList.size(); i++) {
 									PastKick actual = pastKickList.get(i);
 									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.kick.true", new String[] {
