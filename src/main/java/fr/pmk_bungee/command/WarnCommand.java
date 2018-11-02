@@ -54,8 +54,8 @@ public class WarnCommand extends Command {
 				} else {
 					System.out.println("[PUMPMYSTAFF] ERREUR WARN_COMMAND_SQL_INSERT_REFUSE");
 				}
-			} else {sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.commands.warn.syntax")));}
-		} else {sender.sendMessage(new TextComponent(Main.getConfigManager().getString("lang.errors.no_permissions")));}
+			} else {sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.syntax")));}
+		} else {sender.sendMessage(new TextComponent(Main.PREFIX +Main.getConfigManager().getString("lang.errors.no_permissions")));}
 	}
 	public boolean addWarn(String playername, String warnReason, String warnBy, Date warnAt) {
 		
