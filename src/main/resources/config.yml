@@ -6,67 +6,151 @@
 #{REMAININGTIME} - Le temps restant d'un ban / mute, utilisant le format temps spécifié plus bas
 #{BY} - Le nom de la personne ayant kick / ban ou mutes
 #{DETAILS} - Si un message à un détails il faut utiliser celui si.
+#{BANAT} - Pour la date d'un ban.
+#{MUTEAT} - Pour la date d'un mute.
+#{DATE} - Pour la date de quelque chose.
+
+mysql:
+  host: 'localhost'
+  port: 3306
+  username: 'bungeeUtils'
+  password: 'secret'
+  database: 'bungeeUtils'
 
 lang:
 
   prefix: '&6&l[&r&2Pump&eMy&aStaff&6&l]&r'
   console_prefix: '[PumpMyStaff] '
-  time_format: '{DAYS} jours(s), {HOURS} heure(s), {MINUTES} min(s) and {SECONDS} sec(s)'
+  time_format: '{DAYS} jours(s), {HOURS} heure(s), {MINUTES} min(s) et {SECONDS} sec(s)'
   time_format_permanent: 'PERMANENT'
 
   errors:
-    no_permissions: '&cVous n'avez pas la permission.'
-    player_not_found: '&cCe joueur n'existe pas.'
-    player_not_online: '&cLe joueurs {NAME} n'est pas connecté.'
+    no_permissions: '&cVous n avez pas la permission.'
+    player_not_found: '&cCe joueur est introuvable.'
+    player_not_online: '&cThe player &e{NAME} &cis not online.'
     internal_error: '&c INTERNAL SERVER ERROR: &e{DETAILS}'
-    player_already_banned: '&cLe joueur &e{NAME} &cest déjà banni.'
-    player_not_banned: '&cLe joueur &e{NAME} &cn'est pas banni.'
-    player_already_muted: '&cLe joueur &e{NAME} &cest déjà muté.'
-    player_not_muted: '&cLe joueur &e{NAME} &cn'est pas muté.'
-    unknown_timeunit: '&cErreur TimeUnit réferer vous à vos supérieurs.'
+    player_already_banned: '&cLe joueur &e{NAME} &cest deja banni.'
+    player_not_banned: '&cLe joueur &e{NAME} &cn est pas banni.'
+    player_already_muted: '&cLe joueur est deja mute.'
+    player_not_muted: '&cLe joueur &e{NAME} &cn est pas mute.'
+    unknown_timeunit: '&cErreur TimeUnit referer vous à vos superieurs.'
 
   banmessage:
-  - '&cVous avez été banni du serveur.'
+  - '&cVous avez ete banni du serveur.'
   - '&cRaison: &e{REASON}'
   - '&cBanni par: &e{BY}'
   - '&cTemps restant: &e{REMAININGTIME}'
 
   mutemessage:
-  - '&cVous êtes mute du serveur.'
+  - '&cVous etes mute du serveur.'
   - '&cRaison: &e{REASON}'
-  - '&cMuté par: &e{BY}'
+  - '&cMute par: &e{BY}'
   - '&cTemps restant: &e{REMAININGTIME}'
 
-commands:
-  ban:
-    syntax: '&cUtilisation: &c/ban <Joueurs> <Temps> <TimeUnit> <Raison>'
-    banned: '&aVous avez banni &e{NAME}&a avec succès.'
-    broadcast:
-    - '&e{NAME} &ca été banni par &e{BY}&c.'
-    - '&cRaison: &e{REASON}'
-    - '&cTemps: &e{REMAININGTIME}'
-  unban:
-    syntax: '&cUsage: &c/unban <Joueurs>'
-    unbanned: '&aVous avez unban &e{NAME}&a avec succès.'
-    broadcast:
-    - '&e{NAME} &ca été débanni par &e{BY}&c.'
-  mute:
-    syntax: '&cUtilisation: &c/mute <Joueurs> <Time> <TimeUnit> <Raison>'
-    muted: '&aVous avez muté &e{NAME}&a avec succès.'
-    broadcast:
-    - '&e{NAME} &ca été muté par &e{BY}&c.'
-    - '&cRaison: &e{REASON}'
-    - '&cTemps: &e{REMAININGTIME}'
-  unmute:
-    syntax: '&cUtilisation: /unmute <Joueurs>'
-    unmuted: '&aVous avez démute &e{NAME}&a avec succès.'
-    broadcast:
-    - '&e{NAME} &ca été démute par &e{BY}&c.'
-  kick:
-    syntax: '&cUtilisation: &c/kick <Joueurs> <Reason>'
-    kicked: '&aVous avez kick &e{NAME}&a avec succès.'
-    broadcast:
-    - '&e{NAME} &cà été kick par &e{BY}&c.'
-    - '&cRaison: &e{REASON}'
+  kickmessage:
+  - '&cVous avez ete kick du serveur par &e{NAME}.'
+  - '&cRaison: &e{REASON}'
 
-    
+  warnmessage:
+  - '&cVous avez ete warn par &e{NAME}.'
+  - '&cRaison : &e{REASON}'
+
+  commands:
+    warn:
+      succes: '&cVous avez warn &e{NAME}.'
+      syntax: '&cUtilisation /warn <Joueur> <Raison>'
+    ban:
+      syntax: '&cUtilisation: &c/ban <Joueurs> <Temps> <TimeUnit> <Raison>'
+      banned: '&aVous avez banni &e{NAME}&a avec succes.'
+      broadcast:
+      - '&e{NAME} &ca ete banni par &e{BY}&c.'
+      - '&cRaison: &e{REASON}'
+      - '&cTemps: &e{REMAININGTIME}'
+    unban:
+      syntax: '&cUsage: &c/unban <Joueurs>'
+      unbanned: '&aVous avez unban &e{NAME}&a avec succes.'
+      broadcast:
+      - '&e{NAME} &ca ete debanni par &e{BY}&c.'
+    mute:
+      syntax: '&cUtilisation: &c/mute <Joueurs> <Time> <TimeUnit> <Raison>'
+      muted: '&aVous avez mute &e{NAME}&a avec succes.'
+      broadcast:
+      - '&e{NAME} &ca ete mute par &e{BY}&c.'
+      - '&cRaison: &e{REASON}'
+      - '&cTemps: &e{REMAININGTIME}'
+    unmute:
+      syntax: '&cUtilisation: /unmute <Joueurs>'
+      unmuted: '&aVous avez demute &e{NAME}&a avec succes.'
+      broadcast:
+      - '&e{NAME} &ca ete demute par &e{BY}&c.'
+    kick:
+      syntax: '&cUtilisation: &c/kick <Joueurs> <Reason>'
+      kicked: '&aVous avez kick &e{NAME}&a avec succes.'
+      broadcast:
+      - '&e{NAME} &ca ete kick par &e{BY}&c.'
+      - '&cRaison: &e{REASON}'
+    check:
+      succes: '&cInformation pour le joueur &e{NAME}'
+      syntax: '&cUtilisation: &c/check <joueur>'
+      banned:
+        true:
+          - '&cLe joueur &e{NAME} &cest &4&lBANNIE&c.'
+          - '&cRaison: &e{REASON}'
+          - '&cBanni par: &e{BY}'
+          - '&cTemps restant: &e{REMAININGTIME}'
+        false:
+          - '&aLe joueur &e{NAME} &aest pas bannie.'
+      muted:
+        true:
+          - '&cLe joueur &e{NAME} &cest &4&lMUTE&c.'
+          - '&cRaison: &e{REASON}'
+          - '&cMute par: &e{BY}'
+          - '&cTemps restant: &e{REMAININGTIME}'
+        false:
+          - '&aLe joueur &e{NAME} &aest pas mute.'
+      warn:
+        true:
+          - '&c-------&eListe des warn&c-------'
+          - '&cAverti par &e{NAME}'
+          - '&cAverti pour &e{REASON}'
+          - '&cAverti le &e{DATE}'
+        false:
+          - '&aLe joueur &e{NAME} &aest pas Warn'
+    history:
+      syntax: '&cUtilisation : &c /history <player> &c<kick/ban/mute/warn/all>'
+      warn:
+        true:
+          - '&c-------&eListe des warn&c-------'
+          - '&cAverti par &e{NAME}'
+          - '&cAverti pour &e{REASON}'
+          - '&cAverti le &e{DATE}'
+        false:
+          - '&aLe joueur &e{NAME} &aa jamais ete Warn'
+      ban:
+        true:
+          - '&c-------&eListe des anciens ban&c-------'
+          - '&cBanni par &e{NAME}'
+          - '&cBanni pour &e{REASON}'
+          - '&cBanni le &e{DATE}'
+        false:
+          - '&aLe joueur &e{NAME} &aa jamais ete Ban'
+      mute:
+        true:
+          - '&c-------&eListe des anciens Mute&c-------'
+          - '&cMute par &e{NAME}'
+          - '&cMute pour &e{REASON}'
+          - '&cMute le &e{DATE}'
+        false:
+          - '&aLe joueur &e{NAME}&a a jamais ete Mute'
+      kick:
+        true:
+          - '&c-------&eListe des kick&c-------'
+          - '&cKick par &e{NAME}'
+          - '&cKick pour &e{REASON}'
+          - '&cKick le &e{DATE}'
+        false:
+          - '&aLe joueur &e{NAME} &aa jamais ete kick'
+
+
+
+

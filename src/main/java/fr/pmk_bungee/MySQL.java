@@ -16,7 +16,7 @@ public class MySQL {
 	private String password = "";
 	private String database = "";
 	private Connection conn;
-	
+
 	public MySQL(String host, int port, String username, String password, String database) {
 		this.host = host;
 		this.port = port;
@@ -24,16 +24,16 @@ public class MySQL {
 		this.password = password;
 		this.database = database;
 	}
-	
+
 	public MySQL(MySQLCredentials credentials) {
 		this.host = credentials.getHost();
 		this.port = credentials.getPort();
 		this.username = credentials.getUsername();
 		this.password = credentials.getPassword();
 		this.database = credentials.getDatabase();
-		
+
 	}
-	
+
 	public static class MySQLCredentials {
 		private String host = "";
 		private int port;
@@ -89,7 +89,7 @@ public class MySQL {
 			this.username = username;
 		}
 	}
-	
+
 	public boolean isConnected() {
 		return this.conn != null;
 	}
@@ -115,8 +115,8 @@ public class MySQL {
 			}
 		}
 	}
-	
-	
+
+
 	public ResultSet getResult(String query) {
 		if (isConnected()) {
 			try {
@@ -128,26 +128,26 @@ public class MySQL {
 		}
 		return null;
 	}
-	
+
 	public void update(String query) {
-		
+
 		if(isConnected()) {
 			ProxyServer.getInstance().getScheduler().runAsync(Main.sharedInstance(), new Runnable() {
 
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					
+
 					try {
-						
+
 						PreparedStatement pst = conn.prepareStatement(query);
 						pst.executeUpdate();
 					} catch (SQLException e) {
-						
+
 						e.printStackTrace();
 					}
 				}
-					
+
 			});
 		}
 	}
