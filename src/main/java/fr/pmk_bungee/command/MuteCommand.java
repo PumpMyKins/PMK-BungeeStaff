@@ -1,89 +1,80 @@
 package fr.pmk_bungee.command;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 import fr.pmk_bungee.Main;
-import fr.pmk_bungee.utils.PlayerProfile;
+import fr.pmk_bungee.object.Mute;
+import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class MuteCommand extends Command {
 
 	public MuteCommand(String name) {
+
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
-	@SuppressWarnings({ "deprecation", "unused" })
+	@SuppressWarnings("unused")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		// TODO Auto-generated method stub
-		ProxiedPlayer player = (ProxiedPlayer) sender;
 
-		if(player.hasPermission("bungeeban.command.mute")) {
+		if(sender.hasPermission("bungeestaff.command.mute")) {
 
 			if(args.length >= 4) {
-				String playerName = args[0];
-				String reason = "";
+
+				String playername = args[0];
+				String muteReason = "";
+				PlayerSituation situation = new PlayerSituation(playername);
 				for(int i = 3; i <= args.length - 1; i++) {
 
-					reason = reason + args[i] + " ";
-
+					muteReason+=muteReason + args[i] + " ";
 				}
+
 				Main.getConfigManager().save();
-				PlayerProfile profile = new PlayerProfile(playerName);
-				if(profile != null) {
 
-					if(!profile.isMuted()) {
-						try {
+				if(situation != null) {
 
-							long seconds = Integer.parseInt(args[1]);
-							Main.TimeUnit unit = Main.TimeUnit.getByString(args[2]);
+					if(!situation.isMuted()) {
 
-							if(unit != null) {
+						Mute mute = new Mute();
+						long seconds = Integer.parseInt(args[1]);
+						Main.TimeUnit unit = Main.TimeUnit.getByString(args[2]);
+						if(unit != null) {
 
-								seconds *= unit.getSeconds();
-								LocalDateTime now = LocalDateTime.now();
-								java.sql.Date inNow = java.sql.Date.valueOf(now.toLocalDate());
-								profile.setMute(reason, getUserID(sender.getName()), seconds, inNow);
-								sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.mute.muted", new String[] { "{NAME}~" + playerName }));		
-							}
-						} catch (NumberFormatException e) {sender.sendMessage("An interal error occured");}
+							seconds*= unit.getSeconds();
+							mute.setStartMute( new Timestamp(System.currentTimeMillis()));
+							mute.setEndMute( new Timestamp(System.currentTimeMillis() + seconds * 1000));
+							mute.setMuteBy(situation.getPlayerId(sender.getName()));
+							mute.setPlayerId(situation.getPlayerId(playername));
+							mute.setMuteReason(muteReason);
 
+							Main.getMySQL().update("INSERT INTO BungeeMute(playerId, startMute, endMute, muteReason, muteBy) VALUES ('" 
+									+ mute.getId()
+									+ "', '" 
+									+ mute.getStartMute()
+									+ "','" 
+									+ mute.getEndMute()
+									+ "','" 
+									+ mute.getMuteReason()
+									+ "','" 
+									+ mute.getMuteBy()
+									+ "')");
+
+						} else {
+							//TODO 
+						}
 					} else {
-
-						sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_already_muted", new String[] { "{NAME}~" + playerName }));						  }
+						//TODO player_already_mute
+					}
 				} else {
-
-					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));
+					//TODO Player_Not_Found
 				}
-			}
-			else {
-
-				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.mute.syntax"));
+			} else {
+				//TODO error_syntax
 			}
 		} else {
-
-			sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));
-		};
-	} 
-	private int getUserID(String playerName) {
-
-		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '" + playerName + "'");
-			if(id.next()) {
-
-				int userID = id.getInt("userID");
-				return userID;
-
-			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
+			//TODO no_Permission
 		}
-		return -1;
 	}
 }

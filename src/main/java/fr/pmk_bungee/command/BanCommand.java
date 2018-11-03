@@ -1,14 +1,11 @@
 package fr.pmk_bungee.command;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Timestamp;
 
 import fr.pmk_bungee.Main;
-import fr.pmk_bungee.utils.PlayerProfile;
+import fr.pmk_bungee.object.Ban;
+import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class BanCommand extends Command {
@@ -18,90 +15,66 @@ public class BanCommand extends Command {
 		super(name);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		
+
 		if(sender.hasPermission("bungeestaff.command.ban")) {
-			
+
 			if(args.length >= 4) {
-				
+
 				String playername = args[0];
 				String banReason = "";
+				PlayerSituation situation = new PlayerSituation(playername);
 				for(int i = 3; i <= args.length - 1; i++) {
-					
+
 					banReason+=banReason + args[i] + " ";
 				}
-				
-				Main.getConfigManager().save();
-				
-			}
-		} else {
-			//TODO noPermission
-		}
-		
-		// TODO Auto-generated method stub
-		/*ProxiedPlayer player = (ProxiedPlayer) sender;
-
-		if(player.hasPermission("bungeestaff.command.ban")) {
-			if(args.length >= 4) {
-
-				String playerName = args[0];
-				String reason = "";
-				for(int i = 3; i <= args.length - 1; i++) {
-
-					reason = reason + args[i] + " ";
-
-				}
 
 				Main.getConfigManager().save();
-				PlayerProfile profile = new PlayerProfile(playerName);
-				if(profile != null) {
 
-					if(!profile.isBanned()) {
+				if(situation != null) {
 
-						try {
+					if(!situation.isBanned()) {
 
-							long seconds = Integer.parseInt(args[1]);
-							Main.TimeUnit unit = Main.TimeUnit.getByString(args[2]);
-							if(unit != null) {
+						Ban ban = new Ban();
+						long seconds = Integer.parseInt(args[1]);
+						Main.TimeUnit unit = Main.TimeUnit.getByString(args[2]);
+						if(unit != null) {
 
-								seconds *= unit.getSeconds();
-								DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-								LocalDateTime now = LocalDateTime.now();
-								java.sql.Date inNow = java.sql.Date.valueOf(now.toLocalDate());
-								profile.setBanned(reason, getUserID(sender.getName()), seconds, inNow);
-								sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.banned", new String[] { "{NAME}~" + playerName 
+							seconds*= unit.getSeconds();
+							ban.setStartBan( new Timestamp(System.currentTimeMillis()));
+							ban.setEndBan( new Timestamp(System.currentTimeMillis() + seconds * 1000));
+							ban.setBanBy(situation.getPlayerId(sender.getName()));
+							ban.setPlayerId(situation.getPlayerId(playername));
+							ban.setBanReason(banReason);
 
-								}));							  }
-						} catch (NumberFormatException e) {sender.sendMessage("An interal error occured");}
+							Main.getMySQL().update("INSERT INTO BungeeBan(playerId, startBan, endBan, banReason, banBy) VALUES ('" 
+									+ ban.getId()
+									+ "', '" 
+									+ ban.getStartBan()
+									+ "','" 
+									+ ban.getEndBan()
+									+ "','" 
+									+ ban.getBanReason()
+									+ "','" 
+									+ ban.getBanBy()
+									+ "')");
 
+						} else {
+							//TODO 
+						}
 					} else {
-						sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_already_banned", new String[] { "{NAME}~" + playerName }));						  }
+						//TODO player_already_ban
+					}
 				} else {
-					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));
+					//TODO Player_Not_Found
 				}
 			} else {
-				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.syntax"));
+				//TODO error_syntax
 			}
 		} else {
-			sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));
-		};
-	} 
-	public int getUserID(String playerName) {
-
-		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '" + playerName + "'");
-			if(id.next()) {
-
-				int userID = id.getInt("userID");
-				return userID;
-
-			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
+			//TODO no_Permission
 		}
-		return -1;
-	*/}
-
+	}
 }

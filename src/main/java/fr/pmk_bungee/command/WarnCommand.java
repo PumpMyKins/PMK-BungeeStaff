@@ -1,100 +1,73 @@
 package fr.pmk_bungee.command;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.List;
+import java.sql.Timestamp;
 
 import fr.pmk_bungee.Main;
+import fr.pmk_bungee.object.Warn;
+import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class WarnCommand extends Command {
 
 	public WarnCommand(String name) {
+
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		// TODO Auto-generated method stub
-		ProxiedPlayer player = (ProxiedPlayer) sender;
-		if(player.hasPermission("bungeestaff.command.warn")) {
 
-			if(args.length > 1) {
+		if(sender.hasPermission("bungeestaff.command.warn")) {
+
+			if(args.length >= 4) {
 
 				String playername = args[0];
-				String reason = "";
-				String warnBy = sender.getName();
-				LocalDateTime now = LocalDateTime.now();
-				java.sql.Date warnAt = java.sql.Date.valueOf(now.toLocalDate());				
+				String warnReason = "";
+				PlayerSituation situation = new PlayerSituation(playername);
 				for(int i = 1; i <= args.length - 1; i++) {
 
-					reason+=args[i] + " ";
+					warnReason+=warnReason + args[i] + " ";
 				}
 
-				if(addWarn(playername, reason, warnBy, warnAt)) {
+				Main.getConfigManager().save();
 
-					List<String> msgs = Main.getConfigManager().getStringList("lang.warnmessage", new String[] { 
-							"{NAME}~" + warnBy,
-							"{REASON}~" + reason
+				if(situation != null) {
 
-					});
-					for(String msg : msgs) {
 
-						ProxyServer.getInstance().getPlayer(playername).sendMessage(new TextComponent(msg));
+					Warn warn = new Warn();
+					long seconds = Integer.parseInt(args[1]);
+					Main.TimeUnit unit = Main.TimeUnit.getByString(args[2]);
+					if(unit != null) {
+
+						seconds*= unit.getSeconds();
+						warn.setWarnDate(new Timestamp(System.currentTimeMillis()));
+						warn.setWarnBy(situation.getPlayerId(sender.getName()));
+						warn.setPlayerId(situation.getPlayerId(playername));
+						warn.setWarnReason(warnReason);
+
+						Main.getMySQL().update("INSERT INTO BungeeWarn(playerId, warnDate, warnReason, warnBy) VALUES ('" 
+								+ warn.getId()
+								+ "', '" 
+								+ warn.getWarnDate()
+								+ "','" 
+								+ warn.getWarnReason()
+								+ "','" 
+								+ warn.getWarnBy()
+								+ "')");
+
+					} else {
+						//TODO 
 					}
-					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.succes", new String[] {
-							"{NAME}~" + playername,
-
-					})));
 				} else {
-					System.out.println("[PUMPMYSTAFF] ERREUR WARN_COMMAND_SQL_INSERT_REFUSE");
+					//TODO Player_Not_Found
 				}
-			} else {sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.syntax")));}
-		} else {sender.sendMessage(new TextComponent(Main.PREFIX +Main.getConfigManager().getString("lang.errors.no_permissions")));}
-	}
-	public boolean addWarn(String playername, String warnReason, String warnBy, Date warnAt) {
-
-		try {
-
-			Main.getMySQL().update("INSERT INTO BungeeWarn(userID, warnAt, warnBy, warnReason) VALUES ('" 
-					+ getUserID(playername) 
-					+ "', '" 
-					+ warnAt
-					+ "','" 
-					+ getUserID(warnBy) 
-					+ "','" 
-					+ warnReason
-					+ "')");
-
-		} catch(NullPointerException e) {
-			return false;
-		}
-		return true;
-
-	}
-
-	private int getUserID(String playerName) {
-
-		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT userID FROM MinecraftPlayer WHERE username = '" + playerName + "'");
-			if(id.next()) {
-
-				int userID = id.getInt("userID");
-				return userID;
-
+			} else {
+				//TODO error_syntax
 			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		} 
-		return -1;
+		} else {
+			//TODO no_Permission
+		}
 	}
-
 }

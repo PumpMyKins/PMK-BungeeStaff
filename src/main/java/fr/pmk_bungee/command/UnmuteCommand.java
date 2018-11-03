@@ -1,9 +1,7 @@
 package fr.pmk_bungee.command;
 
-import fr.pmk_bungee.Main;
-import fr.pmk_bungee.utils.PlayerProfile;
+import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class UnmuteCommand extends Command {
@@ -13,31 +11,32 @@ public class UnmuteCommand extends Command {
 		// TODO Auto-generated constructor stub
 	}
 
-	@SuppressWarnings({ "deprecation", "unused" })
+	@SuppressWarnings("unused")
 	@Override
 	public void execute(final CommandSender sender, final String[] args) {
-		ProxiedPlayer player = (ProxiedPlayer) sender;
-		if(player.hasPermission("bungeeban.command.unmute")) {
-			if(args.length == 1) {
-				String playerName = args[0];
-				PlayerProfile profile = new PlayerProfile(playerName);
-				if(profile != null) {
-					if(profile.isMuted()) {
-						profile.unmute();
-						sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.unmuted", new String[] { "{NAME}~" + playerName }));							  
+		
+		if(sender.hasPermission("bungeestaff.command.unmute")) {
+			
+			if(args.length > 1) {
+				String playername = args[0];
+				PlayerSituation situation = new PlayerSituation(playername);
+				if(situation != null) {
+					
+					if(situation.isMuted()) {
+						
+						situation.unmute();
+						
+					} else {
+						//TODO not_mutened
 					}
-					else {
-						sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_muted", new String[] { "{NAME}~" + playerName }));				  }
+				} else {
+					//TODO player_not_found
 				}
-				else {
-					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));			  }
+			} else {
+				//TODO syntax_error
 			}
-			else {
-				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.syntax"));
-			}
-		}
-		else {
-			sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));	  
+		} else {
+			//TODO no_permission
 		}
 	}
 

@@ -21,7 +21,7 @@ public class PlayerSituation {
 	private List<Warn> warnList;
 	private boolean isBanned;
 	private boolean isMuted;
-	
+	Timestamp now = new Timestamp(System.currentTimeMillis());
 	
 	
 	public PlayerSituation(String playername){
@@ -36,8 +36,6 @@ public class PlayerSituation {
 		
 		try {
 			
-			Timestamp now = new Timestamp(System.currentTimeMillis());
-
 			ResultSet getBan = Main.getMySQL().getResult("SELECT * FROM BungeeBan WHERE playerId ='" + playerId + "'");
 			ResultSet getKick = Main.getMySQL().getResult("SELECT * FROM BungeeKick WHERE playerId ='" + playerId + "'");
 			ResultSet getMute = Main.getMySQL().getResult("SELECT * FROM BungeeMute WHERE playerId ='" + playerId + "'");
@@ -210,6 +208,28 @@ public class PlayerSituation {
 	public void setMuted(boolean isMuted) {
 		this.isMuted = isMuted;
 	}
-	
+
+	public void unban() {
+
+		for(Ban ban : banList) {
+			
+			if(now.compareTo(ban.getEndBan()) > 0) {
+				ban.setEndBan(new Timestamp(System.currentTimeMillis()));
+				Main.getMySQL().update("UPDATE `BungeeBan` SET `banEnd` = `"+ ban.getEndBan() +"` WHERE 'id' = '"+ban.getId()+"'");
+				break;
+			}
+		}
+	}
+	public void unmute() {
+
+		for(Mute mute : muteList) {
+			
+			if(now.compareTo(mute.getEndMute()) > 0) {
+				mute.setEndMute(new Timestamp(System.currentTimeMillis()));
+				Main.getMySQL().update("UPDATE `BungeeMute` SET `banMute` = `"+ mute.getEndMute() +"` WHERE 'id' = '"+mute.getId()+"'");
+				break;
+			}
+		}
+	}
 	
 }
