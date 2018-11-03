@@ -1,12 +1,12 @@
 package fr.pmk_bungee.object;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Mute {
 
 	private int playerId;
-	private Date startMute;
-	private Date endMute;
+	private Timestamp startMute;
+	private Timestamp endMute;
 	private int muteBy;
 	private String muteReason;
 	private int id;
@@ -17,18 +17,7 @@ public class Mute {
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
-	public Date getStartMute() {
-		return startMute;
-	}
-	public void setStartMute(Date startMute) {
-		this.startMute = startMute;
-	}
-	public Date getEndMute() {
-		return endMute;
-	}
-	public void setEndMute(Date endMute) {
-		this.endMute = endMute;
-	}
+
 	public int getMuteBy() {
 		return muteBy;
 	}
@@ -46,6 +35,18 @@ public class Mute {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Timestamp getStartMute() {
+		return startMute;
+	}
+	public void setStartMute(Timestamp startMute) {
+		this.startMute = startMute;
+	}
+	public Timestamp getEndMute() {
+		return endMute;
+	}
+	public void setEndMute(Timestamp endMute) {
+		this.endMute = endMute;
 	}
 	
 	

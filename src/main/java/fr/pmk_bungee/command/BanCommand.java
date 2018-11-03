@@ -38,6 +38,7 @@ public class BanCommand extends Command {
 		} else {
 			//TODO noPermission
 		}
+		
 		// TODO Auto-generated method stub
 		/*ProxiedPlayer player = (ProxiedPlayer) sender;
 

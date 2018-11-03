@@ -1,12 +1,12 @@
 package fr.pmk_bungee.object;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Ban {
 	
 	private int playerId;
-	private Date startBan;
-	private Date endBan;
+	private Timestamp startBan;
+	private Timestamp endBan;
 	private int banBy;
 	private String banReason;
 	private int id;
@@ -30,23 +30,24 @@ public class Ban {
 	public void setBanReason(String banReason) {
 		this.banReason = banReason;
 	}
-	public Date getEndBan() {
-		return endBan;
-	}
-	public void setEndBan(Date endBan) {
-		this.endBan = endBan;
-	}
-	public Date getStartBan() {
-		return startBan;
-	}
-	public void setStartBan(Date startBan) {
-		this.startBan = startBan;
-	}
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Timestamp getStartBan() {
+		return startBan;
+	}
+	public void setStartBan(Timestamp startBan) {
+		this.startBan = startBan;
+	}
+	public Timestamp getEndBan() {
+		return endBan;
+	}
+	public void setEndBan(Timestamp endBan) {
+		this.endBan = endBan;
 	}
 	
 	

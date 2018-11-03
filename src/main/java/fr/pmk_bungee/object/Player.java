@@ -1,14 +1,14 @@
 package fr.pmk_bungee.object;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Player {
 
 	private int playerId;
 	private String username;
 	private String uuid;
-	private Date firstCome;
-	private Date lastCome;
+	private Timestamp firstCome;
+	private Timestamp lastCome;
 	
 	public int getPlayerId() {
 		return playerId;
@@ -28,18 +28,19 @@ public class Player {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-	public Date getFirstCome() {
+	public Timestamp getFirstCome() {
 		return firstCome;
 	}
-	public void setFirstCome(Date firstCome) {
+	public void setFirstCome(Timestamp firstCome) {
 		this.firstCome = firstCome;
 	}
-	public Date getLastCome() {
+	public Timestamp getLastCome() {
 		return lastCome;
 	}
-	public void setLastCome(Date lastCome) {
+	public void setLastCome(Timestamp lastCome) {
 		this.lastCome = lastCome;
 	}
+
 	
 	
 }

@@ -1,11 +1,11 @@
 package fr.pmk_bungee.object;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Kick {
 
 	private int playerId;
-	private Date kickDate;
+	private Timestamp kickDate;
 	private String kickReason;
 	private int kickBy;
 	private int id;
@@ -16,12 +16,7 @@ public class Kick {
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
-	public Date getKickDate() {
-		return kickDate;
-	}
-	public void setKickDate(Date kickDate) {
-		this.kickDate = kickDate;
-	}
+
 	public String getKickReason() {
 		return kickReason;
 	}
@@ -39,6 +34,12 @@ public class Kick {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Timestamp getKickDate() {
+		return kickDate;
+	}
+	public void setKickDate(Timestamp kickDate) {
+		this.kickDate = kickDate;
 	}
 	
 	

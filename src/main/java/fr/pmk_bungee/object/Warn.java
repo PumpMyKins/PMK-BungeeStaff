@@ -1,11 +1,11 @@
 package fr.pmk_bungee.object;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Warn {
 
 	private int playerId;
-	private Date warnDate;
+	private Timestamp warnDate;
 	private String warnReason;
 	private int warnBy;
 	private int id;
@@ -15,12 +15,6 @@ public class Warn {
 	}
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
-	}
-	public Date getWarnDate() {
-		return warnDate;
-	}
-	public void setWarnDate(Date warnDate) {
-		this.warnDate = warnDate;
 	}
 	public String getWarnReason() {
 		return warnReason;
@@ -39,6 +33,12 @@ public class Warn {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Timestamp getWarnDate() {
+		return warnDate;
+	}
+	public void setWarnDate(Timestamp warnDate) {
+		this.warnDate = warnDate;
 	}
 
 	
