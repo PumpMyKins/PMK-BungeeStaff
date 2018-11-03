@@ -9,6 +9,7 @@ public class Mute {
 	private Date endMute;
 	private int muteBy;
 	private String muteReason;
+	private int id;
 	
 	public int getPlayerId() {
 		return playerId;
@@ -39,6 +40,12 @@ public class Mute {
 	}
 	public void setMuteReason(String muteReason) {
 		this.muteReason = muteReason;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

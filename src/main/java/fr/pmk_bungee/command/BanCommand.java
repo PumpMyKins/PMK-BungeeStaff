@@ -18,11 +18,28 @@ public class BanCommand extends Command {
 		super(name);
 	}
 
-	@SuppressWarnings({ "deprecation", "unused" })
 	@Override
 	public void execute(CommandSender sender, String[] args) {
+		
+		if(sender.hasPermission("bungeestaff.command.ban")) {
+			
+			if(args.length >= 4) {
+				
+				String playername = args[0];
+				String banReason = "";
+				for(int i = 3; i <= args.length - 1; i++) {
+					
+					banReason+=banReason + args[i] + " ";
+				}
+				
+				Main.getConfigManager().save();
+				
+			}
+		} else {
+			//TODO noPermission
+		}
 		// TODO Auto-generated method stub
-		ProxiedPlayer player = (ProxiedPlayer) sender;
+		/*ProxiedPlayer player = (ProxiedPlayer) sender;
 
 		if(player.hasPermission("bungeestaff.command.ban")) {
 			if(args.length >= 4) {
@@ -84,6 +101,6 @@ public class BanCommand extends Command {
 			e.printStackTrace();
 		}
 		return -1;
-	}
+	*/}
 
 }

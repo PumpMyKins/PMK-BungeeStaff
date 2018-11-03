@@ -9,6 +9,7 @@ public class Ban {
 	private Date endBan;
 	private int banBy;
 	private String banReason;
+	private int id;
 	
 
 	public int getPlayerId() {
@@ -40,6 +41,12 @@ public class Ban {
 	}
 	public void setStartBan(Date startBan) {
 		this.startBan = startBan;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

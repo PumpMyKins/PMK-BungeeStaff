@@ -8,6 +8,7 @@ public class Kick {
 	private Date kickDate;
 	private String kickReason;
 	private int kickBy;
+	private int id;
 	
 	public int getPlayerId() {
 		return playerId;
@@ -32,6 +33,12 @@ public class Kick {
 	}
 	public void setKickBy(int kickBy) {
 		this.kickBy = kickBy;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

@@ -2,7 +2,7 @@ package fr.pmk_bungee.object;
 
 import java.util.Date;
 
-public class Joueur {
+public class Player {
 
 	private int playerId;
 	private String username;

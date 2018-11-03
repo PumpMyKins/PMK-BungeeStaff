@@ -8,6 +8,7 @@ public class Warn {
 	private Date warnDate;
 	private String warnReason;
 	private int warnBy;
+	private int id;
 	
 	public int getPlayerId() {
 		return playerId;
@@ -32,6 +33,12 @@ public class Warn {
 	}
 	public void setWarnBy(int warnBy) {
 		this.warnBy = warnBy;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	
