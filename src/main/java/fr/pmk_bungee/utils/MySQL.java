@@ -1,4 +1,4 @@
-package fr.pmk_bungee;
+package fr.pmk_bungee.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import fr.pmk_bungee.Main;
 import net.md_5.bungee.api.ProxyServer;
 
 public class MySQL {
@@ -16,7 +17,7 @@ public class MySQL {
 	private String password = "";
 	private String database = "";
 	private Connection conn;
-
+	
 	public MySQL(String host, int port, String username, String password, String database) {
 		this.host = host;
 		this.port = port;

@@ -1,4 +1,4 @@
-package fr.pmk_bungee.utils;
+package fr.pmk_bungee.utils.manager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,6 +39,7 @@ public class ConfigManager {
 			e.printStackTrace();
 		}
 	}
+	
 	public String timeFormat(int days, int hours, int minutes, int seconds) {
 
 		return getString("lang.time_format").replace("{DAYS}","" + days).replace("{HOURS}", "" + hours).replace("{MINUTES}", "" + minutes).replace("{SECONDS}", "" + seconds);
