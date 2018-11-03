@@ -23,6 +23,8 @@ public class HistoryCommand extends Command {
 					
 					if(args.length > 1) {
 						
+						Main.getConfigManager().save();
+
 						String playername = args[0];
 						PlayerSituation situation = new PlayerSituation(playername);
 						switch(args[1].toLowerCase()) {

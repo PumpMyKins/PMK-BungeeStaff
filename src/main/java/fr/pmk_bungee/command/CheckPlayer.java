@@ -25,6 +25,8 @@ public class CheckPlayer extends Command {
 					
 					if(args.length > 0) {
 						
+						Main.getConfigManager().save();
+
 						PlayerSituation situation = new PlayerSituation(args[0]);
 						if(!situation.getBanList().isEmpty()) {
 							//TODO show_ban
