@@ -37,9 +37,6 @@ public class KickCommand extends Command {
 
 
 					Kick kick = new Kick();
-					long seconds = Integer.parseInt(args[1]);
-					Main.TimeUnit unit = Main.TimeUnit.getByString(args[2]);
-					if(unit != null) {
 
 						seconds*= unit.getSeconds();
 						kick.setKickDate(new Timestamp(System.currentTimeMillis()));
@@ -57,9 +54,6 @@ public class KickCommand extends Command {
 								+ kick.getKickBy()
 								+ "')");
 
-					} else {
-						//TODO 
-					}
 				} else {
 					//TODO Player_Not_Found
 				}

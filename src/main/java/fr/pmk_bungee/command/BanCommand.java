@@ -4,8 +4,10 @@ import java.sql.Timestamp;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Ban;
+import fr.pmk_bungee.utils.MessageSender;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class BanCommand extends Command {
@@ -60,13 +62,10 @@ public class BanCommand extends Command {
 									+ "','" 
 									+ ban.getBanBy()
 									+ "')");
-
-						} else {
-							//TODO 
 						}
 					} else {
 						//TODO player_already_ban
-					}
+					 }
 				} else {
 					//TODO Player_Not_Found
 				}

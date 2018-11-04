@@ -232,21 +232,22 @@ public class PlayerSituation {
 			if(now.compareTo(ban.getEndBan()) > 0) {
 				ban.setEndBan(new Timestamp(System.currentTimeMillis()));
 				Main.getMySQL().update("UPDATE `BungeeBan` SET `banEnd` = `"+ ban.getEndBan() +"` WHERE 'id' = '"+ban.getId()+"'");
-				break;
+				return true;
 			}
 		}
 		return false;
 	}
-	public void unmute() {
+	public boolean unmute() {
 
 		for(Mute mute : muteList) {
 			
 			if(now.compareTo(mute.getEndMute()) > 0) {
 				mute.setEndMute(new Timestamp(System.currentTimeMillis()));
 				Main.getMySQL().update("UPDATE `BungeeMute` SET `banMute` = `"+ mute.getEndMute() +"` WHERE 'id' = '"+mute.getId()+"'");
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public Player getPlayer() {

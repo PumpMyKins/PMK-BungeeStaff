@@ -11,6 +11,7 @@ import java.util.List;
 import com.google.common.io.ByteStreams;
 
 import fr.pmk_bungee.Main;
+import fr.pmk_bungee.object.Message.Parameter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -64,14 +65,18 @@ public class ConfigManager {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<String> getStringList(String key, String... replace) {
+	public List<String> getStringList(String key, /*String... replace*/List<Parameter> replace) {
 
 		List<String> list = getStringList(key);
 		List<String> avail = new ArrayList();
 		for (String str : list)
 		{
-			for (String repl : replace)
+			/*for (String repl : replace)
 			{
+				String[] r = repl.split("~");
+				str = str.replace(r[0], r[1]);
+			}*/
+			for(Parameter repl : replace) {
 				String[] r = repl.split("~");
 				str = str.replace(r[0], r[1]);
 			}
