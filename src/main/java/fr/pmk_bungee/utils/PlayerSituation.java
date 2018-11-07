@@ -50,7 +50,7 @@ public class PlayerSituation {
 				ban.setBanBy(getBan.getInt("banBy"));
 				ban.setPlayerId(playerId);
 				ban.setBanReason(getBan.getString("banReason"));
-				ban.setStartBan(getBan.getTimestamp("banStart"));
+				ban.setStartBan(getBan.getTimestamp("startBan"));
 				ban.setEndBan(getBan.getTimestamp("endBan"));
 				ban.setId(getBan.getInt("id"));
 				banList.add(ban);
