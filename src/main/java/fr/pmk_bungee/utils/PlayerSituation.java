@@ -35,18 +35,18 @@ public class PlayerSituation {
 	public void init() {
 
 		try {
-
-			ResultSet getBan = Main.getMySQL().getResult("SELECT * FROM BungeeBan WHERE playerId ='" + playerId + "'");
-			ResultSet getKick = Main.getMySQL().getResult("SELECT * FROM BungeeKick WHERE playerId ='" + playerId + "'");
-			ResultSet getMute = Main.getMySQL().getResult("SELECT * FROM BungeeMute WHERE playerId ='" + playerId + "'");
-			ResultSet getWarn = Main.getMySQL().getResult("SELECT * FROM BungeeWarn WHERE playerId ='" + playerId + "'");
-			ResultSet getPlayer = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE playerId ='" + playerId + "'");
+			
+			ResultSet getBan = Main.getMySQL().getResult("SELECT * FROM BungeeBan WHERE playerId ='" + this.playerId + "'");
+			ResultSet getKick = Main.getMySQL().getResult("SELECT * FROM BungeeKick WHERE playerId ='" + this.playerId + "'");
+			ResultSet getMute = Main.getMySQL().getResult("SELECT * FROM BungeeMute WHERE playerId ='" + this.playerId + "'");
+			ResultSet getWarn = Main.getMySQL().getResult("SELECT * FROM BungeeWarn WHERE playerId ='" + this.playerId + "'");
+			ResultSet getPlayer = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE playerId ='" + this.playerId + "'");
 
 			while(getBan.next()) {
 
 				Ban ban = new Ban();
 				ban.setBanBy(getBan.getInt("banBy"));
-				ban.setPlayerId(playerId);
+				ban.setPlayerId(this.playerId);
 				ban.setBanReason(getBan.getString("banReason"));
 				ban.setStartBan(getBan.getTimestamp("startBan"));
 				ban.setEndBan(getBan.getTimestamp("endBan"));
@@ -58,7 +58,7 @@ public class PlayerSituation {
 
 				Mute mute = new Mute();
 				mute.setMuteBy(getMute.getInt("muteBy"));
-				mute.setPlayerId(playerId);
+				mute.setPlayerId(this.playerId);
 				mute.setMuteReason(getMute.getString("muteReason"));
 				mute.setStartMute(getMute.getTimestamp("startMute"));
 				mute.setEndMute(getMute.getTimestamp("endMute"));
@@ -72,7 +72,7 @@ public class PlayerSituation {
 				kick.setKickBy(getKick.getInt("kickBy"));
 				kick.setKickDate(getKick.getTimestamp("kickDate"));
 				kick.setKickReason(getKick.getString("kickReason"));
-				kick.setPlayerId(playerId);
+				kick.setPlayerId(this.playerId);
 				kick.setId(getKick.getInt("id"));
 				this.kickList.add(kick);
 
@@ -84,7 +84,7 @@ public class PlayerSituation {
 				warn.setWarnBy(getWarn.getInt("kickBy"));
 				warn.setWarnDate(getWarn.getTimestamp("kickDate"));
 				warn.setWarnReason(getWarn.getString("warnReason"));
-				warn.setPlayerId(playerId);
+				warn.setPlayerId(this.playerId);
 				warn.setId(getBan.getInt("id"));
 				this.warnList.add(warn);
 
