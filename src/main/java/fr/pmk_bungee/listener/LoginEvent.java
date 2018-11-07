@@ -39,7 +39,7 @@ public class LoginEvent implements Listener {
 			error.printStackTrace();
 		}
 		PlayerSituation situation = new PlayerSituation(playername);
-		if(situation.testBan(situation)) {
+		if(PlayerSituation.testBan(situation)) {
 
 			if(!situation.unban()) {
 				e.setCancelled(true);

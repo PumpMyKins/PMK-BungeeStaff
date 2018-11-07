@@ -21,7 +21,7 @@ public class PlayerSituation {
 	private List<Kick> kickList;
 	private List<Warn> warnList;
 	private Player player;
-	Timestamp now = new Timestamp(System.currentTimeMillis());
+	static Timestamp now = new Timestamp(System.currentTimeMillis());
 
 
 	public PlayerSituation(String playername){
@@ -103,7 +103,7 @@ public class PlayerSituation {
 			e.printStackTrace();
 		}
 	}
-	public boolean testBan(PlayerSituation situation) {	
+	public static boolean testBan(PlayerSituation situation) {	
 
 		boolean isBanned = false;
 		if(!situation.getBanList().isEmpty()) {
@@ -124,7 +124,7 @@ public class PlayerSituation {
 		return isBanned;
 	}
 
-	public boolean testMute(PlayerSituation situation) {
+	public static boolean testMute(PlayerSituation situation) {
 		boolean isMuted = false;
 		if(!situation.getMuteList().isEmpty()) {
 

@@ -35,7 +35,7 @@ public class MuteCommand extends Command {
 
 				if(situation != null) {
 
-					if(!situation.testMute(situation)) {
+					if(!PlayerSituation.testMute(situation)) {
 
 						Mute mute = new Mute();
 						long seconds = Integer.parseInt(args[1]);

@@ -26,7 +26,7 @@ public class UnbanCommand extends Command {
 				PlayerSituation situation = new PlayerSituation(playername);
 				if(situation != null) {
 					
-					if(situation.testBan(situation)) {
+					if(PlayerSituation.testBan(situation)) {
 						
 						situation.unban();
 						

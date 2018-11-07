@@ -13,7 +13,7 @@ public class ChatEvent implements Listener {
 		ProxiedPlayer proxiedPlayer = (ProxiedPlayer) e.getSender();
 		PlayerSituation situation = new PlayerSituation(proxiedPlayer.getName());
 		
-		if(situation.testBan(situation)) {
+		if(PlayerSituation.testBan(situation)) {
 
 			if(e.getMessage().startsWith("/")) {
 

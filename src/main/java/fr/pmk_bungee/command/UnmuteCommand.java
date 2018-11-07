@@ -26,7 +26,7 @@ public class UnmuteCommand extends Command {
 				PlayerSituation situation = new PlayerSituation(playername);
 				if(situation != null) {
 					
-					if(situation.testMute(situation)) {
+					if(PlayerSituation.testMute(situation)) {
 						
 						situation.unmute();
 						
