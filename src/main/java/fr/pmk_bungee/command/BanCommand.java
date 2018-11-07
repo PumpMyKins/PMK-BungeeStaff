@@ -1,89 +1,117 @@
 package fr.pmk_bungee.command;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.pmk_bungee.Main;
-import fr.pmk_bungee.utils.PlayerProfile;
+import fr.pmk_bungee.object.Ban;
+import fr.pmk_bungee.object.Message;
+import fr.pmk_bungee.utils.MessageSender;
+import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+import fr.pmk_bungee.object.Parameter;
 
 public class BanCommand extends Command {
+
 
 	public BanCommand(String name) {
 
 		super(name);
 	}
 
-	@SuppressWarnings({ "deprecation", "unused" })
+
+	@SuppressWarnings("unused")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		// TODO Auto-generated method stub
-		ProxiedPlayer player = (ProxiedPlayer) sender;
 
-		if(player.hasPermission("bungeestaff.command.ban")) {
+		Message msg = new Message();
+		List<Parameter> param = new ArrayList<Parameter>();
+
+		if(sender.hasPermission("bungeestaff.command.ban")) {
+
+
 			if(args.length >= 4) {
 
-				String playerName = args[0];
-				String reason = "";
+				String playername = args[0];
+				String banReason = "";
+				PlayerSituation situation = new PlayerSituation(playername);
 				for(int i = 3; i <= args.length - 1; i++) {
 
-					reason = reason + args[i] + " ";
-
+					banReason+=banReason + args[i] + " ";
 				}
 
 				Main.getConfigManager().save();
-				PlayerProfile profile = new PlayerProfile(playerName);
-				if(profile != null) {
 
-					if(!profile.isBanned()) {
+				if(situation != null) {
 
-						try {
+					if(!situation.isBanned()) {
 
-							long seconds = Integer.parseInt(args[1]);
-							Main.TimeUnit unit = Main.TimeUnit.getByString(args[2]);
-							if(unit != null) {
+						Ban ban = new Ban();
+						long seconds = Integer.parseInt(args[1]);
+						Main.TimeUnit unit = Main.TimeUnit.getByString(args[2]);
+						if(unit != null) {
 
-								seconds *= unit.getSeconds();
-								DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-								LocalDateTime now = LocalDateTime.now();
-								java.sql.Date inNow = java.sql.Date.valueOf(now.toLocalDate());
-								profile.setBanned(reason, getUserID(sender.getName()), seconds, inNow);
-								sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.banned", new String[] { "{NAME}~" + playerName 
+							seconds*= unit.getSeconds();
+							ban.setStartBan( new Timestamp(System.currentTimeMillis()));
+							ban.setEndBan( new Timestamp(System.currentTimeMillis() + seconds * 1000));
+							ban.setBanBy(situation.getPlayerId(sender.getName()));
+							ban.setPlayerId(situation.getPlayerId(playername));
+							ban.setBanReason(banReason);
 
-								}));							  }
-						} catch (NumberFormatException e) {sender.sendMessage("An interal error occured");}
+							Main.getMySQL().update("INSERT INTO BungeeBan(playerId, startBan, endBan, banReason, banBy) VALUES ('" 
+									+ ban.getId()
+									+ "', '" 
+									+ ban.getStartBan()
+									+ "','" 
+									+ ban.getEndBan()
+									+ "','" 
+									+ ban.getBanReason()
+									+ "','" 
+									+ ban.getBanBy()
+									+ "')");
 
+							//TODO playerBanned.
+							Parameter name = new Parameter();
+							name.setParamTitle("NAME");
+							name.setParamContent(playername);
+							param.add(name);
+
+							msg.setMessageTitle("lang.commands.ban.banned");
+
+						}
 					} else {
-						sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_already_banned", new String[] { "{NAME}~" + playerName }));						  }
+						//TODO player_already_ban
+						Parameter name = new Parameter();
+						name.setParamTitle("NAME");
+						name.setParamContent(playername);
+						param.add(name);
+
+						msg.setMessageTitle("lang.errors.player_already_banned");
+
+
+					}
 				} else {
-					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));
+					msg.setMessageTitle("lang.errors.player_not_found");
+
 				}
 			} else {
-				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.syntax"));
+
+				msg.setMessageTitle("lang.commands.ban.syntax");
+
+
 			}
 		} else {
-			sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));
-		};
-	} 
-	public int getUserID(String playerName) {
 
-		try {
-			ResultSet id = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '" + playerName + "'");
-			if(id.next()) {
+			msg.setMessageTitle("lang.errors.no_permissions");
 
-				int userID = id.getInt("userID");
-				return userID;
 
-			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
 		}
-		return -1;
-	}
+		msg.setPrefix(true);
+		msg.setSender(sender);
+		msg.setParameter(param);
 
+		MessageSender.send(msg);
+	}
 }

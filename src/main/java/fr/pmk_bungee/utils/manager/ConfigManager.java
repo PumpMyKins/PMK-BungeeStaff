@@ -1,6 +1,7 @@
-package fr.pmk_bungee.utils;
+package fr.pmk_bungee.utils.manager;
 
 import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +12,7 @@ import java.util.List;
 import com.google.common.io.ByteStreams;
 
 import fr.pmk_bungee.Main;
+import fr.pmk_bungee.object.Parameter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -39,6 +41,7 @@ public class ConfigManager {
 			e.printStackTrace();
 		}
 	}
+	
 	public String timeFormat(int days, int hours, int minutes, int seconds) {
 
 		return getString("lang.time_format").replace("{DAYS}","" + days).replace("{HOURS}", "" + hours).replace("{MINUTES}", "" + minutes).replace("{SECONDS}", "" + seconds);
@@ -63,15 +66,15 @@ public class ConfigManager {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<String> getStringList(String key, String... replace) {
+	public List<String> getStringList(String key, List<Parameter> param) {
 
 		List<String> list = getStringList(key);
 		List<String> avail = new ArrayList();
 		for (String str : list)
 		{
-			for (String repl : replace)
+			for (Parameter repl : param)
 			{
-				String[] r = repl.split("~");
+				String[] r = {repl.getParamTitle(), repl.getParamContent()};
 				str = str.replace(r[0], r[1]);
 			}
 			avail.add(str);

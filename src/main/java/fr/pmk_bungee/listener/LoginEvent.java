@@ -2,65 +2,48 @@ package fr.pmk_bungee.listener;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import fr.pmk_bungee.Main;
-import fr.pmk_bungee.utils.PlayerProfile;
+import fr.pmk_bungee.object.Player;
+import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
 public class LoginEvent implements Listener {
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onLogin(net.md_5.bungee.api.event.LoginEvent e) {
 
-		String playerName = e.getConnection().getName();
-		int isPresent = 0;
-		int trueSetter = 1;
+		String playername = e.getConnection().getName();
 		try {
-			ResultSet rs = Main.getMySQL().getResult("SELECT isPresent FROM MinecraftPlayer WHERE username = '" + e.getConnection().getName()+ "'"); 
-			if(rs.next()) {
+			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '" + e.getConnection().getName()+ "'"); 
+			if(!rs.next()) {
 
-				isPresent = rs.getInt("isPresent");
+				Player player = new Player();
+				player.setFirstCome(new Timestamp(System.currentTimeMillis()));
+				player.setUsername(playername);
+				player.setUuid(e.getConnection().getUniqueId().toString());
+
+				Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip, firstCome) VALUES ('" 
+						+  player.getUsername()
+						+ "', '" 
+						+ player.getUuid()
+						+ "', '" 
+						+ e.getConnection().getAddress().getAddress()
+						+ "', '" 
+						+ player.getFirstCome()
+						+ "')");
 			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		} catch (NullPointerException e2) {
-			isPresent = 0;
-			e2.printStackTrace();
+		} catch (SQLException | NullPointerException error) {
+			error.printStackTrace();
 		}
-		if(isPresent == 0) {
-			Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip, isPresent) VALUES ('" 
-					+ playerName 
-					+ "', '" 
-					+ e.getConnection().getUniqueId() 
-					+ "', '" 
-					+ e.getConnection().getAddress().getAddress()
-					+ "','" 
-					+ trueSetter 
-					+ "')");
-		}
-		PlayerProfile profile = new PlayerProfile(e.getConnection().getName());
-		if(profile.isBanned()) {
+		PlayerSituation situation = new PlayerSituation(playername);
+		if(situation.isBanned()) {
 
-			long end = profile.getBanEnd();
-			long current = System.currentTimeMillis();
-
-			if(end > 0L) {
-
-				if(end < current) {
-					profile.unban();
-				}
-
-				else {
-
-					e.setCancelled(true);
-					e.setCancelReason(profile.getBanKickMessage() + "");
-				}
-			}else {
-
+			if(!situation.unban()) {
 				e.setCancelled(true);
-				e.setCancelReason(profile.getBanKickMessage() + "");
+				//TODO kick_message
 			}
 		}
 	}
