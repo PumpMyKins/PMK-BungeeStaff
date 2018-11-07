@@ -53,7 +53,7 @@ public class PlayerSituation {
 				ban.setStartBan(getBan.getTimestamp("banStart"));
 				ban.setEndBan(getBan.getTimestamp("endBan"));
 				ban.setId(getBan.getInt("id"));
-				this.banList.add(ban);
+				banList.add(ban);
 				
 			}
 			while(getMute.next()) {
@@ -102,7 +102,7 @@ public class PlayerSituation {
 				
 			}
 			
-			if(!this.banList.isEmpty()) {
+			if(!banList.isEmpty()) {
 				
 				for(Ban ban : banList) {
 					
