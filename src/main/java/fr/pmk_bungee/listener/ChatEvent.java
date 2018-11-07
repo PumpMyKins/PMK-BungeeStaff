@@ -11,7 +11,7 @@ public class ChatEvent implements Listener {
 	public void onChar(net.md_5.bungee.api.event.ChatEvent e) {
 
 		ProxiedPlayer proxiedPlayer = (ProxiedPlayer) e.getSender();
-		PlayerSituation situation = new PlayerSituation(proxiedPlayer.getName());
+		PlayerSituation situation = new PlayerSituation(e.getSender().toString());
 
 		if(situation.isMuted()) {
 
