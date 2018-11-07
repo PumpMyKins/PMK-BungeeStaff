@@ -1,27 +1,36 @@
 package fr.pmk_bungee.command;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Ban;
+import fr.pmk_bungee.object.Message;
 import fr.pmk_bungee.utils.MessageSender;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+import fr.pmk_bungee.object.Parameter;
 
 public class BanCommand extends Command {
+
 
 	public BanCommand(String name) {
 
 		super(name);
 	}
 
+
 	@SuppressWarnings("unused")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 
+		Message msg = new Message();
+		List<Parameter> param = new ArrayList<Parameter>();
+
 		if(sender.hasPermission("bungeestaff.command.ban")) {
+
 
 			if(args.length >= 4) {
 
@@ -62,18 +71,47 @@ public class BanCommand extends Command {
 									+ "','" 
 									+ ban.getBanBy()
 									+ "')");
+
+							//TODO playerBanned.
+							Parameter name = new Parameter();
+							name.setParamTitle("NAME");
+							name.setParamContent(playername);
+							param.add(name);
+
+							msg.setMessageTitle("lang.commands.ban.banned");
+
 						}
 					} else {
 						//TODO player_already_ban
-					 }
+						Parameter name = new Parameter();
+						name.setParamTitle("NAME");
+						name.setParamContent(playername);
+						param.add(name);
+
+						msg.setMessageTitle("lang.errors.player_already_banned");
+
+
+					}
 				} else {
-					//TODO Player_Not_Found
+					msg.setMessageTitle("lang.errors.player_not_found");
+
 				}
 			} else {
-				//TODO error_syntax
+
+				msg.setMessageTitle("lang.commands.ban.syntax");
+
+
 			}
 		} else {
-			//TODO no_Permission
+
+			msg.setMessageTitle("lang.errors.no_permissions");
+
+
 		}
+		msg.setPrefix(true);
+		msg.setSender(sender);
+		msg.setParameter(param);
+
+		MessageSender.send(msg);
 	}
 }

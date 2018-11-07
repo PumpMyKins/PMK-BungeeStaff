@@ -1,21 +1,17 @@
 package fr.pmk_bungee.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Message;
-import fr.pmk_bungee.object.Message.Parameter;
-import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class MessageSender {
 		
-	public MessageSender(Message message) {
+	public static void send(Message message) {
 		
-		List<String> msgs = null;
-		ProxiedPlayer sender = (ProxiedPlayer) message.getSender();
+		List<String> msgs= new ArrayList<String>();
 		if(message.getParameter().isEmpty()) {
 			
 			if(message.isPrefix()) {
@@ -29,23 +25,19 @@ public class MessageSender {
 			}
 			
 		} else {
-
-			List<Parameter> paramList = message.getParameter();
 			
 			if(message.isPrefix()) {
-				
 				msgs.add(Main.PREFIX);
-				msgs.addAll(Main.getConfigManager().getStringList(message.getMessageTitle(), )); /*{
-					for(Parameter paramD : message.getParameter()) {
-						String title = paramD.getParamTitle();
-						String content = paramD.getParamContent();
-					}	
-				}));
-				*/
+				msgs.addAll(Main.getConfigManager().getStringList(message.getMessageTitle(), message.getParameter()));
 				
-			}
+			} else {
+				
+				msgs.addAll(Main.getConfigManager().getStringList(message.getMessageTitle(), message.getParameter()));
+			}	
 		}
-		
-		
+		for(String msg : msgs) {
+			
+			message.getSender().sendMessage(new TextComponent(msg));
+		}
 	}
 }

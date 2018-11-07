@@ -2,28 +2,9 @@ package fr.pmk_bungee.object;
 
 import net.md_5.bungee.api.CommandSender;
 import java.util.List;
+import fr.pmk_bungee.object.Parameter;
 
 public class Message {
-
-	public class Parameter {
-		
-		private String paramTitle;
-		private String paramContent;
-		
-		public String getParamTitle() {
-			return paramTitle;
-		}
-		public void setParamTitle(String paramTitle) {
-			this.paramTitle = paramTitle;
-		}
-		public String getParamContent() {
-			return paramContent;
-		}
-		public void setParamContent(String paramContent) {
-			this.paramContent = paramContent;
-		}
-		
-	}
 	
 	private CommandSender sender;
 	private boolean prefix;
@@ -63,7 +44,19 @@ public class Message {
 		this.setParameter(parameter);
 		
 	}
+	public Message(CommandSender sender, boolean prefix, String messageTitle) {
 	
+		this.setSender(sender);
+		this.setPrefix(prefix);
+		this.setMessageTitle(messageTitle);
 	
-	
+	}
+	public Message(CommandSender sender, boolean prefix) {
+		
+		this.setSender(sender);
+		this.setPrefix(prefix);
+		
+	}
+	public Message() {
+	}
 }
