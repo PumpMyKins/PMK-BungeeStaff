@@ -102,7 +102,7 @@ public class PlayerSituation {
 				
 			}
 			
-			if(!banList.isEmpty()) {
+			if(!this.banList.isEmpty()) {
 				
 				for(Ban ban : banList) {
 					
@@ -118,7 +118,7 @@ public class PlayerSituation {
 				this.isBanned = false;
 			}
 			
-			if(!muteList.isEmpty()) {
+			if(!this.muteList.isEmpty()) {
 				
 				for(Mute mute : this.muteList) {
 					
