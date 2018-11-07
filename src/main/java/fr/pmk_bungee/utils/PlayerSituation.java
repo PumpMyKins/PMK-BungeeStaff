@@ -62,7 +62,7 @@ public class PlayerSituation {
 				mute.setMuteBy(getMute.getInt("muteBy"));
 				mute.setPlayerId(playerId);
 				mute.setMuteReason(getMute.getString("muteReason"));
-				mute.setStartMute(getMute.getTimestamp("banMute"));
+				mute.setStartMute(getMute.getTimestamp("startMute"));
 				mute.setEndMute(getMute.getTimestamp("endMute"));
 				mute.setId(getMute.getInt("id"));
 				this.muteList.add(mute);
