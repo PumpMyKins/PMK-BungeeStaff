@@ -12,6 +12,7 @@ import fr.pmk_bungee.command.UnmuteCommand;
 import fr.pmk_bungee.command.WarnCommand;
 import fr.pmk_bungee.listener.ChatEvent;
 import fr.pmk_bungee.listener.LoginEvent;
+import fr.pmk_bungee.listener.LogoutEvent;
 import net.md_5.bungee.api.plugin.PluginManager;
 
 public class CommandManager {
@@ -47,6 +48,8 @@ public class CommandManager {
 		pm.registerListener(Main.sharedInstance(), new ChatEvent());
 
 		pm.registerListener(Main.sharedInstance(), new LoginEvent());
+		
+		pm.registerListener(Main.sharedInstance(), new LogoutEvent());
 		
 	
 	}

@@ -11,22 +11,20 @@ public class ChatEvent implements Listener {
 	public void onChar(net.md_5.bungee.api.event.ChatEvent e) {
 
 		ProxiedPlayer proxiedPlayer = (ProxiedPlayer) e.getSender();
-		PlayerSituation situation = new PlayerSituation(e.getSender().toString());
-
+		PlayerSituation situation = new PlayerSituation(proxiedPlayer.getName());
+		
 		if(situation.isMuted()) {
 
 			if(e.getMessage().startsWith("/")) {
 
 				return;
 			}
-			if(situation.isMuted()) {
-				
-				if(!situation.unmute()) {
+			if(!situation.unmute()) {
 					
-					//e.setCancelled(situation.getBanKickMessage(););
-				}
+				e.setCancelled(true);
+				//TODO send muteMEssage
 			}
 		}
 	}
-
 }
+

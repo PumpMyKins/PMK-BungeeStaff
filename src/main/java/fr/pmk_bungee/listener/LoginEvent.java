@@ -43,7 +43,7 @@ public class LoginEvent implements Listener {
 
 			if(!situation.unban()) {
 				e.setCancelled(true);
-				//TODO kick_message
+				//TODO ban_message
 			}
 		}
 	}

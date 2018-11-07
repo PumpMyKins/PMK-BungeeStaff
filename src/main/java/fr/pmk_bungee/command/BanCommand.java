@@ -10,6 +10,8 @@ import fr.pmk_bungee.object.Message;
 import fr.pmk_bungee.utils.MessageSender;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import fr.pmk_bungee.object.Parameter;
 
@@ -34,7 +36,7 @@ public class BanCommand extends Command {
 
 			if(args.length >= 4) {
 
-				String playername = args[0];
+				String playername = args[0].toLowerCase();
 				String banReason = "";
 				PlayerSituation situation = new PlayerSituation(playername);
 				for(int i = 3; i <= args.length - 1; i++) {
@@ -73,6 +75,10 @@ public class BanCommand extends Command {
 									+ "')");
 
 							//TODO playerBanned.
+							if(toProxiedPlayer(playername) != null) {
+								toProxiedPlayer(playername).disconnect(); //TODO disconnecte Message
+							}
+							
 							Parameter name = new Parameter();
 							name.setParamTitle("NAME");
 							name.setParamContent(playername);
@@ -113,5 +119,9 @@ public class BanCommand extends Command {
 		msg.setParameter(param);
 
 		MessageSender.send(msg);
+	}
+	public ProxiedPlayer toProxiedPlayer(String playername) {
+
+		return ProxyServer.getInstance().getPlayer(playername);
 	}
 }
