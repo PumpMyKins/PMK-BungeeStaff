@@ -48,7 +48,7 @@ public class BanCommand extends Command {
 
 				if(situation != null) {
 
-					if(!situation.isBanned()) {
+					if(!situation.testBan(situation)) {
 
 						Ban ban = new Ban();
 						long seconds = Integer.parseInt(args[1]);
