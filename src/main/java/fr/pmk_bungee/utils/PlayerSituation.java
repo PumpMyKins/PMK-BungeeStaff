@@ -106,9 +106,9 @@ public class PlayerSituation {
 	public boolean testBan(PlayerSituation situation) {	
 
 		boolean isBanned = false;
-		if(!banList.isEmpty()) {
+		if(!situation.getBanList().isEmpty()) {
 
-			for(Ban ban : banList) {
+			for(Ban ban : situation.getBanList()) {
 
 				if(now.compareTo(ban.getEndBan()) > 0) {
 					isBanned = true;
@@ -126,9 +126,9 @@ public class PlayerSituation {
 
 	public boolean testMute(PlayerSituation situation) {
 		boolean isMuted = false;
-		if(!this.muteList.isEmpty()) {
+		if(!situation.getMuteList().isEmpty()) {
 
-			for(Mute mute : this.muteList) {
+			for(Mute mute : situation.getMuteList()) {
 
 				if(now.compareTo(mute.getEndMute()) > 0) {
 					isMuted = true;
