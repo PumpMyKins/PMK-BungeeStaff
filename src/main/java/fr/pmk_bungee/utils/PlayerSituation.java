@@ -148,8 +148,8 @@ public class PlayerSituation {
 			ResultSet id = Main.getMySQL().getResult("SELECT playerId FROM MinecraftPlayer WHERE username = '" + playerName + "'");
 			if(id.next()) {
 
-				int userID = id.getInt("userID");
-				return userID;
+				int playerId = id.getInt("playerId");
+				return playerId;
 
 			}
 		} catch (SQLException e) {
