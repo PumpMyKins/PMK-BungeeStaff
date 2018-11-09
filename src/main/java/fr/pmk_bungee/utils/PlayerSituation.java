@@ -36,11 +36,11 @@ public class PlayerSituation {
 
 		try {
 			
-			ResultSet getBan = Main.getMySQL().getResult("SELECT * FROM BungeeBan WHERE playerId ='" + this.playerId + "'");
-			ResultSet getKick = Main.getMySQL().getResult("SELECT * FROM BungeeKick WHERE playerId ='" + this.playerId + "'");
-			ResultSet getMute = Main.getMySQL().getResult("SELECT * FROM BungeeMute WHERE playerId ='" + this.playerId + "'");
-			ResultSet getWarn = Main.getMySQL().getResult("SELECT * FROM BungeeWarn WHERE playerId ='" + this.playerId + "'");
-			ResultSet getPlayer = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE playerId ='" + this.playerId + "'");
+			ResultSet getBan = Main.getMySQL().getResult("SELECT * FROM BungeeBan WHERE playerId ='" + playerId + "'");
+			ResultSet getKick = Main.getMySQL().getResult("SELECT * FROM BungeeKick WHERE playerId ='" + playerId + "'");
+			ResultSet getMute = Main.getMySQL().getResult("SELECT * FROM BungeeMute WHERE playerId ='" + playerId + "'");
+			ResultSet getWarn = Main.getMySQL().getResult("SELECT * FROM BungeeWarn WHERE playerId ='" + playerId + "'");
+			ResultSet getPlayer = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE playerId ='" + playerId + "'");
 
 			while(getBan.next()) {
 
@@ -63,7 +63,7 @@ public class PlayerSituation {
 				mute.setStartMute(getMute.getTimestamp("startMute"));
 				mute.setEndMute(getMute.getTimestamp("endMute"));
 				mute.setId(getMute.getInt("id"));
-				this.muteList.add(mute);
+				muteList.add(mute);
 
 			}
 			while(getKick.next()) {
@@ -74,7 +74,7 @@ public class PlayerSituation {
 				kick.setKickReason(getKick.getString("kickReason"));
 				kick.setPlayerId(this.playerId);
 				kick.setId(getKick.getInt("id"));
-				this.kickList.add(kick);
+				kickList.add(kick);
 
 			}
 
@@ -86,7 +86,7 @@ public class PlayerSituation {
 				warn.setWarnReason(getWarn.getString("warnReason"));
 				warn.setPlayerId(this.playerId);
 				warn.setId(getBan.getInt("id"));
-				this.warnList.add(warn);
+				warnList.add(warn);
 
 			}
 			if(getPlayer.next()) {
@@ -97,7 +97,7 @@ public class PlayerSituation {
 				player.setUuid(getPlayer.getString("uuid"));
 				player.setFirstCome(getPlayer.getTimestamp("firstCome"));
 				player.setLastCome(getPlayer.getTimestamp("lastCome"));
-
+				
 			}
 		}		catch (SQLException | NullPointerException e) {
 			e.printStackTrace();
