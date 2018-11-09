@@ -3,6 +3,7 @@ package fr.pmk_bungee.utils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.pmk_bungee.Main;
@@ -28,7 +29,15 @@ public class PlayerSituation {
 
 		this.playername = playername;
 		this.playerId = getPlayerId(playername);
+		
+		this.banList = new ArrayList<>();
+		this.muteList = new ArrayList<>();
+		this.kickList = new ArrayList<>();
+		this.warnList = new ArrayList<>();
+		
 		init();
+		
+		
 
 	}
 
