@@ -63,7 +63,7 @@ public class BanCommand extends Command {
 							ban.setBanReason(banReason);
 
 							Main.getMySQL().update("INSERT INTO BungeeBan(playerId, startBan, endBan, banReason, banBy) VALUES ('" 
-									+ ban.getId()
+									+ ban.getPlayerId()
 									+ "', '" 
 									+ ban.getStartBan()
 									+ "','" 
@@ -100,7 +100,7 @@ public class BanCommand extends Command {
 					}
 				} else {
 					msg.setMessageTitle("lang.errors.player_not_found");
-
+					
 				}
 			} else {
 
