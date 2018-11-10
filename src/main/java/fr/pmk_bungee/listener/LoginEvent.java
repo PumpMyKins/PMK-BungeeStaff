@@ -42,10 +42,8 @@ public class LoginEvent implements Listener {
 		PlayerSituation situation = new PlayerSituation(playername);
 		if(PlayerSituation.testBan(situation)) {
 
-			if(!situation.unban()) {
 				e.setCancelled(true);
 				e.setCancelReason(new TextComponent(PlayerSituation.getBanMessage(situation)));
-			}
 		}
 	}
 }

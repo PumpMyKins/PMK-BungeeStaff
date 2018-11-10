@@ -19,7 +19,7 @@ public class ChatEvent implements Listener {
 
 				return;
 			}
-			if(!situation.unmute()) {
+			if(!PlayerSituation.testMute(situation)) {
 					
 				e.setCancelled(true);
 				//TODO send muteMEssage

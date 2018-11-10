@@ -139,19 +139,19 @@ public class PlayerSituation {
 
 			for(Mute mute : situation.getMuteList()) {
 
-				if(now.after(mute.getEndMute())) {
+				if(now.before(mute.getEndMute())) {
+					System.out.println("now is after mute.getEnd Joueur encore mute");
 					isMuted = true;
 					break;
 				} else {
+					System.out.println("now is before mute.getEnd Joueur plus banni");
 					isMuted = false;
 				}
-
 			}
-		} else {
-			isMuted = false;
 		}
 		return isMuted;
 	}
+	
 	public static String getBanMessage(PlayerSituation situation) {
 		
 		List<Parameter> paramDisconnect = new ArrayList<Parameter>();
@@ -245,31 +245,6 @@ public class PlayerSituation {
 
 	public void setWarnList(List<Warn> warnList) {
 		this.warnList = warnList;
-	}
-
-	public boolean unban() {
-
-		for(Ban ban : banList) {
-
-			if(now.compareTo(ban.getEndBan()) > 0) {
-				ban.setEndBan(new Timestamp(System.currentTimeMillis()));
-				Main.getMySQL().update("UPDATE `BungeeBan` SET `endBan` = `"+ ban.getEndBan() +"` WHERE 'id' = '"+ban.getId()+"'");
-				return true;
-			}
-		}
-		return false;
-	}
-	public boolean unmute() {
-
-		for(Mute mute : muteList) {
-
-			if(now.compareTo(mute.getEndMute()) > 0) {
-				mute.setEndMute(new Timestamp(System.currentTimeMillis()));
-				Main.getMySQL().update("UPDATE `BungeeMute` SET `endMute` = `"+ mute.getEndMute() +"` WHERE 'id' = '"+mute.getId()+"'");
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public Player getPlayer() {

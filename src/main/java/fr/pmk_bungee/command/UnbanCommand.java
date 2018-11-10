@@ -28,7 +28,7 @@ public class UnbanCommand extends Command {
 					
 					if(PlayerSituation.testBan(situation)) {
 						
-						situation.unban();
+						//situation.unban();
 						
 					} else {
 						//TODO not_banned
