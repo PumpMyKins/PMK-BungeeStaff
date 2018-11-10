@@ -28,7 +28,6 @@ public class UnmuteCommand extends Command {
 					
 					if(PlayerSituation.testMute(situation)) {
 						
-						situation.unmute();
 						
 					} else {
 						//TODO not_mutened
