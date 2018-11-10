@@ -30,7 +30,15 @@ public class PlayerSituation {
 
 		this.playername = playername;
 		this.playerId = getPlayerId(playername);
+		
+		this.banList = new ArrayList<>();
+		this.muteList = new ArrayList<>();
+		this.kickList = new ArrayList<>();
+		this.warnList = new ArrayList<>();
+		
 		init();
+		
+		
 
 	}
 
