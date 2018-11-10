@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Player;
 import fr.pmk_bungee.utils.PlayerSituation;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
@@ -43,7 +44,7 @@ public class LoginEvent implements Listener {
 
 			if(!situation.unban()) {
 				e.setCancelled(true);
-				//TODO ban_message
+				e.setCancelReason(new TextComponent(PlayerSituation.getBanMessage(situation)));
 			}
 		}
 	}

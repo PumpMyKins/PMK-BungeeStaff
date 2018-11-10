@@ -3,12 +3,14 @@ package fr.pmk_bungee.utils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Ban;
 import fr.pmk_bungee.object.Kick;
 import fr.pmk_bungee.object.Mute;
+import fr.pmk_bungee.object.Parameter;
 import fr.pmk_bungee.object.Player;
 import fr.pmk_bungee.object.Warn;
 
@@ -143,7 +145,37 @@ public class PlayerSituation {
 		}
 		return isMuted;
 	}
-
+	public static String getBanMessage(PlayerSituation situation) {
+		
+		List<Parameter> paramDisconnect = new ArrayList<Parameter>();
+		Parameter BanName = new Parameter();
+		BanName.setParamTitle("NAME");
+		BanName.setParamContent(situation.getPlayername());
+		Parameter BanReason = new Parameter();
+		BanReason.setParamTitle("REASON");
+		for(Ban ban : situation.getBanList()) {
+			if(now.compareTo(ban.getEndBan()) > 0) {
+				BanReason.setParamContent(ban.getBanReason());
+				break;
+			}
+		}
+		Parameter BanRemainingTime = new Parameter();
+		BanRemainingTime.setParamTitle("REMAININGTIME");
+		BanRemainingTime.setParamContent(getRemainingTime(situation));
+		
+		paramDisconnect.add(BanName);
+		paramDisconnect.add(BanReason);
+		paramDisconnect.add(BanRemainingTime);
+		
+		List<String> lines = Main.getConfigManager().getStringList("lang.banmessage", paramDisconnect);
+		String str = " ";
+		for(String line : lines) {
+			str = str + line + "\n";
+		}
+		return str;
+	}
+	
+	
 	public int getPlayerId(String playerName) {
 
 		try {
@@ -241,5 +273,42 @@ public class PlayerSituation {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
+	
+	public static String getRemainingTime(PlayerSituation situation) {
+		long end = 0;
+		for(Ban ban : situation.getBanList()) {
+			if(now.compareTo(ban.getEndBan()) > 0) {
+				
+				end = ban.getEndBan().getTime();
+				break;
+			}
+		}
+				long millis = end - now.getTime();
+				int days = 0;
+				int hours = 0;
+				int minutes = 0;
+				int seconds = 0;
+				while (millis >= 1000L)
+				{
+					seconds++;
+					millis -= 1000L;
+				}
+				while (seconds >= 60)
+				{
+					minutes++;
+					seconds -= 60;
+				}
+				while (minutes >= 60)
+				{
+					hours++;
+					minutes -= 60;
+				}
+				while (hours >= 24)
+				{
+					days++;
+					hours -= 24;
+				}
+				return Main.getConfigManager().timeFormat(days, hours, minutes, seconds);		
+	}
+	
 }

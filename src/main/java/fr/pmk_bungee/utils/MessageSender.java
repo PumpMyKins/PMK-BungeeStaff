@@ -15,7 +15,6 @@ public class MessageSender {
 		if(message.getParameter().isEmpty()) {
 			
 			if(message.isPrefix()) {
-				
 				msgs.add(Main.PREFIX);
 				msgs.add(Main.getConfigManager().getString(message.getMessageTitle()));
 				

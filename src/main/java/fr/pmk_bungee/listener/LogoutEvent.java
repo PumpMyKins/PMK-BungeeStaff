@@ -15,6 +15,6 @@ public class LogoutEvent implements Listener{
 		Player player = new Player();
 		player.setUsername(e.getPlayer().getName());
 		player.setLastCome(new Timestamp(System.currentTimeMillis()));
-		Main.getMySQL().update("UPDATE 'MinecraftPlayer' SET 'lastCome' = '"+player.getLastCome()+"'");
+		Main.getMySQL().update("UPDATE 'MinecraftPlayer' SET 'lastCome' = '"+player.getLastCome()+"' WHERE 'playerId' = '"+player.getPlayerId()+"'");
 	}
 }
