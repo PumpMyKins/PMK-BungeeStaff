@@ -156,9 +156,6 @@ public class PlayerSituation {
 	public static String getBanMessage(PlayerSituation situation) {
 		
 		List<Parameter> paramDisconnect = new ArrayList<Parameter>();
-		Parameter BanName = new Parameter();
-		BanName.setParamTitle("{NAME}");
-		BanName.setParamContent(situation.getPlayername());
 		Parameter BanReason = new Parameter();
 		BanReason.setParamTitle("{REASON}");
 		for(Ban ban : situation.getBanList()) {
@@ -171,7 +168,6 @@ public class PlayerSituation {
 		BanRemainingTime.setParamTitle("{REMAININGTIME}");
 		BanRemainingTime.setParamContent(getRemainingTime(situation));
 		
-		paramDisconnect.add(BanName);
 		paramDisconnect.add(BanReason);
 		paramDisconnect.add(BanRemainingTime);
 		
@@ -255,7 +251,7 @@ public class PlayerSituation {
 
 			if(now.compareTo(ban.getEndBan()) > 0) {
 				ban.setEndBan(new Timestamp(System.currentTimeMillis()));
-				Main.getMySQL().update("UPDATE `BungeeBan` SET `banEnd` = `"+ ban.getEndBan() +"` WHERE 'id' = '"+ban.getId()+"'");
+				Main.getMySQL().update("UPDATE `BungeeBan` SET `endBan` = `"+ ban.getEndBan() +"` WHERE 'id' = '"+ban.getId()+"'");
 				return true;
 			}
 		}
@@ -267,7 +263,7 @@ public class PlayerSituation {
 
 			if(now.compareTo(mute.getEndMute()) > 0) {
 				mute.setEndMute(new Timestamp(System.currentTimeMillis()));
-				Main.getMySQL().update("UPDATE `BungeeMute` SET `banMute` = `"+ mute.getEndMute() +"` WHERE 'id' = '"+mute.getId()+"'");
+				Main.getMySQL().update("UPDATE `BungeeMute` SET `endMute` = `"+ mute.getEndMute() +"` WHERE 'id' = '"+mute.getId()+"'");
 				return true;
 			}
 		}
