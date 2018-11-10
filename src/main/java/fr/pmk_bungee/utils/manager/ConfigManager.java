@@ -74,8 +74,7 @@ public class ConfigManager {
 		{
 			for (Parameter repl : param)
 			{
-				String[] r = {repl.getParamTitle(), repl.getParamContent()};
-				str = str.replace(r[0], r[1]);
+				str = str.replace(repl.getParamTitle(), repl.getParamContent());
 			}
 			avail.add(str);
 		}

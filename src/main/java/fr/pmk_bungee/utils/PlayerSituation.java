@@ -163,6 +163,9 @@ public class PlayerSituation {
 				BanReason.setParamContent(ban.getBanReason());
 				break;
 			}
+			else {
+				BanReason.setParamContent("Erreur");
+			}
 		}
 		Parameter BanRemainingTime = new Parameter();
 		BanRemainingTime.setParamTitle("{REMAININGTIME}");

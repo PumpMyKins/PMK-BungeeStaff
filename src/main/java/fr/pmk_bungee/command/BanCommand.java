@@ -77,7 +77,7 @@ public class BanCommand extends Command {
 
 							if(toProxiedPlayer(playername) != null) {
 								
-								toProxiedPlayer(playername).disconnect(new TextComponent(PlayerSituation.getBanMessage(situation))); //TODO disconnecte Message
+								toProxiedPlayer(playername).disconnect(new TextComponent(PlayerSituation.getBanMessage(situation)));
 							}
 
 							Parameter name = new Parameter();
@@ -89,7 +89,7 @@ public class BanCommand extends Command {
 
 						}
 					} else {
-						//TODO player_already_ban
+						
 						Parameter name = new Parameter();
 						name.setParamTitle("{NAME}");
 						name.setParamContent(playername);
