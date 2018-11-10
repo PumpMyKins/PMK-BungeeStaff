@@ -119,10 +119,12 @@ public class PlayerSituation {
 		if(!situation.getBanList().isEmpty()) {
 
 			for(Ban ban : situation.getBanList()) {
-				if(now.after(ban.getEndBan())) {
+				if(now.before(ban.getEndBan())) {
+					System.out.println("now is after ban.getEnd Joueur encore banni");
 					isBanned = true;
 					break;
 				} else {
+					System.out.println("now is before ban.get Joueur plus banni");
 					isBanned = false;
 				}
 
