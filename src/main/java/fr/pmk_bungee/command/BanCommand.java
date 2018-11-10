@@ -42,7 +42,7 @@ public class BanCommand extends Command {
 				PlayerSituation situation = new PlayerSituation(playername);
 				for(int i = 3; i <= args.length - 1; i++) {
 
-					banReason+=banReason + args[i] + " ";
+					banReason += args[i] + " ";
 				}
 
 				Main.getConfigManager().save();
