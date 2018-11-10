@@ -129,8 +129,6 @@ public class PlayerSituation {
 				}
 
 			}
-		} else {
-			isBanned = false;
 		}
 		return isBanned;
 	}
