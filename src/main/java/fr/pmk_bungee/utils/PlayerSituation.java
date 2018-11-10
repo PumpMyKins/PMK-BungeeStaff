@@ -119,8 +119,7 @@ public class PlayerSituation {
 		if(!situation.getBanList().isEmpty()) {
 
 			for(Ban ban : situation.getBanList()) {
-
-				if(now.compareTo(ban.getEndBan()) > 0) {
+				if(now.after(ban.getEndBan())) {
 					isBanned = true;
 					break;
 				} else {
@@ -140,7 +139,7 @@ public class PlayerSituation {
 
 			for(Mute mute : situation.getMuteList()) {
 
-				if(now.compareTo(mute.getEndMute()) > 0) {
+				if(now.after(mute.getEndMute())) {
 					isMuted = true;
 					break;
 				} else {

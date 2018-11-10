@@ -18,7 +18,7 @@ public class LoginEvent implements Listener {
 
 		String playername = e.getConnection().getName();
 		try {
-			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '" + e.getConnection().getName()+ "'"); 
+			ResultSet rs = Main.getMySQL().getResult("SELECT * FROM MinecraftPlayer WHERE username = '"+e.getConnection().getName()+"'"); 
 			if(!rs.next()) {
 
 				Player player = new Player();
