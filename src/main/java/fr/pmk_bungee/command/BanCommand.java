@@ -81,7 +81,7 @@ public class BanCommand extends Command {
 							}
 
 							Parameter name = new Parameter();
-							name.setParamTitle("NAME");
+							name.setParamTitle("{NAME}");
 							name.setParamContent(playername);
 							param.add(name);
 
@@ -91,7 +91,7 @@ public class BanCommand extends Command {
 					} else {
 						//TODO player_already_ban
 						Parameter name = new Parameter();
-						name.setParamTitle("NAME");
+						name.setParamTitle("{NAME}");
 						name.setParamContent(playername);
 						param.add(name);
 

@@ -157,10 +157,10 @@ public class PlayerSituation {
 		
 		List<Parameter> paramDisconnect = new ArrayList<Parameter>();
 		Parameter BanName = new Parameter();
-		BanName.setParamTitle("NAME");
+		BanName.setParamTitle("{NAME}");
 		BanName.setParamContent(situation.getPlayername());
 		Parameter BanReason = new Parameter();
-		BanReason.setParamTitle("REASON");
+		BanReason.setParamTitle("{REASON}");
 		for(Ban ban : situation.getBanList()) {
 			if(now.compareTo(ban.getEndBan()) > 0) {
 				BanReason.setParamContent(ban.getBanReason());
@@ -168,7 +168,7 @@ public class PlayerSituation {
 			}
 		}
 		Parameter BanRemainingTime = new Parameter();
-		BanRemainingTime.setParamTitle("REMAININGTIME");
+		BanRemainingTime.setParamTitle("{REMAININGTIME}");
 		BanRemainingTime.setParamContent(getRemainingTime(situation));
 		
 		paramDisconnect.add(BanName);
