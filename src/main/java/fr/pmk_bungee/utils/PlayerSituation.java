@@ -104,6 +104,7 @@ public class PlayerSituation {
 				player.setUuid(getPlayer.getString("uuid"));
 				player.setFirstCome(getPlayer.getTimestamp("firstCome"));
 				player.setLastCome(getPlayer.getTimestamp("lastCome"));
+				player.setPlayerIp(getPlayer.getString("ip"));
 				
 			}
 		}		catch (SQLException | NullPointerException e) {

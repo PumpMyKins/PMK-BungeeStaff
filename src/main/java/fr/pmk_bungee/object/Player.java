@@ -9,6 +9,7 @@ public class Player {
 	private String uuid;
 	private Timestamp firstCome;
 	private Timestamp lastCome;
+	private String playerIp;
 	
 	public int getPlayerId() {
 		return playerId;
@@ -39,6 +40,12 @@ public class Player {
 	}
 	public void setLastCome(Timestamp lastCome) {
 		this.lastCome = lastCome;
+	}
+	public String getPlayerIp() {
+		return playerIp;
+	}
+	public void setPlayerIp(String playerIp) {
+		this.playerIp = playerIp;
 	}
 
 	
