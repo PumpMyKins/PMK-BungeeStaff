@@ -29,7 +29,7 @@ public class MuteCommand extends Command {
 				PlayerSituation situation = new PlayerSituation(playername);
 				for(int i = 3; i <= args.length - 1; i++) {
 
-					muteReason+=muteReason + args[i] + " ";
+					muteReason+= args[i] + " ";
 				}
 
 				Main.getConfigManager().save();
