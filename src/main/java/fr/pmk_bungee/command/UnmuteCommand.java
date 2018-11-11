@@ -3,6 +3,7 @@ package fr.pmk_bungee.command;
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class UnmuteCommand extends Command {
@@ -28,18 +29,19 @@ public class UnmuteCommand extends Command {
 					if(!situation.getMuteList().isEmpty()) {
 						if(PlayerSituation.isMuted(playername)) {
 							PlayerSituation.unMute(playername);
+							sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.unmuted", new String[] { "{NAME}~" + playername })));							  
 						}
 					} else {
-						//TODO not_mutened
+						sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_muted", new String[] { "{NAME}~" + playername })));
 					}
 				} else {
-					//TODO player_not_found
+					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found")));
 				}
 			} else {
-				//TODO syntax_error
+				sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.syntax")));
 			}
 		} else {
-			//TODO no permission
+			sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));	  
 		}
 	}
 }
