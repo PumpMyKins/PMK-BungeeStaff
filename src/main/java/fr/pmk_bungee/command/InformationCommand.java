@@ -122,7 +122,6 @@ public class InformationCommand extends Command {
 								"{NAME}~" + playername,
 						})));
 					}
-					if(!situation.getPlayer().toString().isEmpty()) {
 						
 						List<String> msgs = Main.getConfigManager().getStringList("lang.commands.info.player", new String[] {
 								"{NAME}~" + situation.getPlayer().getUsername(),
@@ -133,7 +132,6 @@ public class InformationCommand extends Command {
 						});
 						for(String msg : msgs) {
 							sender.sendMessage(new TextComponent(msg));
-						}
 					}
 				}
 			}
