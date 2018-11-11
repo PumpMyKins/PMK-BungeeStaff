@@ -165,6 +165,28 @@ public class PlayerSituation {
 	
 	// END SETTER
 	
+	// FORCE UNMUTE / UNBAN
+	
+	public static void unMute(String playername) {
+		
+		PlayerSituation situation = new PlayerSituation(playername);
+		for(Mute mute : situation.getMuteList()) {
+			if(mute.getEndMute().before(now)) {
+				Main.getMySQL().update("UPDATE `BungeeMute` SET `endMute`="+ now +" WHERE `id` = "+mute.getId()+"");
+			}
+		}
+	}
+	
+	public static void unBan(String playername) {
+		PlayerSituation situation = new PlayerSituation(playername);
+		for(Ban ban : situation.getBanList()) {
+			if(ban.getEndBan().before(now)) {
+				Main.getMySQL().update("UPDATE `BungeeBan` SET `endBan` = "+now+" WHERE `id` = "+ban.getId()+"");
+			}
+		}
+		
+	}
+
 	
 	// GETTER AND SETTER 
 	
