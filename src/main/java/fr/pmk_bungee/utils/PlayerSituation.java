@@ -122,6 +122,7 @@ public class PlayerSituation {
 			if(!situation.getBanList().isEmpty()) {
 				for(Ban ban : situation.getBanList()) {
 					if(ban.getEndBan().after(now)) {
+						System.out.println(now);
 						System.out.println("BanCompara : "+ban.getEndBan().compareTo(now));
 						return true;
 					}
