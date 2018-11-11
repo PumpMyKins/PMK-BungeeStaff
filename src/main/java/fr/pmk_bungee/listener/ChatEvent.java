@@ -22,15 +22,17 @@ public class ChatEvent implements Listener {
 			return;
 		}
 		if (!situation.getMuteList().isEmpty()) {
+			System.out.println("Je suis pas vide #Mute");
 			if(PlayerSituation.isMuted(p.getName())) {
+				System.out.println("Je suis mute #Triste");
 				e.setCancelled(true);
 				for(String str : PlayerSituation.getMuteMessage(p.getName())) {
 
 					p.sendMessage(new TextComponent(Main.PREFIX + str));
 				}
-			}
+			} else { System.out.println("Je suis pas Mute #Heureux");}
 
-		}				
+		} else { System.out.println("J'ai déjà été Mute #BadBoy");}
 	}
 }
 
