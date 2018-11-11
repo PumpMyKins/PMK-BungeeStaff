@@ -175,6 +175,19 @@ public class PlayerSituation {
 				+ "')");
 	}
 	
+	public static void setWarn(Warn warn) {
+		
+		Main.getMySQL().update("INSERT INTO BungeeWarn(userID, warnAt, warnBy, warnReason) VALUES ('" 
+				+ warn.getPlayerId()
+				+ "', '" 
+				+ warn.getWarnDate()
+				+ "','" 
+				+ warn.getWarnBy()
+				+ "','" 
+				+ warn.getWarnReason()
+				+ "')");
+		
+	}
 	// END SETTER
 	
 	// FORCE UNMUTE / UNBAN

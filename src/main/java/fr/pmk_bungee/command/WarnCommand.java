@@ -6,6 +6,7 @@ import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Warn;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class WarnCommand extends Command {
@@ -47,27 +48,22 @@ public class WarnCommand extends Command {
 						warn.setPlayerId(situation.getPlayerId(playername));
 						warn.setWarnReason(warnReason);
 
-						Main.getMySQL().update("INSERT INTO BungeeWarn(playerId, warnDate, warnReason, warnBy) VALUES ('" 
-								+ warn.getId()
-								+ "', '" 
-								+ warn.getWarnDate()
-								+ "','" 
-								+ warn.getWarnReason()
-								+ "','" 
-								+ warn.getWarnBy()
-								+ "')");
+						PlayerSituation.setWarn(warn);
+						
+						sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.succes", new String[] {
+								"{NAME}~" + playername,
+
+						})));
 
 					} else {
-						//TODO 
+						sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.syntax")));
 					}
-				} else {
-					//TODO Player_Not_Found
 				}
 			} else {
-				//TODO error_syntax
+				sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.syntax")));
 			}
 		} else {
-			//TODO no_Permission
+			sender.sendMessage(new TextComponent(Main.PREFIX +Main.getConfigManager().getString("lang.errors.no_permissions")));
 		}
 	}
 }
