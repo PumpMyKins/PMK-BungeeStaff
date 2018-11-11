@@ -150,7 +150,7 @@ public class PlayerSituation {
 	// END CHECKER	
 	
 		
-	// Ban / Mute SETTER
+	// Ban / Mute / Kick / warn SETTER
 	
 	public static void setBanned(Ban ban) {
 		
@@ -162,6 +162,18 @@ public class PlayerSituation {
 		Main.getMySQL().update("INSERT INTO `BungeeMute`(`playerId`, `startMute`, `endMute`, `muteBy`, `muteReason`) VALUES ("+mute.getPlayerId()+","+mute.getStartMute()+","+mute.getEndMute()+","+mute.getMuteBy()+","+mute.getMuteReason()+")");
 	}
 	
+	public static void setKick(Kick kick) {
+		
+		Main.getMySQL().update("INSERT INTO BungeeKick(playerId, kickDate, kickReason, kickBy) VALUES ('" 
+				+ kick.getId()
+				+ "', '" 
+				+ kick.getKickDate()
+				+ "','" 
+				+ kick.getKickReason()
+				+ "','" 
+				+ kick.getKickBy()
+				+ "')");
+	}
 	
 	// END SETTER
 	
