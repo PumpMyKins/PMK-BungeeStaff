@@ -10,7 +10,6 @@ public class UnmuteCommand extends Command {
 
 	public UnmuteCommand(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@SuppressWarnings("unused")
