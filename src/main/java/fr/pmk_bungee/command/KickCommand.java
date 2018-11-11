@@ -1,12 +1,9 @@
 package fr.pmk_bungee.command;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Kick;
-import fr.pmk_bungee.object.Parameter;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -24,8 +21,6 @@ public class KickCommand extends Command {
 	@SuppressWarnings("unused")
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-
-		List<Parameter> param = new ArrayList<Parameter>();
 
 		if(sender.hasPermission("bungeestaff.command.kick")) {
 

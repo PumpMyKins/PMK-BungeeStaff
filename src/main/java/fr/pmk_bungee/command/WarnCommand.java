@@ -40,41 +40,34 @@ public class WarnCommand extends Command {
 
 
 					Warn warn = new Warn();
-					long seconds = Integer.parseInt(args[1]);
-					Main.TimeUnit unit = Main.TimeUnit.getByString(args[2]);
-					if(unit != null) {
 
-						seconds*= unit.getSeconds();
-						warn.setWarnDate(new Timestamp(System.currentTimeMillis()));
-						warn.setWarnBy(situation.getPlayerId(sender.getName()));
-						warn.setPlayerId(situation.getPlayerId(playername));
-						warn.setWarnReason(warnReason);
+					warn.setWarnDate(new Timestamp(System.currentTimeMillis()));
+					warn.setWarnBy(situation.getPlayerId(sender.getName()));
+					warn.setPlayerId(situation.getPlayerId(playername));
+					warn.setWarnReason(warnReason);
 
-						PlayerSituation.setWarn(warn);
-						
-						sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.succes", new String[] {
-								"{NAME}~" + playername,
+					PlayerSituation.setWarn(warn);
 
-						})));
-						List<String> msgs = Main.getConfigManager().getStringList("lang.warnmessage", new String[] { 
-								"{NAME}~" + sender.getName(),
-								"{REASON}~" + warn.getWarnReason()
+					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.succes", new String[] {
+							"{NAME}~" + playername,
 
-						});
-						for(String msg : msgs) {
+					})));
+					List<String> msgs = Main.getConfigManager().getStringList("lang.warnmessage", new String[] { 
+							"{NAME}~" + sender.getName(),
+							"{REASON}~" + warn.getWarnReason()
 
-							ProxyServer.getInstance().getPlayer(playername).sendMessage(new TextComponent(msg));
-						}
-						
-						
-					} else {
-						sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.syntax")));
+					});
+					for(String msg : msgs) {
+
+						ProxyServer.getInstance().getPlayer(playername).sendMessage(new TextComponent(msg));
 					}
+
+
+				} else {
+					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.syntax")));
 				}
-			} else {
-				sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.warn.syntax")));
 			}
-		} else {
+		}  else {
 			sender.sendMessage(new TextComponent(Main.PREFIX +Main.getConfigManager().getString("lang.errors.no_permissions")));
 		}
 	}
