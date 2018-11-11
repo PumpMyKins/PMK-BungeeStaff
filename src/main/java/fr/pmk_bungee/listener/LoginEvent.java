@@ -28,7 +28,7 @@ public class LoginEvent implements Listener {
 			if(PlayerSituation.isBanned(playername)){
 				
 				e.setCancelled(true);
-				e.setCancelReason(new TextComponent("GetBanned"));
+				e.setCancelReason(new TextComponent(PlayerSituation.getBanMessage(playername)));
 			}
 			
 			//TODO test ban
