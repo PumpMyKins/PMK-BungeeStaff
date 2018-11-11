@@ -10,6 +10,7 @@ import fr.pmk_bungee.object.Message;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import fr.pmk_bungee.object.Parameter;
@@ -61,24 +62,24 @@ public class BanCommand extends Command {
 							ban.setBanReason(banReason);
 							
 							PlayerSituation.setBanned(ban);
-
+							sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_already_banned", new String[] { "{NAME}~" + playername })));
+							
 							if(toProxiedPlayer(playername) != null) {
 								
-								toProxiedPlayer(playername).disconnect(); //TODO Disconnect
+								toProxiedPlayer(playername).disconnect(new TextComponent(PlayerSituation.getBanMessage(playername))); 
 							}
 						}
 					} else {
-							//TODO already Banned
+						sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_already_banned", new String[] { "{NAME}~" + playername })));
 					}
 				} else {
-					//TODO player no found
+					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found")));
 				}
 			} else {
-				//TODO syntax Error 
+				sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.syntax")));
 			}
 		} else {
-
-
+			sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));
 		}
 
 	}
