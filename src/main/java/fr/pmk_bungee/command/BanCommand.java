@@ -62,7 +62,8 @@ public class BanCommand extends Command {
 							ban.setBanReason(banReason);
 							
 							PlayerSituation.setBanned(ban);
-							sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_already_banned", new String[] { "{NAME}~" + playername })));
+							
+							sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.ban.banned", new String[] { "{NAME}~" + playername })));
 							
 							if(toProxiedPlayer(playername) != null) {
 								

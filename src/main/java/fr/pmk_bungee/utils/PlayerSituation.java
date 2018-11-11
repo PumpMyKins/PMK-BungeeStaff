@@ -155,12 +155,12 @@ public class PlayerSituation {
 	
 	public static void setBanned(Ban ban) {
 		
-		Main.getMySQL().update("INSERT INTO `BungeeBan`(`playerId`,`startBan`, `endBan`, `banBy`, `banReason`) VALUES ("+ban.getPlayerId()+","+ban.getStartBan()+","+ban.getEndBan()+","+ban.getBanBy()+","+ban.getBanReason()+")");
+		Main.getMySQL().update("INSERT INTO `BungeeBan`(`playerId`,`startBan`, `endBan`, `banBy`, `banReason`) VALUES ('"+ban.getPlayerId()+"','"+ban.getStartBan()+"','"+ban.getEndBan()+"','"+ban.getBanBy()+"','"+ban.getBanReason()+"')");
 	}
 	
 	public static void setMuted(Mute mute) {
 		
-		Main.getMySQL().update("INSERT INTO `BungeeMute`(`playerId`, `startMute`, `endMute`, `muteBy`, `muteReason`) VALUES ("+mute.getPlayerId()+","+mute.getStartMute()+","+mute.getEndMute()+","+mute.getMuteBy()+","+mute.getMuteReason()+")");
+		Main.getMySQL().update("INSERT INTO `BungeeMute`(`playerId`, `startMute`, `endMute`, `muteBy`, `muteReason`) VALUES ('"+mute.getPlayerId()+"','"+mute.getStartMute()+"','"+mute.getEndMute()+"','"+mute.getMuteBy()+"','"+mute.getMuteReason()+"')");
 	}
 	
 	public static void setKick(Kick kick) {
