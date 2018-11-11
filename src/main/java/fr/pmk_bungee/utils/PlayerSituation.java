@@ -97,7 +97,6 @@ public class PlayerSituation {
 			}
 			if(getPlayer.next()) {
 
-				Player player = new Player();
 				player.setPlayerId(getPlayer.getInt("playerId"));
 				player.setUsername(getPlayer.getString("username"));
 				player.setUuid(getPlayer.getString("uuid"));
