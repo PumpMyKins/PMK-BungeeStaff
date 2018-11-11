@@ -20,7 +20,7 @@ public class LoginEvent implements Listener {
 				
 				System.out.println("Player Not Exist in DB");
 				Timestamp now = new Timestamp(System.currentTimeMillis());
-				Main.getMySQL().update("INSERT INTO `MinecraftPlayer`(`username`, `uuid`, `ip`, `firstCome`) VALUES ("+e.getConnection().getName()+","+e.getConnection().getUniqueId()+","+e.getConnection().getAddress().getAddress()+","+now+" )");
+				Main.getMySQL().update("INSERT INTO `MinecraftPlayer`(`username`, `uuid`, `ip`, `firstCome`) VALUES ('"+e.getConnection().getName()+"','"+e.getConnection().getUniqueId()+"','"+e.getConnection().getAddress().getAddress()+"','"+now+"')");
 			
 			} else {
 				System.out.println("Already Exist ");
