@@ -121,7 +121,7 @@ public class PlayerSituation {
 		if(situation != null) {
 			if(!situation.getBanList().isEmpty()) {
 				for(Ban ban : situation.getBanList()) {
-					if(ban.getEndBan().before(now)) {
+					if(ban.getEndBan().after(now)) {
 						return true;
 					}
 				}
@@ -138,7 +138,7 @@ public class PlayerSituation {
 		if(situation != null) {
 			if(!situation.getMuteList().isEmpty()) {
 				for(Mute mute : situation.getMuteList()) {
-					if(mute.getEndMute().before(now)) {
+					if(mute.getEndMute().after(now)) {
 						return true;
 					}
 				}
@@ -198,7 +198,7 @@ public class PlayerSituation {
 		
 		PlayerSituation situation = new PlayerSituation(playername);
 		for(Mute mute : situation.getMuteList()) {
-			if(mute.getEndMute().before(now)) {
+			if(mute.getEndMute().after(now)) {
 				Main.getMySQL().update("UPDATE `BungeeMute` SET `endMute`= '"+now+"' WHERE `id` = '"+mute.getId()+"'");
 			}
 		}
@@ -207,7 +207,7 @@ public class PlayerSituation {
 	public static void unBan(String playername) {
 		PlayerSituation situation = new PlayerSituation(playername);
 		for(Ban ban : situation.getBanList()) {
-			if(ban.getEndBan().before(now)) {
+			if(ban.getEndBan().after(now)) {
 				Main.getMySQL().update("UPDATE `BungeeBan` SET `endBan` = '"+now+"' WHERE `id` = '"+ban.getId()+"'");
 			}
 		}
@@ -223,7 +223,7 @@ public class PlayerSituation {
 		Ban forKick = new Ban();
 		PlayerSituation situation = new PlayerSituation(playername);
 		for(Ban ban : situation.getBanList()) {
-			if(ban.getEndBan().before(now)) {
+			if(ban.getEndBan().after(now)) {
 				forKick = ban;
 			}
 		}
@@ -243,7 +243,7 @@ public class PlayerSituation {
 		Mute forMute = new Mute();
 		PlayerSituation situation = new PlayerSituation(playername);
 		for(Mute mute : situation.getMuteList()) {
-			if(mute.getEndMute().before(now)) {
+			if(mute.getEndMute().after(now)) {
 				forMute = mute;
 			}
 		}

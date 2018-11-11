@@ -24,6 +24,7 @@ public class ChatEvent implements Listener {
 		if (!situation.getMuteList().isEmpty()) {
 			System.out.println("Je suis pas vide #Mute");
 			if(PlayerSituation.isMuted(p.getName())) {
+				
 				System.out.println(PlayerSituation.isMuted(p.getName()));
 				System.out.println("Je suis mute #Triste");
 				e.setCancelled(true);
