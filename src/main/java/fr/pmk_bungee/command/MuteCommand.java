@@ -6,6 +6,7 @@ import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Mute;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class MuteCommand extends Command {
@@ -50,21 +51,23 @@ public class MuteCommand extends Command {
 							mute.setMuteReason(muteReason);
 							
 							PlayerSituation.setMuted(mute);
+							
+							sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.mute.muted", new String[] { "{NAME}~" + playername })));		
 
 						} else {
-							//TODO 
+							sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.mute.syntax")));
 						}
 					} else {
-						//TODO player_already_mute
+						sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_already_muted", new String[] { "{NAME}~" + playername })));
 					}
 				} else {
-					//TODO Player_Not_Found
+					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found")));
 				}
 			} else {
-				//TODO error_syntax
+				sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.mute.syntax")));
 			}
 		} else {
-			//TODO no_Permission
+			sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));
 		}
 	}
 }
