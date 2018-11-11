@@ -87,8 +87,8 @@ public class PlayerSituation {
 			while(getWarn.next()) {
 
 				Warn warn = new Warn();
-				warn.setWarnBy(getWarn.getInt("kickBy"));
-				warn.setWarnDate(getWarn.getTimestamp("kickDate"));
+				warn.setWarnBy(getWarn.getInt("warnBy"));
+				warn.setWarnDate(getWarn.getTimestamp("warnDate"));
 				warn.setWarnReason(getWarn.getString("warnReason"));
 				warn.setPlayerId(this.playerId);
 				warn.setId(getBan.getInt("id"));
