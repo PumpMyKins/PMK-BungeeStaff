@@ -187,6 +187,33 @@ public class PlayerSituation {
 		
 	}
 
+	// END FORCE UNMUTE / UNBAN
+	
+	// MESSAGE FOR BAN AND MUTE
+	
+	public static String getBanMessage(String playername)
+	{
+		Ban forKick = new Ban();
+		PlayerSituation situation = new PlayerSituation(playername);
+		for(Ban ban : situation.getBanList()) {
+			if(ban.getEndBan().before(now)) {
+				forKick = ban;
+			}
+		}
+		
+		List<String> lines = Main.getConfigManager().getStringList("lang.banmessage", new String[] {
+				"{REASON}~" + forKick.getBanReason(), 
+				"{BY}~" + getUsername(forKick.getBanBy()), 
+				"{REMAININGTIME}~" + getRemainingTime(forKick.getEndBan()) });
+		String str = "";
+		for (String line : lines) {
+			str = str + line + "\n";
+		}
+		return str;
+	}
+	
+	
+	// END MESSAGE FOR BAN AND MUTE
 	
 	// GETTER AND SETTER 
 	
@@ -262,7 +289,57 @@ public class PlayerSituation {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+	
+	public static String getUsername(int userID) {
 
+		try {
+			ResultSet id = Main.getMySQL().getResult("SELECT username FROM MinecraftPlayer WHERE playerId = '" 
+					+ userID 
+					+ "'");
+
+			if(id.next()) {
+
+				String username = id.getString("username");
+				return username;
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace(); 
+		} return "";
+	}
 	
-	
+	public static String getRemainingTime(Timestamp ender) {
+			long end = ender.getTime();
+			if (end > 0L)
+			{
+				long millis = end - System.currentTimeMillis();
+				int days = 0;
+				int hours = 0;
+				int minutes = 0;
+				int seconds = 0;
+				while (millis >= 1000L)
+				{
+					seconds++;
+					millis -= 1000L;
+				}
+				while (seconds >= 60)
+				{
+					minutes++;
+					seconds -= 60;
+				}
+				while (minutes >= 60)
+				{
+					hours++;
+					minutes -= 60;
+				}
+				while (hours >= 24)
+				{
+					days++;
+					hours -= 24;
+				}
+				return Main.getConfigManager().timeFormat(days, hours, minutes, seconds);
+			}
+			return Main.getConfigManager().getString("lang.time_format_permanent");
+	}
 }
