@@ -22,8 +22,6 @@ public class PlayerSituation {
 	private List<Kick> kickList;
 	private List<Warn> warnList;
 	private Player player;
-	static Timestamp now = new Timestamp(System.currentTimeMillis());
-
 
 	public PlayerSituation(String playername){
 
@@ -118,6 +116,7 @@ public class PlayerSituation {
 	public static boolean isBanned(String playername) {
 		
 		PlayerSituation situation = new PlayerSituation(playername);
+		Timestamp now = new Timestamp(System.currentTimeMillis());
 		if(situation != null) {
 			if(!situation.getBanList().isEmpty()) {
 				for(Ban ban : situation.getBanList()) {
@@ -137,6 +136,7 @@ public class PlayerSituation {
 	public static boolean isMuted(String playername) {
 
 		PlayerSituation situation = new PlayerSituation(playername);
+		Timestamp now = new Timestamp(System.currentTimeMillis());
 		if(situation != null) {
 			if(!situation.getMuteList().isEmpty()) {
 				for(Mute mute : situation.getMuteList()) {
@@ -198,6 +198,7 @@ public class PlayerSituation {
 	
 	public static void unMute(String playername) {
 		
+		Timestamp now = new Timestamp(System.currentTimeMillis());
 		PlayerSituation situation = new PlayerSituation(playername);
 		for(Mute mute : situation.getMuteList()) {
 			if(mute.getEndMute().after(now)) {
@@ -207,6 +208,7 @@ public class PlayerSituation {
 	}
 	
 	public static void unBan(String playername) {
+		Timestamp now = new Timestamp(System.currentTimeMillis());
 		PlayerSituation situation = new PlayerSituation(playername);
 		for(Ban ban : situation.getBanList()) {
 			if(ban.getEndBan().after(now)) {
@@ -222,6 +224,7 @@ public class PlayerSituation {
 	
 	public static String getBanMessage(String playername)
 	{
+		Timestamp now = new Timestamp(System.currentTimeMillis());
 		Ban forKick = new Ban();
 		PlayerSituation situation = new PlayerSituation(playername);
 		for(Ban ban : situation.getBanList()) {
@@ -242,6 +245,7 @@ public class PlayerSituation {
 	}
 	public static String[] getMuteMessage(String playername)
 	{
+		Timestamp now = new Timestamp(System.currentTimeMillis());
 		Mute forMute = new Mute();
 		PlayerSituation situation = new PlayerSituation(playername);
 		for(Mute mute : situation.getMuteList()) {
