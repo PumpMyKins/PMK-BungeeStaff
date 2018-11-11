@@ -1,9 +1,16 @@
 package fr.pmk_bungee.command;
 
+import java.util.List;
+
 import fr.pmk_bungee.Main;
+import fr.pmk_bungee.object.Ban;
+import fr.pmk_bungee.object.Kick;
+import fr.pmk_bungee.object.Mute;
+import fr.pmk_bungee.object.Warn;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class HistoryCommand extends Command {
@@ -28,76 +35,121 @@ public class HistoryCommand extends Command {
 						String playername = args[0];
 						PlayerSituation situation = new PlayerSituation(playername);
 						switch(args[1].toLowerCase()) {
-						case "warn":
-						
+						case "warn": 
 							if(!situation.getWarnList().isEmpty()) {
-								//TODO show_warn
+								for(int i = 0; i < situation.getWarnList().size(); i++) {
+									Warn actual =situation.getWarnList().get(i);
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.warn.true", new String[] {
+											"{NAME}~" + PlayerSituation.getUsername(actual.getWarnBy()),
+											"{REASON}~" + actual.getWarnReason(),
+											"{DATE}~" + actual.getWarnDate()
+
+									});
+									for (String msg : msgs) {
+										sender.sendMessage(new TextComponent(msg));
+									}
+								}
 							}
 							else {
-								//TODO no_warn
+								List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.warn.false", new String[] {
+										"{NAME}~" + playername
+									
+								});
+								for(String msg : msgs) {
+									
+									sender.sendMessage(new TextComponent(msg));
+								}
 							}
 				            break;
 						case "ban":
 							if(!situation.getBanList().isEmpty()) {
-								//TODO show_ban
+								if(!situation.getBanList().isEmpty()) {
+									for(int i = 0; i < situation.getBanList().size(); i++) {
+										Ban actual = situation.getBanList().get(i);
+										List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.ban.true", new String[] {
+												"{NAME}~" + PlayerSituation.getUsername(actual.getBanBy()),
+												"{REASON}~" + actual.getBanReason(),
+												"{DATE}~" + actual.getStartBan()
+
+										});
+										for (String msg : msgs) {
+											sender.sendMessage(new TextComponent(msg));
+										}
+									}
+								}							
 							}
 							else {
-								//TODO no_ban
+								List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.banned.false", new String[] { 
+										"{NAME}~" + playername 
+
+								});
+
+								for (String msg : msgs) {
+									sender.sendMessage(new TextComponent(msg));
+								}
 							}
 							break;
 						case "mute":
 							if(!situation.getMuteList().isEmpty()) {
-								//TODO show_mute
+								for(int i = 0; i < situation.getMuteList().size(); i++) {	
+									Mute actual = situation.getMuteList().get(i);
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.mute.true", new String[] {
+											"{NAME}~" + PlayerSituation.getUsername(actual.getMuteBy()),
+											"{REASON}~" + actual.getMuteReason(),
+											"{DATE}~" + actual.getStartMute()
+
+									});
+									for (String msg : msgs) {
+										sender.sendMessage(new TextComponent(msg));
+									}							
+								}
 							}
 							else {
-								//TODO no_mute
+								List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.muted.false", new String[] { 
+										"{NAME}~" + playername 
+
+								});
+
+								for (String msg : msgs) {
+									sender.sendMessage(new TextComponent(msg));
+								}
 							}
 							break;
 
 						case "kick":
 							if(!situation.getKickList().isEmpty()) {
-								//TODO show_kick
-							}
-							else {
-								//TODO no_kick
-							}
-							break;
-						case"all":
-							if(!situation.getWarnList().isEmpty()) {
-								//TODO show_warn
-							}
-							else {
-								//TODO no_warn
-							}
-							if(!situation.getBanList().isEmpty()) {
-								//TODO show_ban
-							}
-							else {
-								//TODO no_ban
-							}
-							if(!situation.getMuteList().isEmpty()) {
-								//TODO show_mute
-							}
-							else {
-								//TODO no_mute
-							}
-							if(!situation.getKickList().isEmpty()) {
-								//TODO show_kick
-							}
-							else {
-								//TODO no_kick
-							}
-							break;
+								for(int i = 0; i < situation.getKickList().size(); i++) {
+									Kick actual = situation.getKickList().get(i);
+									List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.kick.true", new String[] {
+											"{NAME}~" + PlayerSituation.getUsername(actual.getKickBy()),
+											"{REASON}~" + actual.getKickReason(),
+											"{DATE}~" + actual.getKickDate()
 
+									});
+									for (String msg : msgs) {
+										sender.sendMessage(new TextComponent(msg));
+									}
+								}
+							}
+							else {
+								//TODO no kick
+							}
+							break;
 						default:
-							//TODO syntax
+							sender.sendMessage(new TextComponent(
+									Main.PREFIX +
+									Main.getConfigManager().getString("lang.commands.history.syntax")));
 						}
 					} else {
-						//TODO syntax
+						sender.sendMessage(new TextComponent(
+								Main.PREFIX +
+								Main.getConfigManager().getString("lang.commands.history.syntax")));
 					}
 
 				} else {
-					//TODO no_permission
+					sender.sendMessage(new TextComponent(
+							Main.PREFIX + 
+							Main.getConfigManager().getString("lang.errors.no_permissions")));
 				}
 			}
 		});
