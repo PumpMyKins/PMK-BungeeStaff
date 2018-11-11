@@ -6,7 +6,6 @@ import java.util.List;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Ban;
-import fr.pmk_bungee.object.Message;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -27,7 +26,6 @@ public class BanCommand extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 
-		Message msg = new Message();
 		List<Parameter> param = new ArrayList<Parameter>();
 
 		if(sender.hasPermission("bungeestaff.command.ban")) {

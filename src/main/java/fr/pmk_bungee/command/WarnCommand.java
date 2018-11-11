@@ -24,14 +24,14 @@ public class WarnCommand extends Command {
 
 		if(sender.hasPermission("bungeestaff.command.warn")) {
 
-			if(args.length >= 4) {
+			if(args.length >= 2) {
 
 				String playername = args[0];
 				String warnReason = "";
 				PlayerSituation situation = new PlayerSituation(playername);
 				for(int i = 1; i <= args.length - 1; i++) {
 
-					warnReason+=warnReason + args[i] + " ";
+					warnReason+= args[i] + " ";
 				}
 
 				Main.getConfigManager().save();

@@ -6,11 +6,12 @@ import java.util.List;
 
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Kick;
-import fr.pmk_bungee.object.Message;
 import fr.pmk_bungee.object.Parameter;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class KickCommand extends Command {
@@ -24,19 +25,18 @@ public class KickCommand extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 
-		Message msg = new Message();
 		List<Parameter> param = new ArrayList<Parameter>();
 
 		if(sender.hasPermission("bungeestaff.command.kick")) {
 
-			if(args.length >= 4) {
+			if(args.length >= 2) {
 
 				String playername = args[0];
 				String kickReason = "";
 				PlayerSituation situation = new PlayerSituation(playername);
 				for(int i = 1; i <= args.length - 1; i++) {
 
-					kickReason+=kickReason + args[i] + " ";
+					kickReason+= args[i] + " ";
 				}
 
 				Main.getConfigManager().save();
@@ -52,6 +52,11 @@ public class KickCommand extends Command {
 					kick.setKickReason(kickReason);
 
 					PlayerSituation.setKick(kick);
+					ProxiedPlayer p = ProxyServer.getInstance().getPlayer(args[0]);
+					p.disconnect(new TextComponent(Main.PREFIX + Main.getConfigManager().getStringList("lang.kickmessage", new String[] {
+							"{NAME}~" + playername,
+							"{REASON}~" + kickReason
+					})));
 
 					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.kicked", new String[] { "{NAME}~" + playername})));
 				} else {

@@ -181,7 +181,7 @@ public class PlayerSituation {
 	
 	public static void setWarn(Warn warn) {
 		
-		Main.getMySQL().update("INSERT INTO BungeeWarn(userID, warnAt, warnBy, warnReason) VALUES ('" 
+		Main.getMySQL().update("INSERT INTO BungeeWarn(playerID, warnAt, warnBy, warnReason) VALUES ('" 
 				+ warn.getPlayerId()
 				+ "', '" 
 				+ warn.getWarnDate()
