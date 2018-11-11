@@ -36,7 +36,7 @@ public class BanCommand extends Command {
 
 			if(args.length >= 4) {
 
-				String playername = args[0].toLowerCase();
+				String playername = args[0];
 				String banReason = "";
 				PlayerSituation situation = new PlayerSituation(playername);
 				for(int i = 3; i <= args.length - 1; i++) {
@@ -48,7 +48,7 @@ public class BanCommand extends Command {
 
 				if(situation != null) {
 
-					if(situation.isBanned()) {
+					if(!PlayerSituation.isBanned(playername)) {
 
 						Ban ban = new Ban();
 						long seconds = Integer.parseInt(args[1]);
@@ -61,19 +61,8 @@ public class BanCommand extends Command {
 							ban.setBanBy(situation.getPlayerId(sender.getName()));
 							ban.setPlayerId(situation.getPlayerId(playername));
 							ban.setBanReason(banReason);
-
-							/*Main.getMySQL().update("INSERT INTO BungeeBan(playerId, startBan, endBan, banReason, banBy) VALUES ('" 
-									+ ban.getPlayerId()
-									+ "', '" 
-									+ ban.getStartBan()
-									+ "','" 
-									+ ban.getEndBan()
-									+ "','" 
-									+ ban.getBanReason()
-									+ "','" 
-									+ ban.getBanBy()
-									+ "')");
-							*/ //TODO add to PlayerSituation
+							
+							PlayerSituation.setBanned(ban);
 
 							if(toProxiedPlayer(playername) != null) {
 								
@@ -91,15 +80,9 @@ public class BanCommand extends Command {
 			}
 		} else {
 
-			msg.setMessageTitle("lang.errors.no_permissions");
-
 
 		}
-		msg.setPrefix(true);
-		msg.setSender(sender);
-		msg.setParameter(param);
 
-		MessageSender.send(msg);
 	}
 	public ProxiedPlayer toProxiedPlayer(String playername) {
 

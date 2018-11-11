@@ -113,14 +113,37 @@ public class PlayerSituation {
 	
 	//CHECKER 
 	
-	public boolean isBanned() {
+	public static boolean isBanned(String playername) {
 		
-		//TODO check is banned
+		PlayerSituation situation = new PlayerSituation(playername);
+		if(situation != null) {
+			if(!situation.getBanList().isEmpty()) {
+				for(Ban ban : situation.getBanList()) {
+					if(ban.getEndBan().before(now)) {
+						return true;
+					}
+				}
+			} else {
+				return false;
+			}
+		}
 		return false;
 	}
 
-	public boolean isMuted() {
-		//TODO Check if muted
+	public static boolean isMuted(String playername) {
+
+		PlayerSituation situation = new PlayerSituation(playername);
+		if(situation != null) {
+			if(!situation.getMuteList().isEmpty()) {
+				for(Mute mute : situation.getMuteList()) {
+					if(mute.getEndMute().before(now)) {
+						return true;
+					}
+				}
+			} else {
+				return false;
+			}
+		}
 		return false;
 	}
 	
@@ -129,16 +152,14 @@ public class PlayerSituation {
 		
 	// Ban / Mute SETTER
 	
-	public boolean setBanned() {
+	public static void setBanned(Ban ban) {
 		
-		//TODO SET BANNED
-		return false;
+		Main.getMySQL().update("INSERT INTO `BungeeBan`(`playerId`,`startBan`, `endBan`, `banBy`, `banReason`) VALUES ("+ban.getPlayerId()+","+ban.getStartBan()+","+ban.getEndBan()+","+ban.getBanBy()+","+ban.getBanReason()+")");
 	}
 	
-	public boolean setMuted() {
+	public static void setMuted(Mute mute) {
 		
-		//TODO SET MUTED
-		return false;
+		Main.getMySQL().update("INSERT INTO `BungeeMute`(`playerId`, `startMute`, `endMute`, `muteBy`, `muteReason`) VALUES ("+mute.getPlayerId()+","+mute.getStartMute()+","+mute.getEndMute()+","+mute.getMuteBy()+","+mute.getMuteReason()+")");
 	}
 	
 	
