@@ -25,12 +25,17 @@ public class UnbanCommand extends Command {
 				String playername = args[0];
 				PlayerSituation situation = new PlayerSituation(playername);
 				if(situation != null) {
-					
-					//TODO test bast
-					
-					//TODO unban
-					
-					//TODO not ban ?!?
+					if(!situation.getBanList().isEmpty()) {
+						if(PlayerSituation.isBanned(playername)) {
+						
+							PlayerSituation.unBan(playername);
+
+						} else {
+							sender.sendMessage("Player not ban");
+						}
+					} else {
+						sender.sendMessage("player not ban");
+					}
 				} else {
 					//TODO player_not_found
 				}
