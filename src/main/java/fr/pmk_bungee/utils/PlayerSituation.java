@@ -91,7 +91,7 @@ public class PlayerSituation {
 				warn.setWarnDate(getWarn.getTimestamp("warnDate"));
 				warn.setWarnReason(getWarn.getString("warnReason"));
 				warn.setPlayerId(this.playerId);
-				warn.setId(getBan.getInt("id"));
+				warn.setId(getWarn.getInt("id"));
 				warnList.add(warn);
 
 			}
