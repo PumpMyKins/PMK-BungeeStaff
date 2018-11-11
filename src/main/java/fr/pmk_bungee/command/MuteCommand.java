@@ -35,7 +35,7 @@ public class MuteCommand extends Command {
 
 				if(situation != null) {
 
-					/*if(!PlayerSituation.testMute(situation)) {
+					if(!PlayerSituation.isMuted(playername)) {
 
 						Mute mute = new Mute();
 						long seconds = Integer.parseInt(args[1]);
@@ -48,20 +48,9 @@ public class MuteCommand extends Command {
 							mute.setMuteBy(situation.getPlayerId(sender.getName()));
 							mute.setPlayerId(situation.getPlayerId(playername));
 							mute.setMuteReason(muteReason);
+							
+							PlayerSituation.setMuted(mute);
 
-							Main.getMySQL().update("INSERT INTO BungeeMute(playerId, startMute, endMute, muteReason, muteBy) VALUES ('" 
-									+ mute.getId()
-									+ "', '" 
-									+ mute.getStartMute()
-									+ "','" 
-									+ mute.getEndMute()
-									+ "','" 
-									+ mute.getMuteReason()
-									+ "','" 
-									+ mute.getMuteBy()
-									+ "')");
-						*/
-						//TODO add mute 
 						} else {
 							//TODO 
 						}
@@ -71,11 +60,11 @@ public class MuteCommand extends Command {
 				} else {
 					//TODO Player_Not_Found
 				}
-			/*} else {
+			} else {
 				//TODO error_syntax
 			}
 		} else {
 			//TODO no_Permission
-		}*/
+		}
 	}
 }
