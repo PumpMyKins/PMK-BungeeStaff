@@ -34,6 +34,7 @@ public class PlayerSituation {
 		this.muteList = new ArrayList<>();
 		this.kickList = new ArrayList<>();
 		this.warnList = new ArrayList<>();
+		this.player = new Player();
 		
 		init();
 		
