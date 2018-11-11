@@ -44,7 +44,7 @@ public class InformationCommand extends Command {
 						}
 					}
 					else {
-						List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.warn.false", new String[] {
+						List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.warn.false", new String[] {
 								"{NAME}~" + playername
 
 						});
@@ -70,7 +70,7 @@ public class InformationCommand extends Command {
 						}							
 					}
 					else {
-						List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.banned.false", new String[] { 
+						List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.banned.false", new String[] { 
 								"{NAME}~" + playername 
 
 						});
@@ -94,7 +94,7 @@ public class InformationCommand extends Command {
 						}
 					}
 					else {
-						List<String> msgs = Main.getConfigManager().getStringList("lang.commands.check.muted.false", new String[] { 
+						List<String> msgs = Main.getConfigManager().getStringList("lang.commands.history.muted.false", new String[] { 
 								"{NAME}~" + playername 
 
 						});

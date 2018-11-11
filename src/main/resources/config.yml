@@ -56,9 +56,11 @@ lang:
   - '&cRaison : &e{REASON}'
 
   commands:
+    
     warn:
       succes: '&cVous avez warn &e{NAME}.'
       syntax: '&cUtilisation /warn <Joueur> <Raison>'
+    
     ban:
       syntax: '&cUtilisation: &c/ban <Joueurs> <Temps> <TimeUnit> <Raison>'
       banned: '&aVous avez banni &e{NAME}&a avec succes.'
@@ -66,11 +68,13 @@ lang:
       - '&e{NAME} &ca ete banni par &e{BY}&c.'
       - '&cRaison: &e{REASON}'
       - '&cTemps: &e{REMAININGTIME}'
+    
     unban:
       syntax: '&cUsage: &c/unban <Joueurs>'
       unbanned: '&aVous avez unban &e{NAME}&a avec succes.'
       broadcast:
       - '&e{NAME} &ca ete debanni par &e{BY}&c.'
+    
     mute:
       syntax: '&cUtilisation: &c/mute <Joueurs> <Time> <TimeUnit> <Raison>'
       muted: '&aVous avez mute &e{NAME}&a avec succes.'
@@ -78,44 +82,20 @@ lang:
       - '&e{NAME} &ca ete mute par &e{BY}&c.'
       - '&cRaison: &e{REASON}'
       - '&cTemps: &e{REMAININGTIME}'
+    
     unmute:
       syntax: '&cUtilisation: /unmute <Joueurs>'
       unmuted: '&aVous avez demute &e{NAME}&a avec succes.'
       broadcast:
       - '&e{NAME} &ca ete demute par &e{BY}&c.'
+   
     kick:
       syntax: '&cUtilisation: &c/kick <Joueurs> <Reason>'
       kicked: '&aVous avez kick &e{NAME}&a avec succes.'
       broadcast:
       - '&e{NAME} &ca ete kick par &e{BY}&c.'
       - '&cRaison: &e{REASON}'
-    check:
-      succes: '&cInformation pour le joueur &e{NAME}'
-      syntax: '&cUtilisation: &c/check <joueur>'
-      banned:
-        true:
-          - '&cLe joueur &e{NAME} &cest &4&lBANNIE&c.'
-          - '&cRaison: &e{REASON}'
-          - '&cBanni par: &e{BY}'
-          - '&cTemps restant: &e{REMAININGTIME}'
-        false:
-          - '&aLe joueur &e{NAME} &aest pas bannie.'
-      muted:
-        true:
-          - '&cLe joueur &e{NAME} &cest &4&lMUTE&c.'
-          - '&cRaison: &e{REASON}'
-          - '&cMute par: &e{BY}'
-          - '&cTemps restant: &e{REMAININGTIME}'
-        false:
-          - '&aLe joueur &e{NAME} &aest pas mute.'
-      warn:
-        true:
-          - '&c-------&eListe des warn&c-------'
-          - '&cAverti par &e{NAME}'
-          - '&cAverti pour &e{REASON}'
-          - '&cAverti le &e{DATE}'
-        false:
-          - '&aLe joueur &e{NAME} &aest pas Warn'
+    
     history:
       syntax: '&cUtilisation : &c /history <player> &c<kick/ban/mute/warn/all>'
       warn:
@@ -150,7 +130,14 @@ lang:
           - '&cKick le &e{DATE}'
         false:
           - '&aLe joueur &e{NAME} &aa jamais ete kick'
-
+    info:
+      player:
+        - '&c-------&eInformation sur le joueurs&c-------'
+        - '&bPseudo : &a{NAME}'
+        - '&bUUID : &a{UUID}'
+        - '&bDate Arrivé : &a{FIRST}'
+        - '&bAperçu le : &a{LAST}'
+        - '&bIp : &a{IP}'
 
 
 
