@@ -211,7 +211,23 @@ public class PlayerSituation {
 		}
 		return str;
 	}
-	
+	public static String[] getMuteMessage(String playername)
+	{
+		Mute forMute = new Mute();
+		PlayerSituation situation = new PlayerSituation(playername);
+		for(Mute mute : situation.getMuteList()) {
+			if(mute.getEndMute().before(now)) {
+				forMute = mute;
+			}
+		}
+		
+		List<String> lines = Main.getConfigManager().getStringList("lang.mutemessage", new String[] {
+				"{REASON}~" + forMute.getMuteReason(), 
+				"{BY}~" + getUsername(forMute.getMuteBy()), 
+				"{REMAININGTIME}~" + getRemainingTime(forMute.getEndMute()) });
+		String[] str = new String [] {lines.get(0), lines.get(1), lines.get(2), lines.get(3)};
+		return str;
+	}
 	
 	// END MESSAGE FOR BAN AND MUTE
 	
