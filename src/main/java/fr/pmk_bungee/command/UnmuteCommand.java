@@ -25,10 +25,10 @@ public class UnmuteCommand extends Command {
 				String playername = args[0];
 				PlayerSituation situation = new PlayerSituation(playername);
 				if(situation != null) {
-					
-					//if(PlayerSituation.testMute(situation)) {
-						//TODO Test Mute
-						
+					if(!situation.getMuteList().isEmpty()) {
+						if(PlayerSituation.isMuted(playername)) {
+							PlayerSituation.unMute(playername);
+						}
 					} else {
 						//TODO not_mutened
 					}
@@ -38,7 +38,8 @@ public class UnmuteCommand extends Command {
 			} else {
 				//TODO syntax_error
 			}
-		//} else {
-			//TODO no_permission
+		} else {
+			//TODO no permission
 		}
 	}
+}
