@@ -3,6 +3,7 @@ package fr.pmk_bungee.command;
 import fr.pmk_bungee.Main;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class UnbanCommand extends Command {
@@ -29,21 +30,22 @@ public class UnbanCommand extends Command {
 						if(PlayerSituation.isBanned(playername)) {
 						
 							PlayerSituation.unBan(playername);
-
+							sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unban.unbanned", new String[] { "{NAME}~" + playername })));							  
+						
 						} else {
-							sender.sendMessage("Player not ban");
+							sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_banned", new String[] { "{NAME}~" + playername })));
 						}
 					} else {
-						sender.sendMessage("player not ban");
+						sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_banned", new String[] { "{NAME}~" + playername })));
 					}
 				} else {
-					//TODO player_not_found
+					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found")));	
 				}
 			} else {
-				//TODO syntax_error
+				sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unban.syntax")));
 			}
 		} else {
-			//TODO no_permission
+			sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));	 
 		}
 	}
 
