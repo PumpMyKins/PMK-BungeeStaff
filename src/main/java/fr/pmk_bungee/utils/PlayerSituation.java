@@ -10,7 +10,6 @@ import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Ban;
 import fr.pmk_bungee.object.Kick;
 import fr.pmk_bungee.object.Mute;
-import fr.pmk_bungee.object.Parameter;
 import fr.pmk_bungee.object.Player;
 import fr.pmk_bungee.object.Warn;
 
@@ -38,8 +37,6 @@ public class PlayerSituation {
 		
 		init();
 		
-		
-
 	}
 
 	public void init() {
@@ -113,74 +110,42 @@ public class PlayerSituation {
 			e.printStackTrace();
 		}
 	}
-	public static boolean testBan(PlayerSituation situation) {	
-
-		boolean isBanned = false;
-		if(!situation.getBanList().isEmpty()) {
-
-			for(Ban ban : situation.getBanList()) {
-				if(now.before(ban.getEndBan())) {
-					System.out.println("now is after ban.getEnd Joueur encore banni");
-					isBanned = true;
-					break;
-				} else {
-					System.out.println("now is before ban.get Joueur plus banni");
-					isBanned = false;
-				}
-
-			}
-		}
-		return isBanned;
+	
+	//CHECKER 
+	
+	public boolean isBanned() {
+		
+		//TODO check is banned
+		return false;
 	}
 
-	public static boolean testMute(PlayerSituation situation) {
-		boolean isMuted = false;
-		if(!situation.getMuteList().isEmpty()) {
-
-			for(Mute mute : situation.getMuteList()) {
-
-				if(now.before(mute.getEndMute())) {
-					System.out.println("now is after mute.getEnd Joueur encore mute");
-					isMuted = true;
-					break;
-				} else {
-					System.out.println("now is before mute.getEnd Joueur plus banni");
-					isMuted = false;
-				}
-			}
-		}
-		return isMuted;
+	public boolean isMuted() {
+		//TODO Check if muted
+		return false;
 	}
 	
-	public static String getBanMessage(PlayerSituation situation) {
+	// END CHECKER	
+	
 		
-		List<Parameter> paramDisconnect = new ArrayList<Parameter>();
-		Parameter BanReason = new Parameter();
-		BanReason.setParamTitle("{REASON}");
-		for(Ban ban : situation.getBanList()) {
-			if(now.compareTo(ban.getEndBan()) > 0) {
-				BanReason.setParamContent(ban.getBanReason());
-				break;
-			}
-			else {
-				BanReason.setParamContent("Erreur");
-			}
-		}
-		Parameter BanRemainingTime = new Parameter();
-		BanRemainingTime.setParamTitle("{REMAININGTIME}");
-		BanRemainingTime.setParamContent(getRemainingTime(situation));
+	// Ban / Mute SETTER
+	
+	public boolean setBanned() {
 		
-		paramDisconnect.add(BanReason);
-		paramDisconnect.add(BanRemainingTime);
-		
-		List<String> lines = Main.getConfigManager().getStringList("lang.banmessage", paramDisconnect);
-		String str = " ";
-		for(String line : lines) {
-			str = str + line + "\n";
-		}
-		return str;
+		//TODO SET BANNED
+		return false;
 	}
 	
+	public boolean setMuted() {
+		
+		//TODO SET MUTED
+		return false;
+	}
+	
+	
+	// END SETTER
+	
+	
+	// GETTER AND SETTER 
 	
 	public int getPlayerId(String playerName) {
 
@@ -254,42 +219,7 @@ public class PlayerSituation {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+
 	
-	public static String getRemainingTime(PlayerSituation situation) {
-		long end = 0;
-		for(Ban ban : situation.getBanList()) {
-			if(now.compareTo(ban.getEndBan()) > 0) {
-				
-				end = ban.getEndBan().getTime();
-				break;
-			}
-		}
-				long millis = end - now.getTime();
-				int days = 0;
-				int hours = 0;
-				int minutes = 0;
-				int seconds = 0;
-				while (millis >= 1000L)
-				{
-					seconds++;
-					millis -= 1000L;
-				}
-				while (seconds >= 60)
-				{
-					minutes++;
-					seconds -= 60;
-				}
-				while (minutes >= 60)
-				{
-					hours++;
-					minutes -= 60;
-				}
-				while (hours >= 24)
-				{
-					days++;
-					hours -= 24;
-				}
-				return Main.getConfigManager().timeFormat(days, hours, minutes, seconds);		
-	}
 	
 }

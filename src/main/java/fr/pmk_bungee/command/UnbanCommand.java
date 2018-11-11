@@ -26,13 +26,11 @@ public class UnbanCommand extends Command {
 				PlayerSituation situation = new PlayerSituation(playername);
 				if(situation != null) {
 					
-					if(PlayerSituation.testBan(situation)) {
-						
-						//situation.unban();
-						
-					} else {
-						//TODO not_banned
-					}
+					//TODO test bast
+					
+					//TODO unban
+					
+					//TODO not ban ?!?
 				} else {
 					//TODO player_not_found
 				}

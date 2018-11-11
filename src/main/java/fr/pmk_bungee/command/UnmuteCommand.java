@@ -26,8 +26,8 @@ public class UnmuteCommand extends Command {
 				PlayerSituation situation = new PlayerSituation(playername);
 				if(situation != null) {
 					
-					if(PlayerSituation.testMute(situation)) {
-						
+					//if(PlayerSituation.testMute(situation)) {
+						//TODO Test Mute
 						
 					} else {
 						//TODO not_mutened
@@ -38,9 +38,7 @@ public class UnmuteCommand extends Command {
 			} else {
 				//TODO syntax_error
 			}
-		} else {
+		//} else {
 			//TODO no_permission
 		}
 	}
-
-}

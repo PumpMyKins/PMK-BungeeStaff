@@ -18,7 +18,6 @@ import fr.pmk_bungee.object.Parameter;
 
 public class BanCommand extends Command {
 
-
 	public BanCommand(String name) {
 
 		super(name);
@@ -49,7 +48,7 @@ public class BanCommand extends Command {
 
 				if(situation != null) {
 
-					if(!PlayerSituation.testBan(situation)) {
+					if(situation.isBanned()) {
 
 						Ban ban = new Ban();
 						long seconds = Integer.parseInt(args[1]);
@@ -63,7 +62,7 @@ public class BanCommand extends Command {
 							ban.setPlayerId(situation.getPlayerId(playername));
 							ban.setBanReason(banReason);
 
-							Main.getMySQL().update("INSERT INTO BungeeBan(playerId, startBan, endBan, banReason, banBy) VALUES ('" 
+							/*Main.getMySQL().update("INSERT INTO BungeeBan(playerId, startBan, endBan, banReason, banBy) VALUES ('" 
 									+ ban.getPlayerId()
 									+ "', '" 
 									+ ban.getStartBan()
@@ -74,40 +73,21 @@ public class BanCommand extends Command {
 									+ "','" 
 									+ ban.getBanBy()
 									+ "')");
+							*/ //TODO add to PlayerSituation
 
 							if(toProxiedPlayer(playername) != null) {
 								
-								toProxiedPlayer(playername).disconnect(new TextComponent(PlayerSituation.getBanMessage(situation)));
+								toProxiedPlayer(playername).disconnect(); //TODO Disconnect
 							}
-
-							Parameter name = new Parameter();
-							name.setParamTitle("{NAME}");
-							name.setParamContent(playername);
-							param.add(name);
-
-							msg.setMessageTitle("lang.commands.ban.banned");
-
 						}
 					} else {
-						
-						Parameter name = new Parameter();
-						name.setParamTitle("{NAME}");
-						name.setParamContent(playername);
-						param.add(name);
-
-						msg.setMessageTitle("lang.errors.player_already_banned");
-
-
+							//TODO already Banned
 					}
 				} else {
-					msg.setMessageTitle("lang.errors.player_not_found");
-
+					//TODO player no found
 				}
 			} else {
-
-				msg.setMessageTitle("lang.commands.ban.syntax");
-
-
+				//TODO syntax Error 
 			}
 		} else {
 

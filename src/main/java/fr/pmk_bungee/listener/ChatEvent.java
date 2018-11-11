@@ -13,18 +13,17 @@ public class ChatEvent implements Listener {
 		ProxiedPlayer proxiedPlayer = (ProxiedPlayer) e.getSender();
 		PlayerSituation situation = new PlayerSituation(proxiedPlayer.getName());
 		
-		if(PlayerSituation.testBan(situation)) {
+		//TODO add test mute
 
 			if(e.getMessage().startsWith("/")) {
 
 				return;
 			}
-			if(!PlayerSituation.testMute(situation)) {
-					
+			//TODO test mute 
 				e.setCancelled(true);
 				//TODO send muteMEssage
 			}
-		}
+		//}
 	}
-}
+//}
 

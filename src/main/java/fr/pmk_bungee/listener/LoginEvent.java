@@ -26,7 +26,7 @@ public class LoginEvent implements Listener {
 				player.setUsername(playername);
 				player.setUuid(e.getConnection().getUniqueId().toString());
 
-				Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip, firstCome) VALUES ('" 
+				/*Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip, firstCome) VALUES ('" 
 						+  player.getUsername()
 						+ "', '" 
 						+ player.getUuid()
@@ -35,15 +35,14 @@ public class LoginEvent implements Listener {
 						+ "', '" 
 						+ player.getFirstCome()
 						+ "')");
+				*/
 			}
 		} catch (SQLException | NullPointerException error) {
 			error.printStackTrace();
 		}
-		PlayerSituation situation = new PlayerSituation(playername);
-		if(PlayerSituation.testBan(situation)) {
-
-				e.setCancelled(true);
-				e.setCancelReason(new TextComponent(PlayerSituation.getBanMessage(situation)));
+			
+			//TODO test ban
+		
+			//TODO kickBan
 		}
 	}
-}

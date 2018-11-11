@@ -35,7 +35,7 @@ public class MuteCommand extends Command {
 
 				if(situation != null) {
 
-					if(!PlayerSituation.testMute(situation)) {
+					/*if(!PlayerSituation.testMute(situation)) {
 
 						Mute mute = new Mute();
 						long seconds = Integer.parseInt(args[1]);
@@ -60,7 +60,8 @@ public class MuteCommand extends Command {
 									+ "','" 
 									+ mute.getMuteBy()
 									+ "')");
-
+						*/
+						//TODO add mute 
 						} else {
 							//TODO 
 						}
@@ -70,11 +71,11 @@ public class MuteCommand extends Command {
 				} else {
 					//TODO Player_Not_Found
 				}
-			} else {
+			/*} else {
 				//TODO error_syntax
 			}
 		} else {
 			//TODO no_Permission
-		}
+		}*/
 	}
 }
