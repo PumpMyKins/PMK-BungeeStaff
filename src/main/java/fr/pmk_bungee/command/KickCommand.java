@@ -8,9 +8,9 @@ import fr.pmk_bungee.Main;
 import fr.pmk_bungee.object.Kick;
 import fr.pmk_bungee.object.Message;
 import fr.pmk_bungee.object.Parameter;
-import fr.pmk_bungee.utils.MessageSender;
 import fr.pmk_bungee.utils.PlayerSituation;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class KickCommand extends Command {
@@ -51,46 +51,15 @@ public class KickCommand extends Command {
 					kick.setPlayerId(situation.getPlayerId(playername));
 					kick.setKickReason(kickReason);
 
-					Main.getMySQL().update("INSERT INTO BungeeKick(playerId, kickDate, kickReason, kickBy) VALUES ('" 
-							+ kick.getId()
-							+ "', '" 
-							+ kick.getKickDate()
-							+ "','" 
-							+ kick.getKickReason()
-							+ "','" 
-							+ kick.getKickBy()
-							+ "')");
+					PlayerSituation.setKick(kick);
 
-					msg.setMessageTitle("lang.commands.kick.kicked");
-					msg.setPrefix(true);
-
-					Parameter name = new Parameter();
-					name.setParamTitle("NAME");
-					name.setParamContent(playername);
-					param.add(name);
-
-					msg.setParameter(param);
-
-
+					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.kicked", new String[] { "{NAME}~" + playername})));
 				} else {
-					msg.setMessageTitle("lang.errors.player_not_found");
-
+					sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.commands.kick.syntax")));
 				}
 			} else {
-
-				msg.setMessageTitle("lang.commands.kick.syntax");
-
-
+				sender.sendMessage(new TextComponent(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions")));		
 			}
-		} else {
-
-			msg.setMessageTitle("lang.errors.no_permissions");	
 		}
-
-		msg.setPrefix(true);
-		msg.setSender(sender);
-		msg.setParameter(param);
-
-		MessageSender.send(msg);
 	}
 }
