@@ -16,7 +16,7 @@ public class LoginEvent implements Listener {
 		String playername = e.getConnection().getName();
 		PlayerSituation situation = new PlayerSituation(playername);
 		if(situation != null) {
-			if(situation.getPlayer().getUuid().equals(e.getConnection().getUniqueId())) {
+			if(situation.getPlayer().getUuid() != null) {
 				
 				System.out.println("Player Not Exist in DB");
 				Timestamp now = new Timestamp(System.currentTimeMillis());
