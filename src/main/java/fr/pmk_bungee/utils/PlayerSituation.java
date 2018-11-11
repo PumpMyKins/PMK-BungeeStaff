@@ -199,7 +199,7 @@ public class PlayerSituation {
 		PlayerSituation situation = new PlayerSituation(playername);
 		for(Mute mute : situation.getMuteList()) {
 			if(mute.getEndMute().before(now)) {
-				Main.getMySQL().update("UPDATE `BungeeMute` SET `endMute`="+ now +" WHERE `id` = '"+mute.getId()+"'");
+				Main.getMySQL().update("UPDATE `BungeeMute` SET `endMute`= '"+now+"' WHERE `id` = '"+mute.getId()+"'");
 			}
 		}
 	}
@@ -208,7 +208,7 @@ public class PlayerSituation {
 		PlayerSituation situation = new PlayerSituation(playername);
 		for(Ban ban : situation.getBanList()) {
 			if(ban.getEndBan().before(now)) {
-				Main.getMySQL().update("UPDATE `BungeeBan` SET `endBan` = "+now+" WHERE `id` = '"+ban.getId()+"'");
+				Main.getMySQL().update("UPDATE `BungeeBan` SET `endBan` = '"+now+"' WHERE `id` = '"+ban.getId()+"'");
 			}
 		}
 		
