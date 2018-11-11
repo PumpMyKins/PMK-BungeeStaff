@@ -26,7 +26,8 @@ public class LoginEvent implements Listener {
 				System.out.println("Already Exist ");
 			}
 			if(PlayerSituation.isBanned(playername)){
-				
+				System.out.println(PlayerSituation.isBanned(playername));
+				System.out.println(PlayerSituation.getBanMessage(playername));
 				e.setCancelled(true);
 				e.setCancelReason(new TextComponent(PlayerSituation.getBanMessage(playername)));
 			}
