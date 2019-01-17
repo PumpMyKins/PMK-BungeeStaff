@@ -7,6 +7,7 @@ import fr.pmk_bungee.utils.manager.ConfigManager;
 import fr.pmk_bungee.utils.manager.DatabaseManager;
 //IMPORT BUNGEE THINGS
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public class Main extends Plugin{
