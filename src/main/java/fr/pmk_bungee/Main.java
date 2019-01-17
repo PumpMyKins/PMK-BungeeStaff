@@ -45,9 +45,8 @@ public class Main extends Plugin{
 
 	//GETTER AND SETTER 
 
-	@SuppressWarnings("deprecation")
 	public static void logToConsole(String string) {
-		ProxyServer.getInstance().getConsole().sendMessage(string);
+		ProxyServer.getInstance().getConsole().sendMessage(new TextComponent(string));
 	}
 
 	public static Main sharedInstance() {
