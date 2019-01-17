@@ -26,21 +26,21 @@ public class CommandManager {
 		PluginManager pm = Main.sharedInstance().getProxy().getPluginManager();
 		
 		// UNBAN
-		pm.registerCommand(Main.sharedInstance(), new UnbanCommand("unban"));
+		pm.registerCommand(Main.sharedInstance(), new UnbanCommand("gunban"));
 		//UNMUTE
-		pm.registerCommand(Main.sharedInstance(), new UnmuteCommand("unmute"));
+		pm.registerCommand(Main.sharedInstance(), new UnmuteCommand("gunmute"));
 		//MUTE
-		pm.registerCommand(Main.sharedInstance(), new MuteCommand("mute"));
+		pm.registerCommand(Main.sharedInstance(), new MuteCommand("gmute"));
 		//BAN
-		pm.registerCommand(Main.sharedInstance(), new BanCommand("ban"));
+		pm.registerCommand(Main.sharedInstance(), new BanCommand("gban"));
 		//GET HISTORY OF THE PLAYER
-		pm.registerCommand(Main.sharedInstance(), new HistoryCommand("history"));
+		pm.registerCommand(Main.sharedInstance(), new HistoryCommand("ghistory"));
 		// GET ALL INFORMATION OF A PLAYER
-		pm.registerCommand(Main.sharedInstance(), new InformationCommand("info"));
+		pm.registerCommand(Main.sharedInstance(), new InformationCommand("ginfo"));
 		//Kick a Player
-		pm.registerCommand(Main.sharedInstance(), new KickCommand("kick"));
+		pm.registerCommand(Main.sharedInstance(), new KickCommand("gkick"));
 		//Warn a player (FOREVER)
-		pm.registerCommand(Main.sharedInstance(), new WarnCommand("warn"));
+		pm.registerCommand(Main.sharedInstance(), new WarnCommand("gwarn"));
 
 		pm.registerListener(Main.sharedInstance(), new ChatEvent());
 
