@@ -1,41 +1,84 @@
 package fr.pmk_bungee.command;
 
-import fr.pmk_bungee.Main;
-import fr.pmk_bungee.utils.PlayerProfile;
+import fr.pmk_bungee.MainBungeeStaff;
+import fr.pmk_bungee.objects.BungeePlayer;
+import fr.pmk_bungee.objects.PlayersLog;
+import fr.pmk_bungee.utils.TypicalMessage;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class UnmuteCommand extends Command {
 
-	public UnmuteCommand(String name) {
+	private PlayersLog pl;
+	
+	public UnmuteCommand(String name, PlayersLog pl) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		this.pl = pl;
 	}
 
-	@SuppressWarnings({ "deprecation", "unused" })
 	@Override
 	public void execute(final CommandSender sender, final String[] args) {
-		if(sender.hasPermission("bungeeban.command.unmute")) {
-			if(args.length == 1) {
-				String playerName = args[0];
-				PlayerProfile profile = new PlayerProfile(playerName);
-				if(profile != null) {
-					if(profile.isMuted()) {
-						profile.unmute();
-						sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.unmuted", new String[] { "{NAME}~" + playerName }));							  
+		
+		if(sender.hasPermission("rank.staff.modo") || sender.hasPermission("rank.staff.admin") || sender.hasPermission("rank.staff.responsable")) {
+			
+			if(args.length > 0) {
+				
+				BungeePlayer bp = this.pl.getPlayer(args[0]);
+				if(bp != null) {
+					
+					if(this.pl.isMute(bp)) {
+						
+						this.pl.unMute(bp);
+						
+						TextComponent bc1 = new TextComponent("Le joueur ");
+						bc1.setColor(ChatColor.DARK_GREEN);
+						TextComponent bc2 = new TextComponent(bp.getUsername());
+						bc2.setColor(ChatColor.GOLD);
+						TextComponent bc3 = new TextComponent(" n'est plus mute !");
+						bc3.setColor(ChatColor.DARK_GREEN);
+						
+						bc1.addExtra(bc2);
+						bc1.addExtra(bc3);
+						
+						sender.sendMessage(bc1);
+						
+					} else {
+						
+						TextComponent bc1 = new TextComponent("Le joueur ");
+						bc1.setColor(ChatColor.DARK_RED);
+						TextComponent bc2 = new TextComponent(bp.getUsername());
+						bc2.setColor(ChatColor.GOLD);
+						TextComponent bc3 = new TextComponent(" n'est pas mute !");
+						bc3.setColor(ChatColor.DARK_RED);
+						
+						bc1.addExtra(bc2);
+						bc1.addExtra(bc3);
+						
+						sender.sendMessage(bc1);
 					}
-					else {
-						sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_muted", new String[] { "{NAME}~" + playerName }));				  }
+				} else {
+					
+					sender.sendMessage(TypicalMessage.playerUnknown(args[0]));
 				}
-				else {
-					sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.player_not_found"));			  }
+			} else {
+				
+				TextComponent bc1 = new TextComponent("Commande : ");
+				bc1.setColor(ChatColor.DARK_RED);
+				TextComponent bc2 = new TextComponent("/unmute <pseudo>");
+				bc2.setColor(ChatColor.GOLD);
+				TextComponent bc3 = new TextComponent(" | Pour unmute quelqu'un !");
+				bc3.setColor(ChatColor.DARK_RED);
+				
+				bc1.addExtra(bc2);
+				bc1.addExtra(bc3);
+				
+				sender.sendMessage(bc1);
 			}
-			else {
-				sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.commands.unmute.syntax"));
-			}
-		}
-		else {
-			sender.sendMessage(Main.PREFIX + Main.getConfigManager().getString("lang.errors.no_permissions"));	  
+		} else {
+			
+			sender.sendMessage(TypicalMessage.noPermission("/unmute"));
 		}
 	}
 
