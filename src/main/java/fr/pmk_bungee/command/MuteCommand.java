@@ -14,9 +14,9 @@ public class MuteCommand extends Command {
 
 	private PlayersLog pl;
 	
-	public MuteCommand(String name, PlayersLog pl) {
+	public MuteCommand(String name, PlayersLog plg) {
 		super(name);
-		this.pl = pl;
+		this.pl = plg;
 	}
 
 	@Override
@@ -43,11 +43,12 @@ public class MuteCommand extends Command {
 					if(!pl.isMute(bp)) {
 						
 						long time = Integer.parseInt(args[1]);
-						MainBungeeStaff.TimeUnit unit = MainBungeeStaff.TimeUnit.getByString(args[2]);
+						fr.pmk_bungee.MainBungeeStaff.TimeUnit unit = fr.pmk_bungee.MainBungeeStaff.TimeUnit.getByString(args[2]);
 						if(unit != null) {
 
 							time *= unit.getSeconds();
 							this.pl.addMute(bp, reason, mutter,(int) time);
+							
 						}
 					} else {
 						TextComponent bc1 = new TextComponent("Le joueur ");

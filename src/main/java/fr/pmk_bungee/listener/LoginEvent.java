@@ -17,9 +17,9 @@ public class LoginEvent implements Listener {
 
 	private PlayersLog pl;
 	
-	public LoginEvent(PlayersLog pl) {
+	public LoginEvent(PlayersLog plg) {
 	
-		this.pl = pl;
+		this.pl = plg;
 	}
 
 	@EventHandler
@@ -32,6 +32,7 @@ public class LoginEvent implements Listener {
 			
 			if(b.getUniqueId().equals(e.getConnection().getUniqueId())) {
 				player = b;
+				exist = true;
 			}
 		}
 		if(!exist) {
@@ -48,9 +49,9 @@ public class LoginEvent implements Listener {
 			
 			Ban b = this.pl.getPlayerCurrentBan(player);
 			
-			BaseComponent bc1 = new TextComponent("[BANNI] Vous êtes banni des serveurs PumpMyKins [BANNI]");
+			BaseComponent bc1 = new TextComponent("[BANNI] Vous êtes banni des serveurs PumpMyKins [BANNI] \n");
 			bc1.setColor(ChatColor.RED);
-			TextComponent bc2 = new TextComponent("Raison :"+b.getBanReason());
+			TextComponent bc2 = new TextComponent("Raison :"+b.getBanReason() +"\n");
 			bc2.setColor(ChatColor.GOLD);
 			String timeleft = Converter.milliToDayHourMinuteSecond((b.getBanAt().getTime()+b.getBanDuration())-(new Date().getTime()));
 			TextComponent bc3 = new TextComponent("Temps restant :"+timeleft);

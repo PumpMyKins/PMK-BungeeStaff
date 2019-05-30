@@ -16,9 +16,9 @@ public class ChatEvent implements Listener {
 
 	private PlayersLog pl;
 
-	public ChatEvent(PlayersLog pl) {
+	public ChatEvent(PlayersLog plg) {
 
-		this.pl = pl;
+		this.pl = plg;
 	}
 
 	@EventHandler
@@ -45,7 +45,11 @@ public class ChatEvent implements Listener {
 			e.setCancelled(true); 
 			TextComponent bc4 = new TextComponent("Muté par :"+(this.pl.getPlayer(m.getMuteBy())).getUsername());
 			bc4.setColor(ChatColor.BLUE);
-			p.sendMessage(bc1, bc2, bc3, bc4, bc1);
+			
+			p.sendMessage(bc1);
+			p.sendMessage(bc2);
+			p.sendMessage(bc3);
+			p.sendMessage(bc4);
 		}
 	}
 }

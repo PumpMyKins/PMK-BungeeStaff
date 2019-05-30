@@ -1,11 +1,13 @@
 package fr.pmk_bungee.command;
 
 import fr.pmk_bungee.MainBungeeStaff;
+import fr.pmk_bungee.MainBungeeStaff.TimeUnit;
 import fr.pmk_bungee.objects.BungeePlayer;
 import fr.pmk_bungee.objects.PlayersLog;
 import fr.pmk_bungee.utils.TypicalMessage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -14,9 +16,9 @@ public class BanCommand extends Command {
 
 	private PlayersLog pl;
 
-	public BanCommand(String name, PlayersLog pl) {
+	public BanCommand(String name, PlayersLog plg) {
 		super(name);
-		this.pl = pl;
+		this.pl = plg;
 	}
 
 	@Override
@@ -43,12 +45,18 @@ public class BanCommand extends Command {
 					if(!pl.isBan(bp)) {
 						
 						long time = Integer.parseInt(args[1]);
-						MainBungeeStaff.TimeUnit unit = MainBungeeStaff.TimeUnit.getByString(args[2]);
+						fr.pmk_bungee.MainBungeeStaff.TimeUnit unit = fr.pmk_bungee.MainBungeeStaff.TimeUnit.getByString(args[2]);
 						if(unit != null) {
-
+							System.out.println(unit);
 							time *= unit.getSeconds();
+							System.out.println(time);
 							this.pl.addBan(bp, reason, banner,(int) time);
-
+							
+							ProxiedPlayer prp = ProxyServer.getInstance().getPlayer(bp.getUniqueId());
+							if(prp != null) {
+								
+								
+							}
 						}
 
 					} else {

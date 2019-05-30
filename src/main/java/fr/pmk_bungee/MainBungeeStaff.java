@@ -52,13 +52,13 @@ public class MainBungeeStaff extends Plugin{
 		mySQL.openConnection();
 		if(mySQL.isConnected()) {
 
-			logToConsole("Â§aMySQL connection success.");
+			logToConsole("§aMySQL connection success.");
 			//BASE DE DONNER
 			mySQL.update("CREATE TABLE IF NOT EXISTS Players(`username` VARCHAR(16) NOT NULL , `uuid` VARCHAR(256) NOT NULL ,`ip` VARCHAR(256) NOT NULL,`firstCome` DATETIME NOT NULL,`lastCome` DATETIME NOT NULL)");
-			mySQL.update("CREATE TABLE IF NOT EXISTS BungeeBan(banId INT, banAt DATETIME NOT NULL, banDuration INT NOT NULL, banBy VARCHAR(256) NOT NULL, bannedPlayer VARCHAR(256) NOT NULL, banIp VARCHAR(256) NOT NULL, banReason VARCHAR(256), PRIMARY KEY (banId))");
-			mySQL.update("CREATE TABLE IF NOT EXISTS BungeeMutes(muteId INT, muteAt DATETIME NOT NULL, muteDuration INT NOT NULL, muteBy VARCHAR(256) NOT NULL, mutePlayer VARCHAR(256) NOT NULL, muteReason VARCHAR(256), PRIMARY KEY (muteId))");
-			mySQL.update("CREATE TABLE IF NOT EXISTS BungeeKicks(kickId INT, kickBy VARCHAR(256) NOT NULL,kickPlayer VARCHAR(256),kickReason VARCHAR(256) NOT NULL, kickDate DATETIME, PRIMARY KEY (kickId))");
-			mySQL.update("CREATE TABLE IF NOT EXISTS BungeeWarn(warnId INT, warnBy VARCHAR(256) NOT NULL, warnDate DATETIME, warnReason VARCHAR(256), warnPlayer VARCHAR(256), PRIMARY KEY (warnId))");
+			mySQL.update("CREATE TABLE IF NOT EXISTS BungeeBan(banId INT NOT NULL AUTO_INCREMENT, banAt DATETIME NOT NULL, banDuration INT NOT NULL, banBy VARCHAR(256) NOT NULL, bannedPlayer VARCHAR(256) NOT NULL, banIp VARCHAR(256) NOT NULL, banReason VARCHAR(256), PRIMARY KEY (banId))");
+			mySQL.update("CREATE TABLE IF NOT EXISTS BungeeMutes(muteId INT NOT NULL AUTO_INCREMENT, muteAt DATETIME NOT NULL, muteDuration INT NOT NULL, muteBy VARCHAR(256) NOT NULL, mutePlayer VARCHAR(256) NOT NULL, muteReason VARCHAR(256), PRIMARY KEY (muteId))");
+			mySQL.update("CREATE TABLE IF NOT EXISTS BungeeKicks(kickId INT NOT NULL AUTO_INCREMENT, kickBy VARCHAR(256) NOT NULL,kickPlayer VARCHAR(256),kickReason VARCHAR(256) NOT NULL, kickDate DATETIME, PRIMARY KEY (kickId))");
+			mySQL.update("CREATE TABLE IF NOT EXISTS BungeeWarn(warnId INT NOT NULL AUTO_INCREMENT, warnBy VARCHAR(256) NOT NULL, warnDate DATETIME, warnReason VARCHAR(256), warnPlayer VARCHAR(256), PRIMARY KEY (warnId))");
 			
 			
 		}
@@ -66,7 +66,7 @@ public class MainBungeeStaff extends Plugin{
 		try {
 			this.pl = new PlayersLog();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -75,20 +75,22 @@ public class MainBungeeStaff extends Plugin{
 		PluginManager pm = ProxyServer.getInstance().getPluginManager();
 
 		//UNBAN + BAN COMMAND
-		pm.registerCommand(this, new UnbanCommand("unban", this.pl));
-		pm.registerCommand(this, new BanCommand("ban", this.pl));
+		pm.registerCommand(this, new UnbanCommand("bunban", this.pl));
+		pm.registerCommand(this, new BanCommand("bban", this.pl));
 		//UNMUTE + MUTE COMMAND
-		pm.registerCommand(this, new UnmuteCommand("unmute", this.pl));
-		pm.registerCommand(this, new MuteCommand("mute", this.pl));
+		pm.registerCommand(this, new UnmuteCommand("bunmute", this.pl));
+		pm.registerCommand(this, new MuteCommand("bmute", this.pl));
 		//CHECK IF BAN / MUTE  + GET ALL INFORMATION OF A PLAYER
-		pm.registerCommand(this, new CheckPlayer("check", this.pl));
-		pm.registerCommand(this, new InformationCommand("info", this.pl));
+		pm.registerCommand(this, new CheckPlayer("bcheck", this.pl));
+		pm.registerCommand(this, new InformationCommand("binfo", this.pl));
 		//Kick a Player + Warn a player (FOREVER)
-		pm.registerCommand(this, new KickCommand("kick", this.pl));
-		pm.registerCommand(this, new WarnCommand("warn", this.pl));
+		pm.registerCommand(this, new KickCommand("bkick", this.pl));
+		pm.registerCommand(this, new WarnCommand("bwarn", this.pl));
 		//THE DIFFERENT LISTENER CHAT FOR MUTE + LOGIN FOR BAN
 		pm.registerListener(this, new ChatEvent(pl));
 		pm.registerListener(this, new LoginEvent(pl));
+		
+		
 	}
 
 	//GETTER AND SETTER 
@@ -118,8 +120,8 @@ public class MainBungeeStaff extends Plugin{
 		return configManager;
 	}
 
-	public enum TimeUnit
-	{
+	public enum TimeUnit {
+		
 		SECOND(new String[] { "s", "sec", "secs", "second", "seconds" }, 1L),  MINUTE(new String[] { "m", "min", "mins", "minute", "minutes" }, 60L),  HOUR(new String[] { "h", "hs", "hour", "hours" }, 3600L),  DAY(new String[] { "d", "ds", "day", "days" }, 86400L);
 
 		private String[] names;

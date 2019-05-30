@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import fr.pmk_bungee.MainBungeeStaff;
 import fr.pmk_bungee.MySQL;
+import fr.pmk_bungee.utils.Converter;
 
 public class PlayersLog {
 
@@ -34,62 +35,72 @@ public class PlayersLog {
 		ResultSet rsWarn = mySQL.getResult("SELECT * FROM `BungeeWarn`");
 		ResultSet rsKick = mySQL.getResult("SELECT * FROM `BungeeKicks`");
 
-		while(rsPlayer.next()) {
+		if(rsPlayer.first()) {
+			while(rsPlayer.next()) {
 
-			BungeePlayer bp = new BungeePlayer();
-			bp.setFirstCome((Date) rsPlayer.getTimestamp("firstCome"));
-			bp.setIp(rsPlayer.getString("ip"));
-			bp.setLastConnection((Date) rsPlayer.getTimestamp("lastConnection"));
-			bp.setUsername(rsPlayer.getString("username"));
-			bp.setUuid(UUID.fromString(rsPlayer.getString("uuid")));
+				BungeePlayer bp = new BungeePlayer();
+				bp.setFirstCome((Date) rsPlayer.getTimestamp("firstCome"));
+				bp.setIp(rsPlayer.getString("ip"));
+				bp.setLastConnection((Date) rsPlayer.getTimestamp("lastCome"));
+				bp.setUsername(rsPlayer.getString("username"));
+				bp.setUuid(UUID.fromString(rsPlayer.getString("uuid")));
 
-			this.playerList.add(bp);
+				this.playerList.add(bp);
+			}
 		}
-		while(rsBan.next()) {
+		if(rsBan.first()) {
+			while(rsBan.next()) {
 
-			Ban b = new Ban();
-			b.setBanId(rsBan.getInt("banId"));
-			b.setBanAt((Date) rsBan.getTimestamp("banAt"));
-			b.setBanBy(UUID.fromString(rsBan.getString("banBy")));
-			b.setBanDuration(rsBan.getInt("banDuration"));
-			b.setBanIp(rsBan.getString("banIp"));
-			b.setBannedPlayer(UUID.fromString(rsBan.getString("bannedPlayer")));
+				Ban b = new Ban();
+				b.setBanId(rsBan.getInt("banId"));
+				b.setBanAt((Date) rsBan.getTimestamp("banAt"));
+				b.setBanBy(UUID.fromString(rsBan.getString("banBy")));
+				b.setBanDuration(rsBan.getInt("banDuration"));
+				b.setBanIp(rsBan.getString("banIp"));
+				b.setBannedPlayer(UUID.fromString(rsBan.getString("bannedPlayer")));
 
-			this.banList.add(b);
+				this.banList.add(b);
+			}
 		}
-		while(rsMute.next()) {
+		if(rsMute.first()) {
+			while(rsMute.next()) {
 
-			Mute m = new Mute();
-			m.setMuteId(rsMute.getInt("muteId"));
-			m.setMuteAt((Date) rsMute.getTimestamp("muteAt"));
-			m.setMuteBy(UUID.fromString(rsMute.getString("muteBy")));
-			m.setMuteDuration(rsMute.getInt("muteDuration"));
-			m.setMutePlayer(UUID.fromString(rsMute.getString("mutePlayer")));
-			m.setMuteReason(rsMute.getString("muteReason"));
+				Mute m = new Mute();
+				m.setMuteId(rsMute.getInt("muteId"));
+				m.setMuteAt((Date) rsMute.getTimestamp("muteAt"));
+				m.setMuteBy(UUID.fromString(rsMute.getString("muteBy")));
+				m.setMuteDuration(rsMute.getInt("muteDuration"));
+				m.setMutePlayer(UUID.fromString(rsMute.getString("mutePlayer")));
+				m.setMuteReason(rsMute.getString("muteReason"));
 
-			this.muteList.add(m);
+				this.muteList.add(m);
+			}
 		}
-		while(rsWarn.next()) {
+		if(rsWarn.first()) {
+			while(rsWarn.next()) {
 
-			Warn w = new Warn();
-			w.setWarnId(rsWarn.getInt("warnId"));
-			w.setWarnBy(UUID.fromString(rsWarn.getString("warnBy")));
-			w.setWarnDate((Date) rsWarn.getTimestamp("warnDate"));
-			w.setWarnPlayer(UUID.fromString(rsWarn.getString("warnPlayer")));
-			w.setWarnReason(rsWarn.getString("warnReason"));
+				Warn w = new Warn();
+				w.setWarnId(rsWarn.getInt("warnId"));
+				w.setWarnBy(UUID.fromString(rsWarn.getString("warnBy")));
+				w.setWarnDate((Date) rsWarn.getTimestamp("warnDate"));
+				w.setWarnPlayer(UUID.fromString(rsWarn.getString("warnPlayer")));
+				w.setWarnReason(rsWarn.getString("warnReason"));
 
-			this.warnList.add(w);
+				this.warnList.add(w);
+			}
 		}
-		while(rsKick.next()) {
+		if(rsKick.first()) {
+			while(rsKick.next()) {
 
-			Kick k = new Kick();
-			k.setKickId(rsKick.getInt("kickId"));
-			k.setKickBy(UUID.fromString(rsKick.getString("kickBy")));
-			k.setKickDate((Date) rsKick.getTimestamp("kickDate"));
-			k.setKickPlayer(UUID.fromString(rsKick.getString("kickPlayer")));
-			k.setKickReason(rsKick.getString("kickReason"));
+				Kick k = new Kick();
+				k.setKickId(rsKick.getInt("kickId"));
+				k.setKickBy(UUID.fromString(rsKick.getString("kickBy")));
+				k.setKickDate((Date) rsKick.getTimestamp("kickDate"));
+				k.setKickPlayer(UUID.fromString(rsKick.getString("kickPlayer")));
+				k.setKickReason(rsKick.getString("kickReason"));
 
-			this.kickList.add(k);
+				this.kickList.add(k);
+			}
 		}
 	}
 
@@ -154,9 +165,9 @@ public class PlayersLog {
 					+"','"
 					+bp.getIp()
 					+"','"
-					+bp.getFirstCome()
+					+Converter.dateConv(bp.getFirstCome())
 					+"','"
-					+bp.getLastConnection()
+					+Converter.dateConv(bp.getLastConnection())
 					+"')");
 
 		} catch (SQLException e) {
@@ -164,27 +175,27 @@ public class PlayersLog {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public BungeePlayer getPlayer(UUID uuid) {
-		
+
 		for(BungeePlayer bp  :this.getPlayerList()) {
-			
-			if(bp.getUniqueId() == uuid)
+
+			if(bp.getUniqueId().equals(uuid))
 				return bp;
 		}
 		return null;
 	}
-	
+
 	public BungeePlayer getPlayer(String username) {
-		
+
 		for(BungeePlayer bp : this.getPlayerList()) {
-			
-			if(bp.getUsername() == username)
+
+			if(bp.getUsername().equalsIgnoreCase(username))
 				return bp;
 		}
 		return null;
 	}
-	
+
 	public void addBan(BungeePlayer bannedPlayer, String reason, BungeePlayer banBy, int banDuration) {
 
 		List<Ban> banList = this.getBanList();
@@ -194,6 +205,7 @@ public class PlayersLog {
 		b.setBanDuration(banDuration);
 		b.setBanIp(bannedPlayer.getIp());
 		b.setBannedPlayer(bannedPlayer.getUniqueId());
+		b.setBanReason(reason);
 		banList.add(b);
 
 		dbBanAdd(b);
@@ -210,6 +222,7 @@ public class PlayersLog {
 			b.setBanDuration(31557600);
 			b.setBanIp(bannedPlayer.getIp());
 			b.setBannedPlayer(bannedPlayer.getUniqueId());
+			b.setBanReason(reason);
 			b.setBanBy(UUID.fromString("console"));
 			banList.add(b);
 
@@ -223,7 +236,7 @@ public class PlayersLog {
 
 		try {
 			MainBungeeStaff.getMySQL().update("INSERT INTO `BungeeBan`(`banAt`, `banDuration`, `banBy`, `bannedPlayer`, `banIp`, `banReason`) VALUES ('"
-					+b.getBanAt()
+					+Converter.dateConv(b.getBanAt())
 					+"','"
 					+b.getBanDuration()
 					+"','"
@@ -293,9 +306,9 @@ public class PlayersLog {
 	}
 
 	public Ban getPlayerCurrentBan(BungeePlayer player) {
-		
+
 		if(isBan(player)) {
-			
+
 			for(Ban b : this.getBanList()) {
 
 				if(b.getBannedPlayer() == player.getUniqueId()) {
@@ -311,7 +324,7 @@ public class PlayersLog {
 		}
 		return null;
 	}
-	
+
 	public List<Ban> getPlayerBans(BungeePlayer player) {
 
 		List<Ban> lb = new ArrayList<Ban>();
@@ -348,6 +361,7 @@ public class PlayersLog {
 		m.setMuteBy(muteBy.getUniqueId());
 		m.setMuteDuration(muteDuration);
 		m.setMutePlayer(mutedPlayer.getUniqueId());
+		m.setMuteReason(reason);
 		muteList.add(m);
 
 		dbMuteAdd(m);
@@ -364,6 +378,7 @@ public class PlayersLog {
 			m.setMuteDuration(31557600);
 			m.setMutePlayer(mutedPlayer.getUniqueId());
 			m.setMuteBy(UUID.fromString("console"));
+			m.setMuteReason(reason);
 			muteList.add(m);
 
 			dbMuteAdd(m);
@@ -376,7 +391,7 @@ public class PlayersLog {
 
 		try {
 			MainBungeeStaff.getMySQL().update("INSERT INTO `BungeeMutes`(`muteAt`, `muteDuration`, `muteBy`, `mutePlayer`, `muteReason`) VALUES ('"
-					+m.getMuteAt()
+					+Converter.dateConv(m.getMuteAt())
 					+"','"
 					+m.getMuteDuration()
 					+"','"
@@ -458,7 +473,7 @@ public class PlayersLog {
 	}
 
 	public Mute getPlayerCurrentMute(BungeePlayer player) {
-		
+
 		for(Mute m : this.getMuteList()) {
 
 			if(m.getMutePlayer() == player.getUniqueId()) {
@@ -473,7 +488,7 @@ public class PlayersLog {
 		}
 		return null;
 	}
-	
+
 	public List<Mute> getPlayerMuteBy(BungeePlayer player){
 
 		List<Mute> lm = new ArrayList<Mute>();
@@ -526,7 +541,7 @@ public class PlayersLog {
 			MainBungeeStaff.getMySQL().update("INSERT INTO `BungeeWarn`(`warnBy`, `warnDate`, `warnReason`, `warnPlayer`) VALUES ('"
 					+w.getWarnBy()
 					+"','"
-					+w.getWarnDate()
+					+Converter.dateConv(w.getWarnDate())
 					+"','"
 					+w.getWarnReason()
 					+"','"
@@ -614,7 +629,7 @@ public class PlayersLog {
 			MainBungeeStaff.getMySQL().update("INSERT INTO `BungeeKicks`(`kickBy`, `kickDate`, `kickReason`, `kickPlayer`) VALUES ('"
 					+k.getKickBy()
 					+"','"
-					+k.getKickDate()
+					+Converter.dateConv(k.getKickDate())
 					+"','"
 					+k.getKickReason()
 					+"','"

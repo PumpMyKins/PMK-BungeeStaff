@@ -24,7 +24,7 @@ public class TypicalMessage {
 		bc1.setColor(ChatColor.DARK_RED);
 		TextComponent bc2 = new TextComponent(playername);
 		bc2.setColor(ChatColor.GOLD);
-		TextComponent bc3 = new TextComponent("n'existe pas !");
+		TextComponent bc3 = new TextComponent(" n'existe pas !");
 		bc3.setColor(ChatColor.DARK_RED);
 
 		bc1.addExtra(bc2);

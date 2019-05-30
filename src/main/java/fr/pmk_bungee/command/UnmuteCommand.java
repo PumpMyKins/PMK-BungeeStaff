@@ -1,6 +1,5 @@
 package fr.pmk_bungee.command;
 
-import fr.pmk_bungee.MainBungeeStaff;
 import fr.pmk_bungee.objects.BungeePlayer;
 import fr.pmk_bungee.objects.PlayersLog;
 import fr.pmk_bungee.utils.TypicalMessage;
@@ -13,9 +12,9 @@ public class UnmuteCommand extends Command {
 
 	private PlayersLog pl;
 	
-	public UnmuteCommand(String name, PlayersLog pl) {
+	public UnmuteCommand(String name, PlayersLog plg) {
 		super(name);
-		this.pl = pl;
+		this.pl = plg;
 	}
 
 	@Override

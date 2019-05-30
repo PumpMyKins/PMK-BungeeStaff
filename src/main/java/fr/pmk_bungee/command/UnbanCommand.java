@@ -11,9 +11,9 @@ import net.md_5.bungee.api.plugin.Command;
 public class UnbanCommand extends Command {
 
 	private PlayersLog pl;
-	public UnbanCommand(String name, PlayersLog pl) {
+	public UnbanCommand(String name, PlayersLog plg) {
 		super(name);
-		this.pl = pl;
+		this.pl = plg;
 	}
 
 	@Override

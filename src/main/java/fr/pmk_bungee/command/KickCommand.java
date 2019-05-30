@@ -14,9 +14,9 @@ public class KickCommand extends Command {
 
 	private PlayersLog pl;
 	
-	public KickCommand(String name, PlayersLog pl) {
+	public KickCommand(String name, PlayersLog plg) {
 		super(name);
-		this.pl = pl;
+		this.pl = plg;
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class KickCommand extends Command {
 					reason = reason + args[i] + " ";
 				}
 				
-				TextComponent kickreason = new TextComponent("Vous avez été kick du serveur !");
+				TextComponent kickreason = new TextComponent("Vous avez été kick du serveur ! \n Raison : ");
 				kickreason.setColor(ChatColor.RED);
 				TextComponent kickreasonbis = new TextComponent(reason);
 				kickreasonbis.setColor(ChatColor.GOLD);

@@ -19,9 +19,9 @@ public class InformationCommand extends Command {
 
 	private PlayersLog pl;
 
-	public InformationCommand(String name, PlayersLog pl) {
+	public InformationCommand(String name, PlayersLog plg) {
 		super(name);
-		this.pl = pl;
+		this.pl = plg;
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class InformationCommand extends Command {
 
 		if(sender.hasPermission("rank.staff.modo") || sender.hasPermission("rank.staff.admin") || sender.hasPermission("rank.staff.responsable")) {
 			// /info <pseudo> <type : ALL / BAN / MUTE / KICK / WARN>
-			if(args.length > 0) {
+			if(args.length > 1) {
 
 				BungeePlayer bp = this.pl.getPlayer(args[0]);
 
@@ -123,7 +123,11 @@ public class InformationCommand extends Command {
 				bc6bis.setColor(ChatColor.GOLD);
 				bc6.addExtra(bc6bis);
 				
-				pp.sendMessage(bc2, bc3, bc4, bc5, bc6);
+				pp.sendMessage(bc2);
+				pp.sendMessage(bc3);
+				pp.sendMessage(bc4);
+				pp.sendMessage(bc5);
+				pp.sendMessage(bc6);
 			}
 		} else {
 
@@ -170,7 +174,11 @@ public class InformationCommand extends Command {
 				bc6bis.setColor(ChatColor.GOLD);
 				bc6.addExtra(bc6bis);
 
-				pp.sendMessage(bc2, bc3, bc4, bc5, bc6);
+				pp.sendMessage(bc2);
+				pp.sendMessage(bc3);
+				pp.sendMessage(bc4);
+				pp.sendMessage(bc5);
+				pp.sendMessage(bc6);
 			}
 		} else {
 
@@ -212,7 +220,10 @@ public class InformationCommand extends Command {
 				bc5bis.setColor(ChatColor.GOLD);
 				bc5.addExtra(bc5bis);
 
-				pp.sendMessage(bc2, bc3, bc4, bc5);
+				pp.sendMessage(bc2);
+				pp.sendMessage(bc3);
+				pp.sendMessage(bc4);
+				pp.sendMessage(bc5);
 			}
 		} else {
 
@@ -235,7 +246,7 @@ public class InformationCommand extends Command {
 			int i = 1;
 			for(Kick k : lk) {
 
-				TextComponent bc2 = new TextComponent("--[[[[Kick numero : "+i+" ]]]]--");
+				TextComponent bc2 = new TextComponent("--[[[[ Kick numero : "+i+" ]]]]--");
 				bc2.setColor(ChatColor.RED);
 				i++;
 				TextComponent bc3 = new TextComponent("Kick par :");
@@ -254,7 +265,10 @@ public class InformationCommand extends Command {
 				bc5bis.setColor(ChatColor.GOLD);
 				bc5.addExtra(bc5bis);
 
-				pp.sendMessage(bc2, bc3, bc4, bc5);
+				pp.sendMessage(bc2);
+				pp.sendMessage(bc3);
+				pp.sendMessage(bc4);
+				pp.sendMessage(bc5);
 			}
 		} else {
 
@@ -295,6 +309,11 @@ public class InformationCommand extends Command {
 		bc6bis.setColor(ChatColor.GOLD);
 		bc6.addExtra(bc6bis);
 		
-		pp.sendMessage(bc1, bc2, bc3, bc4, bc5, bc6);
+		pp.sendMessage(bc1);
+		pp.sendMessage(bc2);
+		pp.sendMessage(bc3);
+		pp.sendMessage(bc4);
+		pp.sendMessage(bc5);
+		pp.sendMessage(bc6);
 	}
 }

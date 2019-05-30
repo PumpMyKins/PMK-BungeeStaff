@@ -1,12 +1,5 @@
 package fr.pmk_bungee.command;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import fr.pmk_bungee.MainBungeeStaff;
 import fr.pmk_bungee.objects.BungeePlayer;
 import fr.pmk_bungee.objects.PlayersLog;
 import fr.pmk_bungee.utils.TypicalMessage;
@@ -21,9 +14,9 @@ public class WarnCommand extends Command {
 
 	private PlayersLog pl;
 	
-	public WarnCommand(String name, PlayersLog pl) {
+	public WarnCommand(String name, PlayersLog plg) {
 		super(name);
-		this.pl = pl;
+		this.pl = plg;
 	}
 
 	@Override
@@ -41,7 +34,7 @@ public class WarnCommand extends Command {
 					reason = reason + args[i] + " ";
 				}
 				
-				TextComponent kickreason = new TextComponent("Vous avez été warn ! Pour :");
+				TextComponent kickreason = new TextComponent("Vous avez été warn ! Pour : ");
 				kickreason.setColor(ChatColor.RED);
 				TextComponent kickreasonbis = new TextComponent(reason);
 				kickreasonbis.setColor(ChatColor.GOLD);
@@ -78,9 +71,9 @@ public class WarnCommand extends Command {
 				
 				TextComponent bc1 = new TextComponent("Commande : ");
 				bc1.setColor(ChatColor.DARK_RED);
-				TextComponent bc2 = new TextComponent("/kick <pseudo> <raison>");
+				TextComponent bc2 = new TextComponent("/warn <pseudo> <raison>");
 				bc2.setColor(ChatColor.GOLD);
-				TextComponent bc3 = new TextComponent(" | Pour kick un joueur du serveur !");
+				TextComponent bc3 = new TextComponent(" | Pour warn un joueur !");
 				bc3.setColor(ChatColor.DARK_RED);
 				
 				bc1.addExtra(bc2);
@@ -91,7 +84,7 @@ public class WarnCommand extends Command {
 
 		} else { 
 			
-			sender.sendMessage(TypicalMessage.noPermission("/kick"));
+			sender.sendMessage(TypicalMessage.noPermission("/warn"));
 		}
 	}
 }

@@ -15,9 +15,9 @@ public class CheckPlayer extends Command {
 
 	private PlayersLog pl;
 
-	public CheckPlayer(String string, PlayersLog pl) {
+	public CheckPlayer(String string, PlayersLog plg) {
 		super(string);
-		this.pl = pl;
+		this.pl = plg;
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class CheckPlayer extends Command {
 					bc2.setColor(ChatColor.GOLD);
 					bc1.addExtra(bc2);
 					
-					sender.sendMessage(bc1, bc2);
+					sender.sendMessage(bc1);
 					
 					if(b != null) {
 						
@@ -64,7 +64,11 @@ public class CheckPlayer extends Command {
 						TextComponent bc7 = new TextComponent("/* Fin ban */");
 						bc7.setColor(ChatColor.DARK_RED);
 						
-						sender.sendMessage(bc3, bc4, bc5, bc6, bc7);
+						sender.sendMessage(bc3);
+						sender.sendMessage(bc4);
+						sender.sendMessage(bc5);
+						sender.sendMessage(bc6);
+						sender.sendMessage(bc7);
 					} else {
 						
 						TextComponent bc8 = new TextComponent("Le joueur n'est pas banni !");
@@ -94,7 +98,11 @@ public class CheckPlayer extends Command {
 						TextComponent bc7 = new TextComponent("/* Fin mute */");
 						bc7.setColor(ChatColor.DARK_RED);
 						
-						sender.sendMessage(bc3, bc4, bc5, bc6, bc7);
+						sender.sendMessage(bc3);
+						sender.sendMessage(bc4);
+						sender.sendMessage(bc5);
+						sender.sendMessage(bc6);
+						sender.sendMessage(bc7);
 					} else {
 						
 						TextComponent bc8 = new TextComponent("Le joueur n'est pas mute !");
