@@ -30,13 +30,9 @@ public class PlayersLog {
 		MySQL mySQL = MainBungeeStaff.getMySQL();
 
 		ResultSet rsPlayer = mySQL.getResult("SELECT * FROM `Players`");
-		ResultSet rsBan = mySQL.getResult("SELECT * FROM `BungeeBan`");
-		ResultSet rsMute = mySQL.getResult("SELECT * FROM `BungeeMutes`");
-		ResultSet rsWarn = mySQL.getResult("SELECT * FROM `BungeeWarn`");
-		ResultSet rsKick = mySQL.getResult("SELECT * FROM `BungeeKicks`");
 
 		if(rsPlayer.first()) {
-			while(rsPlayer.next()) {
+			do {
 
 				BungeePlayer bp = new BungeePlayer();
 				bp.setFirstCome((Date) rsPlayer.getTimestamp("firstCome"));
@@ -46,10 +42,13 @@ public class PlayersLog {
 				bp.setUuid(UUID.fromString(rsPlayer.getString("uuid")));
 
 				this.playerList.add(bp);
-			}
+			} while(rsPlayer.next());
 		}
+		
+		ResultSet rsBan = mySQL.getResult("SELECT * FROM `BungeeBan`");
+		
 		if(rsBan.first()) {
-			while(rsBan.next()) {
+			do {
 
 				Ban b = new Ban();
 				b.setBanId(rsBan.getInt("banId"));
@@ -60,10 +59,13 @@ public class PlayersLog {
 				b.setBannedPlayer(UUID.fromString(rsBan.getString("bannedPlayer")));
 
 				this.banList.add(b);
-			}
+			} while(rsBan.next());
 		}
+		
+		ResultSet rsMute = mySQL.getResult("SELECT * FROM `BungeeMutes`");
+
 		if(rsMute.first()) {
-			while(rsMute.next()) {
+			do {
 
 				Mute m = new Mute();
 				m.setMuteId(rsMute.getInt("muteId"));
@@ -74,10 +76,13 @@ public class PlayersLog {
 				m.setMuteReason(rsMute.getString("muteReason"));
 
 				this.muteList.add(m);
-			}
+			} while(rsMute.next());
 		}
+		
+		ResultSet rsWarn = mySQL.getResult("SELECT * FROM `BungeeWarn`");
+		
 		if(rsWarn.first()) {
-			while(rsWarn.next()) {
+			do {
 
 				Warn w = new Warn();
 				w.setWarnId(rsWarn.getInt("warnId"));
@@ -87,10 +92,13 @@ public class PlayersLog {
 				w.setWarnReason(rsWarn.getString("warnReason"));
 
 				this.warnList.add(w);
-			}
+			}while(rsWarn.next());
 		}
+		
+		ResultSet rsKick = mySQL.getResult("SELECT * FROM `BungeeKicks`");
+		
 		if(rsKick.first()) {
-			while(rsKick.next()) {
+			do {
 
 				Kick k = new Kick();
 				k.setKickId(rsKick.getInt("kickId"));
@@ -100,7 +108,7 @@ public class PlayersLog {
 				k.setKickReason(rsKick.getString("kickReason"));
 
 				this.kickList.add(k);
-			}
+			} while(rsKick.next());
 		}
 	}
 
@@ -152,7 +160,7 @@ public class PlayersLog {
 
 	public void addPlayer(BungeePlayer p) {
 
-		this.getPlayerList().add(p);
+		this.playerList.add(p);
 		dbPlayerAdd(p);
 	}
 	public void dbPlayerAdd(BungeePlayer bp) {
@@ -175,10 +183,32 @@ public class PlayersLog {
 			e.printStackTrace();
 		}
 	}
+	
+	public void dbLastCome(BungeePlayer bp) {
+		
+		try {
+			int i = 0;
+			for(i = 0; i < this.playerList.size(); i++) {
+				
+				if(this.playerList.get(i).equals(bp)) {
+					
+					break;
+				}
+			}
+			this.playerList.remove(i);
+			bp.setLastConnection(new Date());
+			this.playerList.add(bp);
+			
+			MainBungeeStaff.getMySQL().update("UPDATE `Players` SET `lastCome`="+Converter.dateConv(new Date())+" WHERE `uuid` = '"+bp.getUniqueId()+"'");
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
 
 	public BungeePlayer getPlayer(UUID uuid) {
 
-		for(BungeePlayer bp  :this.getPlayerList()) {
+		for(BungeePlayer bp  :this.playerList) {
 
 			if(bp.getUniqueId().equals(uuid))
 				return bp;
@@ -188,7 +218,7 @@ public class PlayersLog {
 
 	public BungeePlayer getPlayer(String username) {
 
-		for(BungeePlayer bp : this.getPlayerList()) {
+		for(BungeePlayer bp : this.playerList) {
 
 			if(bp.getUsername().equalsIgnoreCase(username))
 				return bp;
@@ -198,7 +228,7 @@ public class PlayersLog {
 
 	public void addBan(BungeePlayer bannedPlayer, String reason, BungeePlayer banBy, int banDuration) {
 
-		List<Ban> banList = this.getBanList();
+		List<Ban> banList = this.banList;
 		Ban b = new Ban();
 		b.setBanAt(new Date());
 		b.setBanBy(banBy.getUniqueId());
@@ -216,7 +246,7 @@ public class PlayersLog {
 	public void addBan(BungeePlayer bannedPlayer, String reason) { //Console only, perma ban && no ProxiedPlayer
 
 		if(!isBan(bannedPlayer)) {
-			List<Ban> banList = this.getBanList();
+			List<Ban> banList = this.banList;
 			Ban b = new Ban();
 			b.setBanAt(new Date());
 			b.setBanDuration(31557600);
@@ -259,9 +289,9 @@ public class PlayersLog {
 
 		if(isBan(bannedPlayer)) {
 
-			for(Ban b : this.getBanList()) {
+			for(Ban b : this.banList) {
 
-				if(b.getBannedPlayer() == bannedPlayer.getUniqueId()) {
+				if(b.getBannedPlayer().equals(bannedPlayer.getUniqueId())) {
 
 					Date at = b.getBanAt();
 					Date today = new Date();
@@ -290,9 +320,9 @@ public class PlayersLog {
 
 	public boolean isBan(BungeePlayer player) {
 
-		for(Ban b : this.getBanList()) {
+		for(Ban b : this.banList) {
 
-			if(b.getBannedPlayer() == player.getUniqueId()) {
+			if(b.getBannedPlayer().equals(player.getUniqueId())) {
 
 				Date at = b.getBanAt();
 				Date today = new Date();
@@ -309,9 +339,9 @@ public class PlayersLog {
 
 		if(isBan(player)) {
 
-			for(Ban b : this.getBanList()) {
+			for(Ban b : this.banList) {
 
-				if(b.getBannedPlayer() == player.getUniqueId()) {
+				if(b.getBannedPlayer().equals(player.getUniqueId())) {
 
 					Date at = b.getBanAt();
 					Date today = new Date();
@@ -328,9 +358,9 @@ public class PlayersLog {
 	public List<Ban> getPlayerBans(BungeePlayer player) {
 
 		List<Ban> lb = new ArrayList<Ban>();
-		for(Ban b : this.getBanList()) {
+		for(Ban b : this.banList) {
 
-			if(b.getBannedPlayer() == player.getUniqueId()) {
+			if(b.getBannedPlayer().equals(player.getUniqueId())) {
 
 				lb.add(b);
 			}
@@ -342,9 +372,9 @@ public class PlayersLog {
 	public List<Ban> getPlayerBannedBy(BungeePlayer player) {
 
 		List<Ban> lb = new ArrayList<Ban>();
-		for(Ban b : this.getBanList()) {
+		for(Ban b : this.banList) {
 
-			if(b.getBanBy() == player.getUniqueId()) {
+			if(b.getBanBy().equals(player.getUniqueId())) {
 
 				lb.add(b);
 			}
@@ -355,7 +385,7 @@ public class PlayersLog {
 
 	public void addMute(BungeePlayer mutedPlayer, String reason, BungeePlayer muteBy, int muteDuration) {
 
-		List<Mute> muteList = this.getMuteList();
+		List<Mute> muteList = this.muteList;
 		Mute m = new Mute();
 		m.setMuteAt(new Date());
 		m.setMuteBy(muteBy.getUniqueId());
@@ -372,7 +402,7 @@ public class PlayersLog {
 	public void addMute(BungeePlayer mutedPlayer, String reason) { //Console only, perma mute && no ProxiedPlayer
 
 		if(!isMute(mutedPlayer)) {
-			List<Mute> muteList = this.getMuteList();
+			List<Mute> muteList = this.muteList;
 			Mute m = new Mute();
 			m.setMuteAt(new Date());
 			m.setMuteDuration(31557600);
@@ -414,7 +444,7 @@ public class PlayersLog {
 
 			for(Mute m : this.getMuteList()) {
 
-				if(m.getMutePlayer() == player.getUniqueId()) {
+				if(m.getMutePlayer().equals(player.getUniqueId())) {
 
 					Date at = m.getMuteAt();
 					Date today = new Date();
@@ -433,7 +463,7 @@ public class PlayersLog {
 	public void dbUnMute(int muteId, int newDuration) {
 
 		try {
-			MainBungeeStaff.getMySQL().update("UPDATE `BungeeMutes` SET `muteDuration`="+newDuration+" WHERE `banId`="+muteId);
+			MainBungeeStaff.getMySQL().update("UPDATE `BungeeMutes` SET `muteDuration`="+newDuration+" WHERE `muteId`="+muteId);
 
 		} catch (SQLException e) {
 
@@ -445,7 +475,7 @@ public class PlayersLog {
 
 		for(Mute m : this.getMuteList()) {
 
-			if(m.getMutePlayer() == player.getUniqueId()) {
+			if(m.getMutePlayer().equals(player.getUniqueId())) {
 
 				Date at = m.getMuteAt();
 				Date today = new Date();
@@ -461,10 +491,10 @@ public class PlayersLog {
 	public List<Mute> getPlayerMute(BungeePlayer player){
 
 		List<Mute> lm = new ArrayList<Mute>();
-		for(Mute m : this.getMuteList()) {
+		for(Mute m : this.muteList) {
 
-			if(m.getMutePlayer() == player.getUniqueId()) {
-
+			if(m.getMutePlayer().equals(player.getUniqueId())) {
+				
 				lm.add(m);
 			}
 		}
@@ -474,9 +504,9 @@ public class PlayersLog {
 
 	public Mute getPlayerCurrentMute(BungeePlayer player) {
 
-		for(Mute m : this.getMuteList()) {
+		for(Mute m : this.muteList) {
 
-			if(m.getMutePlayer() == player.getUniqueId()) {
+			if(m.getMutePlayer().equals(player.getUniqueId())) {
 
 				Date at = m.getMuteAt();
 				Date today = new Date();
@@ -492,9 +522,9 @@ public class PlayersLog {
 	public List<Mute> getPlayerMuteBy(BungeePlayer player){
 
 		List<Mute> lm = new ArrayList<Mute>();
-		for(Mute m : this.getMuteList()) {
+		for(Mute m : this.muteList) {
 
-			if(m.getMuteBy() == player.getUniqueId()) {
+			if(m.getMuteBy().equals(player.getUniqueId())) {
 
 				lm.add(m);
 			}
@@ -506,7 +536,7 @@ public class PlayersLog {
 	public void addWarn(BungeePlayer warnPlayer, String reason, BungeePlayer warnBy) {
 
 
-		List<Warn> warnList = this.getWarnList();
+		List<Warn> warnList = this.warnList;
 		Warn w = new Warn();
 		w.setWarnDate(new Date());
 		w.setWarnBy(warnBy.getUniqueId());
@@ -521,7 +551,7 @@ public class PlayersLog {
 
 	public void addWarn(BungeePlayer warnPlayer, String reason) {
 
-		List<Warn> warnList = this.getWarnList();
+		List<Warn> warnList = this.warnList;
 		Warn w = new Warn();
 		w.setWarnDate(new Date());
 		w.setWarnBy(UUID.fromString("console"));
@@ -568,7 +598,7 @@ public class PlayersLog {
 	public List<Warn> getPlayerWarn(BungeePlayer player){
 
 		List<Warn> listwarn = new ArrayList<Warn>();
-		for(Warn w : this.getWarnList()) {
+		for(Warn w : this.warnList) {
 
 			if(w.getWarnPlayer().equals(player.getUniqueId())) {
 
@@ -581,7 +611,7 @@ public class PlayersLog {
 	public List<Warn> getWarnBy(BungeePlayer player) {
 
 		List<Warn> listwarn = new ArrayList<Warn>();
-		for(Warn w : this.getWarnList()) {
+		for(Warn w : this.warnList) {
 
 			if(w.getWarnBy().equals(player.getUniqueId())) {
 
@@ -645,9 +675,9 @@ public class PlayersLog {
 	public List<Kick> getPlayerKick(BungeePlayer player) {
 
 		List<Kick> listkick = new ArrayList<Kick>();
-		for(Kick k : this.getKickList()) {
+		for(Kick k : this.kickList) {
 
-			if(k.getKickPlayer() == player.getUniqueId()) {
+			if(k.getKickPlayer().equals(player.getUniqueId())) {
 
 				listkick.add(k);
 			}
@@ -659,9 +689,9 @@ public class PlayersLog {
 	public List<Kick> getPlayerKickBy(BungeePlayer player) {
 
 		List<Kick> listkick = new ArrayList<Kick>();
-		for(Kick k : this.getKickList()) {
+		for(Kick k : this.kickList) {
 
-			if(k.getKickBy() == player.getUniqueId()) {
+			if(k.getKickBy().equals(player.getUniqueId())) {
 
 				listkick.add(k);
 			}
@@ -673,7 +703,7 @@ public class PlayersLog {
 	public List<Ban> getCurrentBan() {
 
 		List<Ban> listban = new ArrayList<Ban>();
-		for(Ban b : this.getBanList()) {
+		for(Ban b : this.banList) {
 
 			if(b.getBanAt().getTime()+b.getBanDuration()> new Date().getTime()) {
 
@@ -687,7 +717,7 @@ public class PlayersLog {
 	public List<Mute> getCurrentMute() {
 
 		List<Mute> listmute = new ArrayList<Mute>();
-		for(Mute m : this.getMuteList()) {
+		for(Mute m : this.muteList) {
 
 			if(m.getMuteAt().getTime()+m.getMuteDuration() > new Date().getTime()) {
 

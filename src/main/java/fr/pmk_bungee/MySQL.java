@@ -92,10 +92,11 @@ public class MySQL {
 
 	public boolean isConnected() {
 		try {
-			if(this.conn != null && !(this.conn.isClosed()))
+			if(this.conn != null && !(this.conn.isClosed())) {
 				return true;
-			else
+			} else {
 				return false;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,8 +150,11 @@ public class MySQL {
 		if (isConnected()) {
 			try {
 				PreparedStatement pst = this.conn.prepareStatement(query);
-				return pst.executeQuery();
+				ResultSet rs = pst.executeQuery();
+				return rs;
+				
 			} catch (SQLException e) {
+				
 				e.printStackTrace();
 			}
 		}
@@ -164,7 +168,6 @@ public class MySQL {
 
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
 
 					try {
 

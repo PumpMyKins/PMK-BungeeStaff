@@ -1,24 +1,34 @@
 package fr.pmk_bungee.utils;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Converter {
 
 	public static String milliToDayHourMinuteSecond(long millis) {
 		
-		long second = millis / 1000;
-		long minutes = second / 60;
+		long seconds = millis / 1000;
+		long minutes = seconds / 60;
 		long hours = minutes / 60;
 		long days = hours / 24;
 		
-		String toReturn = days +" jour(s), "+hours % 24+" heure(s), "+minutes % 60+" minutes, "+second % 60+" secondes";
-		System.out.println(toReturn);
+		String toReturn = "";
+		
+		if(days != 0)
+			toReturn = toReturn.concat(days + " jour(s), ");
+		if(hours%24 != 0)
+			toReturn = toReturn.concat(hours % 24+" heure(s), ");
+		if(minutes%60 != 0)
+			toReturn = toReturn.concat(minutes % 60+" minutes, ");
+		if(seconds%60 != 0)
+			toReturn = toReturn.concat(seconds % 60+" secondes");
+		
 		return toReturn;
 	}
 	
-	public static String dateConv(java.util.Date date) {
+	public static String dateConv(Date date) {
 		
-		java.util.Date dt = date;
+		Date dt = date;
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		

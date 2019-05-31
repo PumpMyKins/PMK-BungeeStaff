@@ -272,7 +272,7 @@ public class InformationCommand extends Command {
 			}
 		} else {
 
-			TextComponent bc2 = new TextComponent("Le joueur n'a jamais été warn");
+			TextComponent bc2 = new TextComponent("Le joueur n'a jamais été kick");
 			bc2.setColor(ChatColor.DARK_GREEN);
 
 			pp.sendMessage(bc2);

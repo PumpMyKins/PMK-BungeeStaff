@@ -1,7 +1,6 @@
 package fr.pmk_bungee.command;
 
 import fr.pmk_bungee.MainBungeeStaff;
-import fr.pmk_bungee.MainBungeeStaff.TimeUnit;
 import fr.pmk_bungee.objects.BungeePlayer;
 import fr.pmk_bungee.objects.PlayersLog;
 import fr.pmk_bungee.utils.TypicalMessage;
@@ -45,7 +44,7 @@ public class BanCommand extends Command {
 					if(!pl.isBan(bp)) {
 						
 						long time = Integer.parseInt(args[1]);
-						fr.pmk_bungee.MainBungeeStaff.TimeUnit unit = fr.pmk_bungee.MainBungeeStaff.TimeUnit.getByString(args[2]);
+						MainBungeeStaff.TimeUnit unit = MainBungeeStaff.TimeUnit.getByString(args[2]);
 						if(unit != null) {
 							System.out.println(unit);
 							time *= unit.getSeconds();

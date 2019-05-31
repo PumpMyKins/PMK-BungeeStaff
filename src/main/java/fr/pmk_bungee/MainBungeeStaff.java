@@ -122,7 +122,7 @@ public class MainBungeeStaff extends Plugin{
 
 	public enum TimeUnit {
 		
-		SECOND(new String[] { "s", "sec", "secs", "second", "seconds" }, 1L),  MINUTE(new String[] { "m", "min", "mins", "minute", "minutes" }, 60L),  HOUR(new String[] { "h", "hs", "hour", "hours" }, 3600L),  DAY(new String[] { "d", "ds", "day", "days" }, 86400L);
+		SECOND(new String[] { "s", "sec", "secs", "second", "seconds" }, 1000L),  MINUTE(new String[] { "m", "min", "mins", "minute", "minutes" }, 60000L),  HOUR(new String[] { "h", "hs", "hour", "hours" }, 3600000L),  DAY(new String[] { "d", "ds", "day", "days" }, 86400000L);
 
 		private String[] names;
 		private long seconds;

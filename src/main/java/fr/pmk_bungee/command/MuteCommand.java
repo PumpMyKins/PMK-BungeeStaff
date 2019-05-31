@@ -43,7 +43,7 @@ public class MuteCommand extends Command {
 					if(!pl.isMute(bp)) {
 						
 						long time = Integer.parseInt(args[1]);
-						fr.pmk_bungee.MainBungeeStaff.TimeUnit unit = fr.pmk_bungee.MainBungeeStaff.TimeUnit.getByString(args[2]);
+						MainBungeeStaff.TimeUnit unit = MainBungeeStaff.TimeUnit.getByString(args[2]);
 						if(unit != null) {
 
 							time *= unit.getSeconds();
