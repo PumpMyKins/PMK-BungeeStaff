@@ -22,7 +22,7 @@ Plugin BungeeCord de ban / Mute / kick / Warn
  - [x]    Kick : /bkick Pseudo Raison<br /><br />
   
   ***Information : <br />*** 
- - [ ]    Information Player : /binfo Pseudo (ALL | BAN | MUTE ...) <br /><br />
+ - [x]    Information Player : /binfo Pseudo (ALL | BAN | MUTE ...) <br /><br />
     
   ***Warn : <br />***
  - [x]    Warn a player : /bwarn Pseudo Raison <br />
