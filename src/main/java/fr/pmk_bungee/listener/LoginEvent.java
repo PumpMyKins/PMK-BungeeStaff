@@ -1,67 +1,63 @@
 package fr.pmk_bungee.listener;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
-import fr.pmk_bungee.Main;
-import fr.pmk_bungee.utils.PlayerProfile;
+import fr.pmk_bungee.objects.Ban;
+import fr.pmk_bungee.objects.BungeePlayer;
+import fr.pmk_bungee.objects.PlayersLog;
+import fr.pmk_bungee.utils.Converter;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
 public class LoginEvent implements Listener {
 
-	@SuppressWarnings("deprecation")
+	private PlayersLog pl;
+	
+	public LoginEvent(PlayersLog plg) {
+	
+		this.pl = plg;
+	}
+
 	@EventHandler
 	public void onLogin(net.md_5.bungee.api.event.LoginEvent e) {
 
-		String playerName = e.getConnection().getName();
-		int isPresent = 0;
-		int trueSetter = 1;
-		try {
-			ResultSet rs = Main.getMySQL().getResult("SELECT isPresent FROM MinecraftPlayer WHERE username = '" + e.getConnection().getName()+ "'"); 
-			if(rs.next()) {
-
-				isPresent = rs.getInt("isPresent");
+		List<BungeePlayer> bp = this.pl.getPlayerList();
+		BungeePlayer player = new BungeePlayer();
+		boolean exist = false;
+		for(BungeePlayer b : bp) {
+			
+			if(b.getUniqueId().equals(e.getConnection().getUniqueId())) {
+				player = b;
+				exist = true;
 			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		} catch (NullPointerException e2) {
-			isPresent = 0;
-			e2.printStackTrace();
 		}
-		if(isPresent == 0) {
-			Main.getMySQL().update("INSERT INTO MinecraftPlayer(username, uuid, ip, isPresent) VALUES ('" 
-					+ playerName 
-					+ "', '" 
-					+ e.getConnection().getUniqueId() 
-					+ "', '" 
-					+ e.getConnection().getAddress().getAddress()
-					+ "','" 
-					+ trueSetter 
-					+ "')");
+		if(!exist) {
+			
+			player.setFirstCome(new Date());
+			player.setIp(e.getConnection().getAddress().getHostName());
+			player.setLastConnection(new Date());
+			player.setUsername(e.getConnection().getName());
+			player.setUuid(e.getConnection().getUniqueId());
+			
+			this.pl.addPlayer(player);
 		}
-		PlayerProfile profile = new PlayerProfile(e.getConnection().getName());
-		if(profile.isBanned()) {
-
-			long end = profile.getBanEnd();
-			long current = System.currentTimeMillis();
-
-			if(end > 0L) {
-
-				if(end < current) {
-					profile.unban();
-				}
-
-				else {
-
-					e.setCancelled(true);
-					e.setCancelReason(profile.getBanKickMessage() + "");
-				}
-			}else {
-
-				e.setCancelled(true);
-				e.setCancelReason(profile.getBanKickMessage() + "");
-			}
+		if(this.pl.isBan(player)) {
+			
+			Ban b = this.pl.getPlayerCurrentBan(player);
+			
+			BaseComponent bc1 = new TextComponent("[BANNI] Vous êtes banni des serveurs PumpMyKins [BANNI] \n");
+			bc1.setColor(ChatColor.RED);
+			TextComponent bc2 = new TextComponent("Raison :"+b.getBanReason() +"\n");
+			bc2.setColor(ChatColor.GOLD);
+			String timeleft = Converter.milliToDayHourMinuteSecond((b.getBanAt().getTime()+b.getBanDuration())-(new Date().getTime()));
+			TextComponent bc3 = new TextComponent("Temps restant :"+timeleft);
+			bc3.setColor(ChatColor.DARK_GREEN);
+			e.setCancelReason(bc1, bc2, bc3);
+			e.setCancelled(true);
 		}
 	}
 }
