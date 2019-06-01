@@ -5,13 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.google.common.io.ByteStreams;
 
-import fr.pmk_bungee.Main;
-import net.md_5.bungee.api.ChatColor;
+import fr.pmk_bungee.MainBungeeStaff;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
@@ -26,86 +23,35 @@ public class ConfigManager {
 		try {
 
 			this.configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFile());
-			Main.PREFIX = getString("lang.prefix");
-			Main.CONSOLE_PREFIX = getString("lang.console_prefix");
-			Main.host = this.configuration.getString("mysql.host");
-			Main.port = this.configuration.getInt("mysql.port");
-			Main.username = this.configuration.getString("mysql.username");
-			Main.password = this.configuration.getString("mysql.password");
-			Main.database = this.configuration.getString("mysql.database");
+			MainBungeeStaff.host = this.configuration.getString("mysql.host");
+			MainBungeeStaff.port = this.configuration.getInt("mysql.port");
+			MainBungeeStaff.username = this.configuration.getString("mysql.username");
+			MainBungeeStaff.password = this.configuration.getString("mysql.password");
+			MainBungeeStaff.database = this.configuration.getString("mysql.database");
 
 		} catch(IOException e) {
 
 			e.printStackTrace();
 		}
 	}
-	public String timeFormat(int days, int hours, int minutes, int seconds) {
-
-		return getString("lang.time_format").replace("{DAYS}","" + days).replace("{HOURS}", "" + hours).replace("{MINUTES}", "" + minutes).replace("{SECONDS}", "" + seconds);
-	}
-	public String getString(String key, String... replace) {
-
-		String str = this.configuration.getString(key);
-		str = ChatColor.translateAlternateColorCodes('&', str);
-		for (String repl : replace) {
-
-			String[] r = repl.split("~");
-			str = str.replace(r[0], r[1]);
-		}
-		return str;
-	}
-
-	public String getString(String key){
-
-		String str = this.configuration.getString(key);
-		str = ChatColor.translateAlternateColorCodes('&', str);
-		return str;
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<String> getStringList(String key, String... replace) {
-
-		List<String> list = getStringList(key);
-		List<String> avail = new ArrayList();
-		for (String str : list)
-		{
-			for (String repl : replace)
-			{
-				String[] r = repl.split("~");
-				str = str.replace(r[0], r[1]);
-			}
-			avail.add(str);
-		}
-		return avail;
-	}
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<String> getStringList(String key){
-
-		List<String> list = this.configuration.getStringList(key);
-		List<String> avail = new ArrayList();
-		for (String str : list) {
-			avail.add(ChatColor.translateAlternateColorCodes('&', str));
-		}
-		return avail;
-	}	  
 
 	public File getFile(){
 
-		return new File(Main.sharedInstance().getDataFolder(), "config.yml");
+		return new File(MainBungeeStaff.sharedInstance().getDataFolder(), "config.yml");
 	}
 
 	@SuppressWarnings("unused")
 	private void saveDefaultConfig()
 	{
-		if (!Main.sharedInstance().getDataFolder().exists()) {
-			Main.sharedInstance().getDataFolder().mkdir();
+		if (!MainBungeeStaff.sharedInstance().getDataFolder().exists()) {
+			MainBungeeStaff.sharedInstance().getDataFolder().mkdir();
 		}
 		File file = getFile();
 		if (!file.exists()) {
 			try
 			{
 				file.createNewFile();
-				InputStream is = Main.sharedInstance().getResourceAsStream("config.yml");Throwable localThrowable6 = null;
+				InputStream is = MainBungeeStaff.sharedInstance().getResourceAsStream("config.yml");Throwable localThrowable6 = null;
 				try
 				{
 					OutputStream os = new FileOutputStream(file);Throwable localThrowable7 = null;
