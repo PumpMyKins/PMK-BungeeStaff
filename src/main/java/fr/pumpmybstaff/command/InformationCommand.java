@@ -1,15 +1,15 @@
-package fr.pmk_bungee.command;
+package fr.pumpmybstaff.command;
 
 import java.util.List;
 
-import fr.pmk_bungee.objects.Ban;
-import fr.pmk_bungee.objects.BungeePlayer;
-import fr.pmk_bungee.objects.Kick;
-import fr.pmk_bungee.objects.Mute;
-import fr.pmk_bungee.objects.PlayersLog;
-import fr.pmk_bungee.objects.Warn;
-import fr.pmk_bungee.utils.Converter;
-import fr.pmk_bungee.utils.TypicalMessage;
+import fr.pumpmybstaff.objects.Ban;
+import fr.pumpmybstaff.objects.BungeePlayer;
+import fr.pumpmybstaff.objects.Kick;
+import fr.pumpmybstaff.objects.Mute;
+import fr.pumpmybstaff.objects.PlayersLog;
+import fr.pumpmybstaff.objects.Warn;
+import fr.pumpmybstaff.utils.Converter;
+import fr.pumpmybstaff.utils.TypicalMessage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -107,7 +107,7 @@ public class InformationCommand extends Command {
 				TextComponent bc3bis = new TextComponent(this.pl.getPlayer(b.getBanBy()).getUsername());
 				bc3bis.setColor(ChatColor.GOLD);
 				bc3.addExtra(bc3bis);
-				TextComponent bc4 = new TextComponent("Durée du ban :");
+				TextComponent bc4 = new TextComponent("Durï¿½e du ban :");
 				bc4.setColor(ChatColor.BLUE);
 				TextComponent bc4bis = new TextComponent(Converter.milliToDayHourMinuteSecond(b.getBanDuration()));
 				bc4bis.setColor(ChatColor.GOLD);
@@ -131,7 +131,7 @@ public class InformationCommand extends Command {
 			}
 		} else {
 
-			TextComponent bc2 = new TextComponent("Le joueur n'a jamais été banni");
+			TextComponent bc2 = new TextComponent("Le joueur n'a jamais ï¿½tï¿½ banni");
 			bc2.setColor(ChatColor.DARK_GREEN);
 
 			pp.sendMessage(bc2);
@@ -158,7 +158,7 @@ public class InformationCommand extends Command {
 				TextComponent bc3bis = new TextComponent(this.pl.getPlayer(m.getMuteBy()).getUsername());
 				bc3bis.setColor(ChatColor.GOLD);
 				bc3.addExtra(bc3bis);
-				TextComponent bc4 = new TextComponent("Durée du Mute :");
+				TextComponent bc4 = new TextComponent("Durï¿½e du Mute :");
 				bc4.setColor(ChatColor.BLUE);
 				TextComponent bc4bis = new TextComponent(Converter.milliToDayHourMinuteSecond(m.getMuteDuration()));
 				bc4bis.setColor(ChatColor.GOLD);
@@ -182,7 +182,7 @@ public class InformationCommand extends Command {
 			}
 		} else {
 
-			TextComponent bc2 = new TextComponent("Le joueur n'a jamais été mute");
+			TextComponent bc2 = new TextComponent("Le joueur n'a jamais ï¿½tï¿½ mute");
 			bc2.setColor(ChatColor.DARK_GREEN);
 
 			pp.sendMessage(bc2);
@@ -227,7 +227,7 @@ public class InformationCommand extends Command {
 			}
 		} else {
 
-			TextComponent bc2 = new TextComponent("Le joueur n'a jamais été warn");
+			TextComponent bc2 = new TextComponent("Le joueur n'a jamais ï¿½tï¿½ warn");
 			bc2.setColor(ChatColor.DARK_GREEN);
 
 			pp.sendMessage(bc2);
@@ -272,7 +272,7 @@ public class InformationCommand extends Command {
 			}
 		} else {
 
-			TextComponent bc2 = new TextComponent("Le joueur n'a jamais été kick");
+			TextComponent bc2 = new TextComponent("Le joueur n'a jamais ï¿½tï¿½ kick");
 			bc2.setColor(ChatColor.DARK_GREEN);
 
 			pp.sendMessage(bc2);
@@ -298,12 +298,12 @@ public class InformationCommand extends Command {
 		TextComponent bc4bis = new TextComponent(bp.getUniqueId().toString());
 		bc4bis.setColor(ChatColor.GOLD);
 		bc4.addExtra(bc4bis);
-		TextComponent bc5 = new TextComponent("Première connection :");
+		TextComponent bc5 = new TextComponent("Premiï¿½re connection :");
 		bc5.setColor(ChatColor.BLUE);
 		TextComponent bc5bis = new TextComponent(bp.getFirstCome().toString());
 		bc5bis.setColor(ChatColor.GOLD);
 		bc5.addExtra(bc5bis);
-		TextComponent bc6 = new TextComponent("Dernière connection :");
+		TextComponent bc6 = new TextComponent("Derniï¿½re connection :");
 		bc6.setColor(ChatColor.BLUE);
 		TextComponent bc6bis = new TextComponent(bp.getLastConnection().toString());
 		bc6bis.setColor(ChatColor.GOLD);

@@ -1,4 +1,4 @@
-package fr.pmk_bungee.utils;
+package fr.pumpmybstaff.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package fr.pmk_bungee.objects;
+package fr.pumpmybstaff.objects;
 
 import java.util.Date;
 import java.util.UUID;

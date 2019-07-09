@@ -1,4 +1,4 @@
-package fr.pmk_bungee.utils;
+package fr.pumpmybstaff.utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -8,7 +8,7 @@ import java.io.OutputStream;
 
 import com.google.common.io.ByteStreams;
 
-import fr.pmk_bungee.MainBungeeStaff;
+import fr.pumpmybstaff.MainBungeeStaff;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;

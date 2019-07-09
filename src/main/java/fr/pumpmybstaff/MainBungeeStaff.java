@@ -1,24 +1,20 @@
-package fr.pmk_bungee;
+package fr.pumpmybstaff;
 
 import java.sql.SQLException;
 
-//IMPORT SQL
-import fr.pmk_bungee.MySQL.MySQLCredentials;
-//IMPORT COMMAND
-import fr.pmk_bungee.command.BanCommand;
-import fr.pmk_bungee.command.CheckPlayer;
-import fr.pmk_bungee.command.InformationCommand;
-import fr.pmk_bungee.command.KickCommand;
-import fr.pmk_bungee.command.MuteCommand;
-import fr.pmk_bungee.command.UnbanCommand;
-import fr.pmk_bungee.command.UnmuteCommand;
-import fr.pmk_bungee.command.WarnCommand;
-//IMPORT LISTENER
-import fr.pmk_bungee.listener.ChatEvent;
-import fr.pmk_bungee.listener.LoginEvent;
-import fr.pmk_bungee.objects.PlayersLog;
-//IMPORT CONFIG
-import fr.pmk_bungee.utils.ConfigManager;
+import fr.pumpmybstaff.MySQL.MySQLCredentials;
+import fr.pumpmybstaff.command.BanCommand;
+import fr.pumpmybstaff.command.CheckPlayer;
+import fr.pumpmybstaff.command.InformationCommand;
+import fr.pumpmybstaff.command.KickCommand;
+import fr.pumpmybstaff.command.MuteCommand;
+import fr.pumpmybstaff.command.UnbanCommand;
+import fr.pumpmybstaff.command.UnmuteCommand;
+import fr.pumpmybstaff.command.WarnCommand;
+import fr.pumpmybstaff.listener.ChatEvent;
+import fr.pumpmybstaff.listener.LoginEvent;
+import fr.pumpmybstaff.objects.PlayersLog;
+import fr.pumpmybstaff.utils.ConfigManager;
 //IMPORT BUNGEE THINGS
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -52,7 +48,7 @@ public class MainBungeeStaff extends Plugin{
 		mySQL.openConnection();
 		if(mySQL.isConnected()) {
 
-			logToConsole("§aMySQL connection success.");
+			logToConsole("ï¿½aMySQL connection success.");
 			//BASE DE DONNER
 			mySQL.update("CREATE TABLE IF NOT EXISTS Players(`username` VARCHAR(16) NOT NULL , `uuid` VARCHAR(256) NOT NULL ,`ip` VARCHAR(256) NOT NULL,`firstCome` DATETIME NOT NULL,`lastCome` DATETIME NOT NULL)");
 			mySQL.update("CREATE TABLE IF NOT EXISTS BungeeBan(banId INT NOT NULL AUTO_INCREMENT, banAt DATETIME NOT NULL, banDuration INT NOT NULL, banBy VARCHAR(256) NOT NULL, bannedPlayer VARCHAR(256) NOT NULL, banIp VARCHAR(256) NOT NULL, banReason VARCHAR(256), PRIMARY KEY (banId))");

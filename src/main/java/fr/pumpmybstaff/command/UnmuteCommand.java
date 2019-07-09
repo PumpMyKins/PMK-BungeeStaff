@@ -1,17 +1,18 @@
-package fr.pmk_bungee.command;
+package fr.pumpmybstaff.command;
 
-import fr.pmk_bungee.objects.BungeePlayer;
-import fr.pmk_bungee.objects.PlayersLog;
-import fr.pmk_bungee.utils.TypicalMessage;
+import fr.pumpmybstaff.objects.BungeePlayer;
+import fr.pumpmybstaff.objects.PlayersLog;
+import fr.pumpmybstaff.utils.TypicalMessage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
-public class UnbanCommand extends Command {
+public class UnmuteCommand extends Command {
 
 	private PlayersLog pl;
-	public UnbanCommand(String name, PlayersLog plg) {
+	
+	public UnmuteCommand(String name, PlayersLog plg) {
 		super(name);
 		this.pl = plg;
 	}
@@ -26,15 +27,15 @@ public class UnbanCommand extends Command {
 				BungeePlayer bp = this.pl.getPlayer(args[0]);
 				if(bp != null) {
 					
-					if(this.pl.isBan(bp)) {
+					if(this.pl.isMute(bp)) {
 						
-						this.pl.unBan(bp);
+						this.pl.unMute(bp);
 						
 						TextComponent bc1 = new TextComponent("Le joueur ");
 						bc1.setColor(ChatColor.DARK_GREEN);
 						TextComponent bc2 = new TextComponent(bp.getUsername());
 						bc2.setColor(ChatColor.GOLD);
-						TextComponent bc3 = new TextComponent(" n'est plus banni !");
+						TextComponent bc3 = new TextComponent(" n'est plus mute !");
 						bc3.setColor(ChatColor.DARK_GREEN);
 						
 						bc1.addExtra(bc2);
@@ -48,7 +49,7 @@ public class UnbanCommand extends Command {
 						bc1.setColor(ChatColor.DARK_RED);
 						TextComponent bc2 = new TextComponent(bp.getUsername());
 						bc2.setColor(ChatColor.GOLD);
-						TextComponent bc3 = new TextComponent(" n'est pas banni !");
+						TextComponent bc3 = new TextComponent(" n'est pas mute !");
 						bc3.setColor(ChatColor.DARK_RED);
 						
 						bc1.addExtra(bc2);
@@ -64,9 +65,9 @@ public class UnbanCommand extends Command {
 				
 				TextComponent bc1 = new TextComponent("Commande : ");
 				bc1.setColor(ChatColor.DARK_RED);
-				TextComponent bc2 = new TextComponent("/unban <pseudo>");
+				TextComponent bc2 = new TextComponent("/unmute <pseudo>");
 				bc2.setColor(ChatColor.GOLD);
-				TextComponent bc3 = new TextComponent(" | Pour débannir quelqu'un !");
+				TextComponent bc3 = new TextComponent(" | Pour unmute quelqu'un !");
 				bc3.setColor(ChatColor.DARK_RED);
 				
 				bc1.addExtra(bc2);
@@ -76,7 +77,8 @@ public class UnbanCommand extends Command {
 			}
 		} else {
 			
-			sender.sendMessage(TypicalMessage.noPermission("/unban"));
+			sender.sendMessage(TypicalMessage.noPermission("/unmute"));
 		}
 	}
+
 }

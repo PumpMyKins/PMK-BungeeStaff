@@ -1,4 +1,4 @@
-package fr.pmk_bungee;
+package fr.pumpmybstaff;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

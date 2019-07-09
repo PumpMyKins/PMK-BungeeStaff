@@ -1,11 +1,11 @@
-package fr.pmk_bungee.command;
+package fr.pumpmybstaff.command;
 
-import fr.pmk_bungee.objects.Ban;
-import fr.pmk_bungee.objects.BungeePlayer;
-import fr.pmk_bungee.objects.Mute;
-import fr.pmk_bungee.objects.PlayersLog;
-import fr.pmk_bungee.utils.Converter;
-import fr.pmk_bungee.utils.TypicalMessage;
+import fr.pumpmybstaff.objects.Ban;
+import fr.pumpmybstaff.objects.BungeePlayer;
+import fr.pumpmybstaff.objects.Mute;
+import fr.pumpmybstaff.objects.PlayersLog;
+import fr.pumpmybstaff.utils.Converter;
+import fr.pumpmybstaff.utils.TypicalMessage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -56,7 +56,7 @@ public class CheckPlayer extends Command {
 						TextComponent bc5bis = new TextComponent(b.getBanAt().toString());
 						bc5bis.setColor(ChatColor.GOLD);
 						bc5.addExtra(bc5bis);
-						TextComponent bc6 = new TextComponent("Durée du ban :");
+						TextComponent bc6 = new TextComponent("Durï¿½e du ban :");
 						bc6.setColor(ChatColor.RED);
 						TextComponent bc6bis = new TextComponent(Converter.milliToDayHourMinuteSecond(b.getBanDuration()));
 						bc6bis.setColor(ChatColor.GOLD);
@@ -90,7 +90,7 @@ public class CheckPlayer extends Command {
 						TextComponent bc5bis = new TextComponent(b.getBanAt().toString());
 						bc5bis.setColor(ChatColor.GOLD);
 						bc5.addExtra(bc5bis);
-						TextComponent bc6 = new TextComponent("Durée du mute :");
+						TextComponent bc6 = new TextComponent("Durï¿½e du mute :");
 						bc6.setColor(ChatColor.RED);
 						TextComponent bc6bis = new TextComponent(Converter.milliToDayHourMinuteSecond(b.getBanDuration()));
 						bc6bis.setColor(ChatColor.GOLD);

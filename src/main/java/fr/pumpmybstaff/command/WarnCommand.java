@@ -1,8 +1,8 @@
-package fr.pmk_bungee.command;
+package fr.pumpmybstaff.command;
 
-import fr.pmk_bungee.objects.BungeePlayer;
-import fr.pmk_bungee.objects.PlayersLog;
-import fr.pmk_bungee.utils.TypicalMessage;
+import fr.pumpmybstaff.objects.BungeePlayer;
+import fr.pumpmybstaff.objects.PlayersLog;
+import fr.pumpmybstaff.utils.TypicalMessage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -34,7 +34,7 @@ public class WarnCommand extends Command {
 					reason = reason + args[i] + " ";
 				}
 				
-				TextComponent kickreason = new TextComponent("Vous avez été warn ! Pour : ");
+				TextComponent kickreason = new TextComponent("Vous avez ï¿½tï¿½ warn ! Pour : ");
 				kickreason.setColor(ChatColor.RED);
 				TextComponent kickreasonbis = new TextComponent(reason);
 				kickreasonbis.setColor(ChatColor.GOLD);
@@ -53,7 +53,7 @@ public class WarnCommand extends Command {
 					bc1.setColor(ChatColor.DARK_GREEN);
 					TextComponent bc2 = new TextComponent(playername);
 					bc2.setColor(ChatColor.GOLD);
-					TextComponent bc3 = new TextComponent(" avec succès !");
+					TextComponent bc3 = new TextComponent(" avec succï¿½s !");
 					bc3.setColor(ChatColor.DARK_GREEN);
 					
 					bc1.addExtra(bc2);

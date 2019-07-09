@@ -1,4 +1,4 @@
-package fr.pmk_bungee.objects;
+package fr.pumpmybstaff.objects;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import fr.pmk_bungee.MainBungeeStaff;
-import fr.pmk_bungee.MySQL;
-import fr.pmk_bungee.utils.Converter;
+import fr.pumpmybstaff.MainBungeeStaff;
+import fr.pumpmybstaff.MySQL;
+import fr.pumpmybstaff.utils.Converter;
 
 public class PlayersLog {
 

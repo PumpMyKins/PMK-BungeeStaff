@@ -1,29 +1,30 @@
-package fr.pmk_bungee.command;
+package fr.pumpmybstaff.command;
 
-import fr.pmk_bungee.MainBungeeStaff;
-import fr.pmk_bungee.objects.BungeePlayer;
-import fr.pmk_bungee.objects.PlayersLog;
-import fr.pmk_bungee.utils.TypicalMessage;
+import fr.pumpmybstaff.MainBungeeStaff;
+import fr.pumpmybstaff.objects.BungeePlayer;
+import fr.pumpmybstaff.objects.PlayersLog;
+import fr.pumpmybstaff.utils.TypicalMessage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-public class MuteCommand extends Command {
+public class BanCommand extends Command {
 
 	private PlayersLog pl;
-	
-	public MuteCommand(String name, PlayersLog plg) {
+
+	public BanCommand(String name, PlayersLog plg) {
 		super(name);
 		this.pl = plg;
 	}
 
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		
-		if(sender.hasPermission("rank.staff.modo") || sender.hasPermission("rank.staff.admin") || sender.hasPermission("rank.staff.responsable")) {
+		// TODO Auto-generated method stub
 
+		if(sender.hasPermission("rank.staff.modo") || sender.hasPermission("rank.staff.admin") || sender.hasPermission("rank.staff.responsable")) {
 			if(args.length >= 4) {
 
 				String playerName = args[0];
@@ -37,25 +38,32 @@ public class MuteCommand extends Command {
 				ProxiedPlayer pp = (ProxiedPlayer) sender;
 				MainBungeeStaff.getConfigManager().save();
 				BungeePlayer bp = this.pl.getPlayer(playerName);
-				BungeePlayer mutter = this.pl.getPlayer(pp.getUniqueId());
+				BungeePlayer banner = this.pl.getPlayer(pp.getUniqueId());
 				if(bp != null) {
 
-					if(!pl.isMute(bp)) {
+					if(!pl.isBan(bp)) {
 						
 						long time = Integer.parseInt(args[1]);
 						MainBungeeStaff.TimeUnit unit = MainBungeeStaff.TimeUnit.getByString(args[2]);
 						if(unit != null) {
-
+							System.out.println(unit);
 							time *= unit.getSeconds();
-							this.pl.addMute(bp, reason, mutter,(int) time);
+							System.out.println(time);
+							this.pl.addBan(bp, reason, banner,(int) time);
 							
+							ProxiedPlayer prp = ProxyServer.getInstance().getPlayer(bp.getUniqueId());
+							if(prp != null) {
+								
+								
+							}
 						}
+
 					} else {
 						TextComponent bc1 = new TextComponent("Le joueur ");
 						bc1.setColor(ChatColor.DARK_RED);
 						TextComponent bc2 = new TextComponent(bp.getUsername());
 						bc2.setColor(ChatColor.GOLD);
-						TextComponent bc3 = new TextComponent(" est déjà mute !");
+						TextComponent bc3 = new TextComponent(" est dï¿½jï¿½ banni !");
 						bc3.setColor(ChatColor.DARK_RED);
 						
 						bc1.addExtra(bc2);
@@ -70,9 +78,9 @@ public class MuteCommand extends Command {
 				
 				TextComponent bc1 = new TextComponent("Commande : ");
 				bc1.setColor(ChatColor.DARK_RED);
-				TextComponent bc2 = new TextComponent("/mute <pseudo> <temps> <unite de temps> <raison>");
+				TextComponent bc2 = new TextComponent("/ban <pseudo> <temps> <unite de temps> <raison>");
 				bc2.setColor(ChatColor.GOLD);
-				TextComponent bc3 = new TextComponent(" | Pour mute quelqu'un !");
+				TextComponent bc3 = new TextComponent(" | Pour bannir quelqu'un !");
 				bc3.setColor(ChatColor.DARK_RED);
 				
 				bc1.addExtra(bc2);
@@ -81,7 +89,7 @@ public class MuteCommand extends Command {
 				sender.sendMessage(bc1);
 			}
 		} else {
-			sender.sendMessage(TypicalMessage.noPermission("/mute"));
+			sender.sendMessage(TypicalMessage.noPermission("/ban"));
 		};
 	} 
 }

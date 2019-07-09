@@ -1,12 +1,12 @@
-package fr.pmk_bungee.listener;
+package fr.pumpmybstaff.listener;
 
 import java.util.Date;
 import java.util.List;
 
-import fr.pmk_bungee.objects.Ban;
-import fr.pmk_bungee.objects.BungeePlayer;
-import fr.pmk_bungee.objects.PlayersLog;
-import fr.pmk_bungee.utils.Converter;
+import fr.pumpmybstaff.objects.Ban;
+import fr.pumpmybstaff.objects.BungeePlayer;
+import fr.pumpmybstaff.objects.PlayersLog;
+import fr.pumpmybstaff.utils.Converter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -49,7 +49,7 @@ public class LoginEvent implements Listener {
 			
 			Ban b = this.pl.getPlayerCurrentBan(player);
 			
-			BaseComponent bc1 = new TextComponent("[BANNI] Vous êtes banni des serveurs PumpMyKins [BANNI] \n");
+			BaseComponent bc1 = new TextComponent("[BANNI] Vous ï¿½tes banni des serveurs PumpMyKins [BANNI] \n");
 			bc1.setColor(ChatColor.RED);
 			TextComponent bc2 = new TextComponent("Raison :"+b.getBanReason() +"\n");
 			bc2.setColor(ChatColor.GOLD);

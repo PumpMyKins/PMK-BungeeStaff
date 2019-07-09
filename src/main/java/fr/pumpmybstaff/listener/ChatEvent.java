@@ -1,11 +1,11 @@
-package fr.pmk_bungee.listener;
+package fr.pumpmybstaff.listener;
 
 import java.util.Date;
 
-import fr.pmk_bungee.objects.BungeePlayer;
-import fr.pmk_bungee.objects.Mute;
-import fr.pmk_bungee.objects.PlayersLog;
-import fr.pmk_bungee.utils.Converter;
+import fr.pumpmybstaff.objects.BungeePlayer;
+import fr.pumpmybstaff.objects.Mute;
+import fr.pumpmybstaff.objects.PlayersLog;
+import fr.pumpmybstaff.utils.Converter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -50,7 +50,7 @@ public class ChatEvent implements Listener {
 			TextComponent bc3bis = new TextComponent(Converter.milliToDayHourMinuteSecond(timeleft));
 			bc3bis.setColor(ChatColor.GOLD);
 			bc3.addExtra(bc3bis);
-			TextComponent bc4 = new TextComponent("Muté par : ");
+			TextComponent bc4 = new TextComponent("Mutï¿½ par : ");
 			bc4.setColor(ChatColor.BLUE);
 			TextComponent bc4bis = new TextComponent((this.pl.getPlayer(m.getMuteBy())).getUsername());
 			bc4bis.setColor(ChatColor.GOLD);

@@ -1,9 +1,9 @@
-package fr.pmk_bungee.listener;
+package fr.pumpmybstaff.listener;
 
 import java.util.List;
 
-import fr.pmk_bungee.objects.BungeePlayer;
-import fr.pmk_bungee.objects.PlayersLog;
+import fr.pumpmybstaff.objects.BungeePlayer;
+import fr.pumpmybstaff.objects.PlayersLog;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 
 public class LogoutEvent {
